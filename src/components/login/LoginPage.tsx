@@ -4,22 +4,23 @@ import {LoginForm} from "./LoginForm";
 import loginPageLogo from "../../images/loginPageLogo.svg"
 
 const Container = styled.div`
-  background-image: url(${loginPageBg});
-  background-position: center;
-  width: 100vw;
-  height: 100vh;
+	background-image: url(${loginPageBg});
+	background-position: center;
+	background-size: cover;
+	width: 100vw;
+	height: 100vh;
 `
 const Logotype = styled.img`
-  position: absolute;
-  top: 60px;
-  left: 60px;
+	position: absolute;
+	top: 60px;
+	left: 60px;
 `
 
 export const LoginPage = () => {
-  return (
-    <Container>
-      <Logotype src={loginPageLogo} />
-      <LoginForm />
-    </Container>
-  )
+	return (
+		<Container>
+			<Logotype src={loginPageLogo} />
+			<LoginForm />
+		</Container>
+	)
 }

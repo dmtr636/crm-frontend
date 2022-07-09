@@ -10,3 +10,7 @@ button {
     line-height: 0;
     cursor: pointer;
 }
+a {
+    text-decoration: none;
+    cursor: pointer;
+}

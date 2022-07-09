@@ -30,6 +30,13 @@ const Container = styled.div`
   @media ${device.desktopL} {
     right: 240px;
   }
+
+  animation: fadein 1s;
+  
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
 `
 
 type Props = { children: JSX.Element }
