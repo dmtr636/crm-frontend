@@ -50,7 +50,9 @@ const TogglePasswordVisibilityButton = styled.button<{ icon: string }>`
 `
 
 type Props = {
-  type?: "email" | "password"
+  type?: "email" | "password",
+  value: string,
+  onChange: (value: string) => void
 }
 
 export const LoginFormField = (props: Props) => {
@@ -79,7 +81,13 @@ export const LoginFormField = (props: Props) => {
       {props.type === EMAIL && <img src={emailIcon} alt={""} onClick={focusInput}/>}
       {props.type === PASSWORD && <img src={passwordIcon} alt={""} onClick={focusInput}/>}
 
-      <Input type={inputType} ref={ref} showDots={!showPassword && props.type === PASSWORD}/>
+      <Input
+        type={inputType}
+        ref={ref}
+        showDots={!showPassword && props.type === PASSWORD}
+        value={props.value}
+        onChange={(event) => props.onChange(event.target.value)}
+      />
 
       {props.type === PASSWORD &&
           <TogglePasswordVisibilityButton

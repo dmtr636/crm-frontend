@@ -23,13 +23,15 @@ const Button = styled.button<Props>`
     border: 3px solid #1F232C;
     cursor: default;
   `}
-  
-  &:hover {
-    background: linear-gradient(91.32deg, #363D4B 0%, #454D60 100%);
-  }
-  &:active {
-    background: #1F232C;
-  }
+
+  ${props => !props.disabled && `
+    &:hover {
+      background: linear-gradient(91.32deg, #363D4B 0%, #454D60 100%);
+    }
+    &:active {
+      background: #1F232C;
+    }
+  `}
 `
 
 type Props = {
