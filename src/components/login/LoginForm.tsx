@@ -3,29 +3,14 @@ import {LoginFormContainer} from "./LoginFormContainer";
 import {LoginFormField} from "./LoginFormField";
 import {LoginFormButton} from "./LoginFormButton";
 import {LoginFormLink} from "./LoginFormLink";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import LoginStore from "../../store/loginStore";
+import {observer} from "mobx-react";
 
-export const LoginForm = () => {
+const loginStore = LoginStore
+
+export const LoginForm = observer(() => {
   const [showProblemMessage, setShowProblemMessage] = useState(false)
-  const [validated, setValidated] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
-  const validateEmail = (email: string) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      );
-  };
-
-  useEffect(() => {
-    if (password.length > 0 && validateEmail(email)) {
-      setValidated(true)
-    } else {
-      setValidated(false)
-    }
-  }, [email, password])
 
   return (
     <LoginFormContainer>
@@ -33,13 +18,13 @@ export const LoginForm = () => {
         <LoginFormHeader />
         <LoginFormField
           type={"email"}
-          value={email}
-          onChange={(value) => setEmail(value)}
+          value={loginStore.email}
+          onChange={(value) => loginStore.setEmail(value)}
         />
         <LoginFormField
           type={"password"}
-          value={password}
-          onChange={(value) => setPassword(value)}
+          value={loginStore.password}
+          onChange={(value) => loginStore.setPassword(value)}
         />
         {showProblemMessage &&
             <LoginFormLink
@@ -47,7 +32,7 @@ export const LoginForm = () => {
                 href={"https://t.me/dmtr636"}
             />
         }
-        <LoginFormButton disabled={!validated}/>
+        <LoginFormButton disabled={!loginStore.formValidated}/>
         <LoginFormLink
           onClick={() => setShowProblemMessage(true)}
           text={"Проблема со входом"}
@@ -55,4 +40,4 @@ export const LoginForm = () => {
       </>
     </LoginFormContainer>
   )
-}
+})
