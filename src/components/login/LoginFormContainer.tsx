@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import {device} from "../../constants/breakpoints";
+import LoginStore from "../../store/loginStore";
+import React from "react";
 
-const Container = styled.div`
+const Form = styled.form`
   width: 580px;
   height: 880px;
 
@@ -39,12 +41,25 @@ const Container = styled.div`
   }
 `
 
-type Props = { children: JSX.Element }
+type Props = {
+  children: JSX.Element,
+  onSubmit: () => void
+}
 
 export const LoginFormContainer = (props: Props) => {
+  const onSubmit = (event:  React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (LoginStore.formValidated) {
+      props.onSubmit()
+    }
+  }
+
   return (
-    <Container>
+    <Form
+      noValidate={true}
+      onSubmit={event => onSubmit(event)}
+    >
       {props.children}
-    </Container>
+    </Form>
   )
 }

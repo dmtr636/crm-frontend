@@ -36,12 +36,17 @@ const Button = styled.button<Props>`
 
 type Props = {
   disabled?: boolean,
-  error?: boolean
+  error?: boolean,
+  onClick?: () => void
 }
 
 export const LoginFormButton = (props: Props) => {
   return (
-    <Button disabled={props.disabled} error={props.error}>
+    <Button
+      disabled={props.disabled}
+      error={props.error}
+      type={"submit"}
+    >
       войти
     </Button>
   )

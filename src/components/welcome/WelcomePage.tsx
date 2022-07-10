@@ -8,11 +8,12 @@ import {observer} from "mobx-react";
 const Container = styled.div`
   background-image: url(${bg});
   background-position: center;
+  background-size: cover;
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
   padding-top: 200px;
-  padding-left: 40px;
+  padding-left: 50px;
 `
 const Header = styled.div`
   font-family: 'Raleway';
@@ -30,7 +31,7 @@ const Logotype = styled.img`
 `
 const LogoutButton = styled.button`
   font-family: 'Raleway'; 
-  width: 200px; 
+  width: 195px; 
   height: 40px;
   position: absolute;
   font-size: 20px;
@@ -39,6 +40,7 @@ const LogoutButton = styled.button`
   color: white;
   border: white solid 1px;
   border-radius: 5px;
+  box-sizing: border-box;
   
   &:hover {
     border-color: aquamarine;

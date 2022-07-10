@@ -60,7 +60,8 @@ export const LoginFormField = (props: Props) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const focusInput = () => {
-    (ref.current as unknown as HTMLInputElement)?.focus()
+    (ref.current as unknown as HTMLInputElement)?.focus();
+    (ref.current as unknown as HTMLInputElement)?.click();
   }
 
   useEffect(() => {
@@ -69,6 +70,10 @@ export const LoginFormField = (props: Props) => {
       const img = new Image();
       img.src = src;
     });
+
+    if (props.type === "email") {
+      focusInput()
+    }
   }, []);
 
   let inputType = props.type || ""
@@ -87,10 +92,12 @@ export const LoginFormField = (props: Props) => {
         showDots={!showPassword && props.type === PASSWORD}
         value={props.value}
         onChange={(event) => props.onChange(event.target.value)}
+        autoComplete={props.type === EMAIL ? "email" : "current-password"}
       />
 
       {props.type === PASSWORD &&
           <TogglePasswordVisibilityButton
+              type={"button"}
               icon={showPassword ? hidePasswordIcon : showPasswordIcon}
               onClick={() => setShowPassword(!showPassword)}
           />

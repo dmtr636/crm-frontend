@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {IUser} from "../interfaces/IUser";
 import axios from "axios";
-import {AUTHENTICATE_ENDPOINT, LOGOUT_ENDPOINT} from "../api/endoints";
+import {AUTHENTICATE_ENDPOINT, LOGIN_ENDPOINT, LOGOUT_ENDPOINT} from "../api/endoints";
 
 class UserStore {
   user: IUser | undefined

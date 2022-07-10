@@ -6,14 +6,23 @@ import {LoginFormLink} from "./LoginFormLink";
 import {useState} from "react";
 import LoginStore from "../../store/loginStore";
 import {observer} from "mobx-react";
+import {useNavigate} from "react-router-dom";
 
 const loginStore = LoginStore
 
 export const LoginForm = observer(() => {
   const [showProblemMessage, setShowProblemMessage] = useState(false)
+  const navigate = useNavigate()
+
+  const login = async () => {
+    const isLoggedIn = await loginStore.login()
+    if (isLoggedIn) {
+      navigate("/", {replace: true})
+    }
+  }
 
   return (
-    <LoginFormContainer>
+    <LoginFormContainer onSubmit={login}>
       <>
         <LoginFormHeader />
         <LoginFormField
@@ -32,7 +41,9 @@ export const LoginForm = observer(() => {
                 href={"https://t.me/dmtr636"}
             />
         }
-        <LoginFormButton disabled={!loginStore.formValidated}/>
+        <LoginFormButton
+          disabled={!loginStore.formValidated}
+        />
         <LoginFormLink
           onClick={() => setShowProblemMessage(true)}
           text={"Проблема со входом"}
