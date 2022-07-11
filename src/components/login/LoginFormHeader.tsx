@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {device} from "../../constants/breakpoints";
 
 const Text = styled.div`
   font-family: 'Raleway';
@@ -13,6 +14,12 @@ const Text = styled.div`
   display: flex;
   align-items: center;
   height: 121px;
+  margin-bottom: 10px;
+
+  @media screen and ${device.phone} {
+    height: 62px;
+    font-size: 30px;
+  }
 `
 
 export const LoginFormHeader = () => {

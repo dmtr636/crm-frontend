@@ -7,6 +7,8 @@ import UserStore from "./userStore";
 class LoginStore {
   email = ""
   password = ""
+  error = false
+  isLogging = false
 
   constructor() {
     makeAutoObservable(this)
@@ -14,21 +16,28 @@ class LoginStore {
 
   setEmail(email: string) {
     this.email = email
+    this.error = false
   }
   setPassword(password: string) {
     this.password = password
+    this.error = false
   }
 
   async login() {
+    this.isLogging = true
     const res = await axios.post(LOGIN_ENDPOINT, {
       email: this.email,
       password: this.password
     })
+    this.isLogging = false
+
     let data = res.data
     if (!data.error) {
       UserStore.user = data
+      this.error = false
       return true
     } else {
+      this.error = true
       return false
     }
   }

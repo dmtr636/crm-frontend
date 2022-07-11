@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import {device} from "../../constants/breakpoints";
 
-const ProblemsButton = styled.a`
+const ProblemsButton = styled.a<{error?: boolean}>`
   align-self: center;
   
   font-family: 'Raleway';
@@ -9,8 +10,9 @@ const ProblemsButton = styled.a`
   font-size: 24px;
   line-height: 100%;
   letter-spacing: 0.03em;
+  margin-top: 10px;
 
-  background: linear-gradient(91.32deg, #1F232C 0%, #3B4252 100%);
+  background: ${props => props.error ? '#BF616A' : 'linear-gradient(91.32deg, #1F232C 0%, #3B4252 100%)'};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -31,11 +33,16 @@ const ProblemsButton = styled.a`
     background-clip: text;
     text-fill-color: transparent;
   }
+  
+  @media screen and ${device.phone} {
+    font-size: 16px;
+  }
 `
 
 type Props = {
   href?: string,
   text: string,
+  error?: boolean,
   onClick?: () => void
 }
 
@@ -47,6 +54,7 @@ export const LoginFormLink = (props: Props) => {
       target="_blank"
       rel="noopener noreferrer"
       onClick={props.onClick}
+      error={props.error}
     >
       {props.text}
     </ProblemsButton>

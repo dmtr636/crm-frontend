@@ -7,6 +7,7 @@ import {useState} from "react";
 import LoginStore from "../../store/loginStore";
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router-dom";
+import {LoginFormMessage} from "./LoginFormMessage";
 
 const loginStore = LoginStore
 
@@ -16,6 +17,7 @@ export const LoginForm = observer(() => {
 
   const login = async () => {
     const isLoggedIn = await loginStore.login()
+    setShowProblemMessage(false)
     if (isLoggedIn) {
       navigate("/", {replace: true})
     }
@@ -35,6 +37,9 @@ export const LoginForm = observer(() => {
           value={loginStore.password}
           onChange={(value) => loginStore.setPassword(value)}
         />
+        {(loginStore.error) &&
+            <LoginFormMessage />
+        }
         {showProblemMessage &&
             <LoginFormLink
                 text={"Напишите Дмитрию в Telegram"}
@@ -42,10 +47,14 @@ export const LoginForm = observer(() => {
             />
         }
         <LoginFormButton
+          error={loginStore.error}
           disabled={!loginStore.formValidated}
         />
         <LoginFormLink
-          onClick={() => setShowProblemMessage(true)}
+          onClick={() => {
+            setShowProblemMessage(true)
+            loginStore.error = false
+          }}
           text={"Проблема со входом"}
         />
       </>
