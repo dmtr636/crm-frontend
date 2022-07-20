@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/crm-frontend/static/css/main.808c37d0.css",
-    "main.js": "/crm-frontend/static/js/main.d9433b45.js",
+    "main.js": "/crm-frontend/static/js/main.e3fcc86b.js",
     "static/media/loginPageBg.jpg": "/crm-frontend/static/media/loginPageBg.943e61a0dcad952ae2e6.jpg",
     "static/media/floppa_icon.png": "/crm-frontend/static/media/floppa_icon.fd99c11b2208867a3b5d.png",
     "static/media/loginPageLogo.svg": "/crm-frontend/static/media/loginPageLogo.20e6456211a657a50f60996b69fa671e.svg",
@@ -11,10 +11,10 @@
     "static/media/passwordFieldIcon.svg": "/crm-frontend/static/media/passwordFieldIcon.69318a2f349d46bac71ce2fa5f85282f.svg",
     "static/media/emailFieldIcon.svg": "/crm-frontend/static/media/emailFieldIcon.50273e271e2c8921c825d4d3ce22bb5e.svg",
     "main.808c37d0.css.map": "/crm-frontend/static/css/main.808c37d0.css.map",
-    "main.d9433b45.js.map": "/crm-frontend/static/js/main.d9433b45.js.map"
+    "main.e3fcc86b.js.map": "/crm-frontend/static/js/main.e3fcc86b.js.map"
   },
   "entrypoints": [
     "static/css/main.808c37d0.css",
-    "static/js/main.d9433b45.js"
+    "static/js/main.e3fcc86b.js"
   ]
 }
