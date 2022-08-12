@@ -17,6 +17,12 @@ a {
     cursor: pointer;
 }
 
+input {
+    border: none;
+    outline: none;
+    background: none;
+}
+
 input:-webkit-autofill {
     -webkit-background-clip: text;
 }

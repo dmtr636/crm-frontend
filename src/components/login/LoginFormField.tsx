@@ -6,11 +6,12 @@ import hidePasswordIcon from "../../assets/hidePasswordIcon.svg"
 import {useEffect, useRef, useState} from "react";
 import LoginStore from "../../store/loginStore";
 import {device} from "../../constants/breakpoints";
+import {preloadImages} from "../../utils/utils";
 
 const EMAIL = "email"
 const PASSWORD = "password"
 
-const Container = styled.div<{error: boolean}>`
+const Container = styled.div<{ error: boolean }>`
     width: 100%;
     height: 76px;
     border: 3px solid #1F232C;
@@ -64,9 +65,9 @@ const TogglePasswordVisibilityButton = styled.button<{ icon: string; error: bool
     flex-shrink: 0;
 
     ${props => props.error && `
-    filter: brightness(0) saturate(100%) invert(48%) sepia(18%) saturate(1292%) hue-rotate(305deg) brightness(91%) contrast(89%);
-  `}
-
+    	filter: brightness(0) saturate(100%) invert(48%) sepia(18%) saturate(1292%) hue-rotate(305deg) brightness(91%) contrast(89%);
+  	`}
+	
     &:hover {
         opacity: 0.8;
     }
@@ -77,11 +78,10 @@ const TogglePasswordVisibilityButton = styled.button<{ icon: string; error: bool
         background-size: contain;
     }
 `
-const Img = styled.img<{error: boolean}>`
+const Img = styled.img<{ error: boolean }>`
     ${props => props.error && `
     filter: brightness(0) saturate(100%) invert(48%) sepia(18%) saturate(1292%) hue-rotate(305deg) brightness(91%) contrast(89%);
-  `}
-    @media screen and ${device.phone} {
+  `} @media screen and ${device.phone} {
         width: 24px;
         height: 24px;
     }
@@ -96,21 +96,13 @@ type Props = {
 export const LoginFormField = (props: Props) => {
 	const ref = useRef(null)
 	const [showPassword, setShowPassword] = useState(false)
-	const [rdo, setRdo] = useState(true)
 
 	const focusInput = () => {
 		(ref.current as unknown as HTMLInputElement)?.focus();
 	}
 
 	useEffect(() => {
-		[hidePasswordIcon].forEach((src) => {
-			const img = new Image();
-			img.src = src;
-		});
-
-		setTimeout(() => {
-			//setRdo(false)
-		}, 500)
+		preloadImages([hidePasswordIcon])
 	}, []);
 
 	let inputType = props.type || ""

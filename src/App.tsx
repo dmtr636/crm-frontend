@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import {Route, Routes, useMatch, useNavigate} from "react-router-dom";
-import {WelcomePage} from "./pages/WelcomePage";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import {LoginPage} from "./pages/LoginPage";
 import {LoadingPage} from "./pages/LoadingPage";
 import UserStore from "./store/userStore";
 import {observer} from "mobx-react";
-import {HomePage} from "./pages/HomePage";
 import {MainPage} from "./pages/MainPage";
 import {Page404} from "./pages/Page404";
 import {sidebarRoutes} from "./routes/routes";
@@ -36,10 +34,10 @@ export const App = observer(() => {
 		<AppContainer>
 			{loading
 				?
-				<LoadingPage />
+				<LoadingPage/>
 				:
 				<Routes>
-					<Route path={"/"} element={<MainPage/>}>
+					<Route path={"/"} element={<MainPage />}>
 						{sidebarRoutes.map(route =>
 							route.index
 								? <Route index element={route.component} />

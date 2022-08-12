@@ -17,9 +17,8 @@ class UserStore {
 		if (!data.error) {
 			this.user = data
 			return true
-		} else {
-			return false
 		}
+		return false
 	}
 
 	logout() {

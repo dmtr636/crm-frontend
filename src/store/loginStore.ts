@@ -8,7 +8,7 @@ class LoginStore {
 	email = ""
 	password = ""
 	error = false
-	isLogging = false
+	isLogining = false
 
 	constructor() {
 		makeAutoObservable(this)
@@ -28,12 +28,12 @@ class LoginStore {
 	}
 
 	async login() {
-		this.isLogging = true
+		this.isLogining = true
 		const res = await axios.post(LOGIN_ENDPOINT, {
 			email: this.email,
 			password: this.password
 		})
-		this.isLogging = false
+		this.isLogining = false
 
 		let data = res.data
 		if (!data.error) {
