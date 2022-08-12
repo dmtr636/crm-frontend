@@ -1,7 +1,8 @@
-import {FunctionComponent} from "react";
+import {ReactNode} from "react";
 
 export interface IRoute {
 	path: string,
-	component: FunctionComponent,
-	icon: string
+	component: ReactNode,
+	icon: string,
+	index?: boolean,
 }
