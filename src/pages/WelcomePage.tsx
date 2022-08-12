@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import bg from "../../images/loginPageBg.jpg"
-import UserStore from "../../store/userStore";
-import loginPageLogo from "../../images/loginPageLogo.svg";
-import cat from "../../images/floppa_icon.png"
+import bg from "../assets/loginPageBg.jpg"
+import UserStore from "../store/userStore";
+import loginPageLogo from "../assets/loginPageLogo.svg";
+import cat from "../assets/floppa_icon.png"
 import {useNavigate} from "react-router-dom";
 import {observer} from "mobx-react";
-import {device} from "../../constants/breakpoints";
+import {device} from "../constants/breakpoints";
 
 const Container = styled.div`
   background-image: url(${bg});

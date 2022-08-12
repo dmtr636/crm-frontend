@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Route, Routes, useMatch, useNavigate} from "react-router-dom";
-import {WelcomePage} from "./components/welcome/WelcomePage";
-import {LoginPage} from "./components/login/LoginPage";
-import {LoadingPage} from "./components/loading/LoadingPage";
+import {WelcomePage} from "./pages/WelcomePage";
+import {LoginPage} from "./pages/LoginPage";
+import {LoadingPage} from "./pages/LoadingPage";
 import UserStore from "./store/userStore";
 import {observer} from "mobx-react";
+import {HomePage} from "./pages/HomePage";
+import {MainPage} from "./pages/MainPage";
+import {Page404} from "./pages/Page404";
 
 const AppContainer = styled.div`
 
@@ -35,9 +38,11 @@ export const App = observer(() => {
 				<LoadingPage />
 				:
 				<Routes>
-					<Route path={"/"} element={<WelcomePage/>} />
+					<Route path={"/"} element={<MainPage/>}>
+
+					</Route>
 					<Route path={"/login"} element={<LoginPage/>} />
-					<Route path={"*"} element={<WelcomePage />} />
+					<Route path={"*"} element={<Page404 />} />
 				</Routes>
 			}
 		</AppContainer>

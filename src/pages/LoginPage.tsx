@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import loginPageBg from "../../images/loginPageBg.jpg"
-import {LoginForm} from "./LoginForm";
-import loginPageLogo from "../../images/loginPageLogo.svg"
+import loginPageBg from "../assets/loginPageBg.jpg"
+import {LoginForm} from "../components/login/LoginForm";
+import loginPageLogo from "../assets/loginPageLogo.svg"
 import {observer} from "mobx-react";
 import {useEffect} from "react";
-import UserStore from "../../store/userStore";
+import UserStore from "../store/userStore";
 import {useNavigate} from "react-router-dom";
-import {device} from "../../constants/breakpoints";
+import {device} from "../constants/breakpoints";
 
 const Container = styled.div`
 	background-image: url(${loginPageBg});
@@ -28,11 +28,11 @@ const Container = styled.div`
 		min-height: calc(var(--vh, 1vh) * 100);
 	}
 `
+
 const Logotype = styled.img`
 	position: absolute;
 	top: 60px;
 	left: 60px;
-
 
 	@media 
 	screen and ${device.phone}, 
@@ -59,8 +59,6 @@ const Logotype = styled.img`
 export const LoginPage = observer(() => {
 	const userStore = UserStore
 	const navigate = useNavigate()
-	const audio = new Audio("https://static.wikia.nocookie.net/dota2_gamepedia/images/7/75/Music_default_ui_main_01.mp3")
-	audio.currentTime = 5
 
 	useEffect(() => {
 		if (userStore.user) {
@@ -69,7 +67,7 @@ export const LoginPage = observer(() => {
 	}, [])
 
 	return (
-		<div onClick={() => audio.play()}>
+		<div>
 			<Container>
 				<Logotype src={loginPageLogo} />
 				<LoginForm />

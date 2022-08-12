@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bg from "../../images/loginPageBg.jpg"
+import bg from "../assets/loginPageBg.jpg"
 
 const Container = styled.div`
   background-image: url(${bg});
