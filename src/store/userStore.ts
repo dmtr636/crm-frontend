@@ -5,7 +5,7 @@ import {AUTHENTICATE_ENDPOINT, LOGOUT_ENDPOINT} from "../api/endoints";
 import LoginStore from "./loginStore";
 
 class UserStore {
-	user: IUser | undefined
+	user?: IUser
 
 	constructor() {
 		makeAutoObservable(this)

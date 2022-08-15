@@ -48,7 +48,7 @@ export const HeaderSearch = () => {
 					onFocus={() => setShowBackdrop(true)}
 					onBlur={() => setShowBackdrop(false)}
 				/>
-				{showBackdrop && <HeaderSearchResult searchQuery={value}/>}
+				{showBackdrop && value.length > 0 && <HeaderSearchResult searchQuery={value}/>}
 			</Container>
 			{showBackdrop && <Backdrop opacity={0.7} />}
 		</>
