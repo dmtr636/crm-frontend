@@ -5,7 +5,7 @@ import {ITask} from "../../interfaces/ITask";
 import {IHomeProject} from "../../interfaces/IHomeProject";
 import {HomeProjectCardTasksColumn} from "./HomeProjectCardTasksColumn";
 
-const COLUMN_COUNT = 4
+const COLUMN_COUNT = 3
 const ITEMS_IN_COLUMN = 3
 
 const Container = styled.div`
@@ -24,9 +24,6 @@ const makeColumns = (project: IHomeProject) => {
 			break
 		}
 		for (let j = 0; j < ITEMS_IN_COLUMN; j++) {
-			if (i*COLUMN_COUNT + j === project.tasks.length) {
-				break
-			}
 			column.push(project.tasks[i*COLUMN_COUNT + j])
 		}
 		columns.push(column)

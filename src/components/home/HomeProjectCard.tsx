@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import {HomeProjectCardHeader} from "./HomeProjectCardHeader";
-import {IHomeProject} from "../../interfaces/IHomeProject";
 import {HomeProjectCardSelect} from "./HomeProjectCardSelect";
-import {useContext} from "react";
-import {HomeProjectContext} from "./HomeProject";
 import {HomeProjectCardTasks} from "./HomeProjectCardTasks";
 
 const Card = styled.div`

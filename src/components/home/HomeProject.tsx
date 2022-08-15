@@ -6,8 +6,7 @@ import {HomeProjectCard} from "./HomeProjectCard";
 import {createContext} from "react";
 
 const Container = styled.div`
-    padding: 0 48px;
-	margin: 48px 0;
+	margin: 48px;
 `
 
 export const HomeProjectContext = createContext<IHomeProject | null>(null);

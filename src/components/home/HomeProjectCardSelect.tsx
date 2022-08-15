@@ -1,8 +1,5 @@
 import {observer} from "mobx-react";
-import {taskTypes} from "../../constants/taskTypes";
-import {HomeSelectTypeTab} from "./HomeSelectTypeTab";
 import styled from "styled-components";
-import {IHomeProject} from "../../interfaces/IHomeProject";
 import {HomeProjectCardSelectTab} from "./HomeProjectCardSelectTab";
 
 const Container = styled.div`
