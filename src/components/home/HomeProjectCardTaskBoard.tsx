@@ -3,8 +3,9 @@ import {HomeProjectContext} from "./HomeProject";
 import styled from "styled-components";
 import {ITask} from "../../interfaces/ITask";
 import {IHomeProject} from "../../interfaces/IHomeProject";
-import {HomeProjectCardTasksColumn} from "./HomeProjectCardTasksColumn";
+import {HomeProjectCardTaskColumn} from "./HomeProjectCardTaskColumn";
 import useWindowDimensions from "../../hooks/hooks";
+import {observer} from "mobx-react";
 
 const ITEMS_IN_COLUMN = 3
 
@@ -43,7 +44,7 @@ const getColumnCount = (width: number) => {
 	}
 }
 
-export const HomeProjectCardTaskBoard = () => {
+export const HomeProjectCardTaskBoard = observer(() => {
 	const project = useContext(HomeProjectContext)!
 	const {width} = useWindowDimensions()
 	const [columns, setColumns] = useState<(ITask[])[]>()
@@ -55,13 +56,13 @@ export const HomeProjectCardTaskBoard = () => {
 
 	useEffect(() => {
 		setColumns(makeColumns(project, columnCount))
-	}, [columnCount, project])
+	}, [columnCount, project, project.tasks])
 
 	return (
 		<Container columnCount={columnCount}>
 			{columns?.map(column =>
-				<HomeProjectCardTasksColumn tasks={column} key={column[0].id} />
+				<HomeProjectCardTaskColumn tasks={column} key={column[0].id} />
 			)}
 		</Container>
 	)
-}
+})

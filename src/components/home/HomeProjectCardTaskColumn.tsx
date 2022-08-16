@@ -8,11 +8,11 @@ const Column = styled.div`
 	row-gap: 26px;
 `
 
-export const HomeProjectCardTasksColumn = (props: {tasks: ITask[]}) => {
+export const HomeProjectCardTaskColumn = (props: {tasks: ITask[]}) => {
 	return (
 		<Column>
 			{props.tasks.map(task =>
-				task && <HomeProjectCardTask task={task} />
+				<HomeProjectCardTask task={task} />
 			)}
 		</Column>
 	)
