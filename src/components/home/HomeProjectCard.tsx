@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {HomeProjectCardHeader} from "./HomeProjectCardHeader";
 import {HomeProjectCardSelect} from "./HomeProjectCardSelect";
-import {HomeProjectCardTasks} from "./HomeProjectCardTasks";
+import {HomeProjectCardTaskBoard} from "./HomeProjectCardTaskBoard";
 
 const Card = styled.div`
 	margin-top: 48px;
@@ -19,7 +19,7 @@ export const HomeProjectCard = () => {
 			<HomeProjectCardHeader />
 			<Content>
 				<HomeProjectCardSelect />
-				<HomeProjectCardTasks />
+				<HomeProjectCardTaskBoard />
 			</Content>
 		</Card>
 	)

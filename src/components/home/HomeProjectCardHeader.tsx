@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import infoIcon from "assets/homeProjectInfo.svg"
+import infoIcon from "assets/home/homeProjectInfo.svg"
 import {useContext} from "react";
 import {HomeProjectContext} from "./HomeProject";
 

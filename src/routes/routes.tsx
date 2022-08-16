@@ -1,7 +1,7 @@
 import {IRoute} from "../interfaces/IRoute";
 import {HomePage} from "../pages/HomePage";
-import sidebarHome from "assets/sidebarHome.svg"
-import sidebarProjects from "assets/sidebarProjects.svg"
+import sidebarHome from "assets/sidebar/sidebarHome.svg"
+import sidebarProjects from "assets/sidebar/sidebarProjects.svg"
 import {ProjectsPage} from "../pages/ProjectsPage";
 
 export const sidebarRoutes: IRoute[] = [

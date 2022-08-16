@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import searchIcon from "assets/headerSearchFieldSearchIcon.svg"
+import searchIcon from "assets/header/headerSearchFieldSearchIcon.svg"
 import {Backdrop} from "../Backdrop";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {HeaderSearchResult} from "./HeaderSearchResult";
+import {appStore} from "../../../store/appStore";
 
 const Container = styled.div<{showBackdrop: boolean}>`
 	position: relative;
@@ -37,6 +38,13 @@ export const HeaderSearch = () => {
 	const [value, setValue] = useState("")
 	const [showBackdrop, setShowBackdrop] = useState(false)
 
+	useEffect(() => {
+		if (showBackdrop) {
+			appStore.setBackdropType("content")
+		}
+		appStore.setIsShowBackdrop(showBackdrop)
+	}, [showBackdrop])
+
 	return (
 		<>
 			<Container showBackdrop={showBackdrop}>
@@ -50,7 +58,6 @@ export const HeaderSearch = () => {
 				/>
 				{showBackdrop && value.length > 0 && <HeaderSearchResult searchQuery={value}/>}
 			</Container>
-			{showBackdrop && <Backdrop opacity={0.7} />}
 		</>
 	)
 }

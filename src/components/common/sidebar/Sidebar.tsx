@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import sidebarLogo from "assets/sidebarLogo.svg"
-import sidebarLine from "assets/sidebarLine.svg"
-import sidebarReport from "assets/sidebarReport.svg"
+import sidebarLogo from "assets/sidebar/sidebarLogo.svg"
+import sidebarLine from "assets/sidebar/sidebarLine.svg"
+import sidebarReport from "assets/sidebar/sidebarReport.svg"
 import {sidebarRoutes} from "../../../routes/routes";
 import {NavLink} from "react-router-dom";
 
@@ -14,6 +14,7 @@ const Container = styled.div`
     align-items: center;
     padding: 48px 0;
     row-gap: 48px;
+	z-index: 7;
 `
 const Link = styled.img<{ active?: boolean }>`
     opacity: ${props => props.active ? 1 : 0.5};

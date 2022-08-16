@@ -1,18 +1,20 @@
 import styled from "styled-components";
 import {HeaderSearch} from "./HeaderSearch";
-import notificationsIcon from "assets/headerNotifications.svg"
-import avatar from "assets/headerAvatar.png"
-import arrow from "assets/headerArrow.svg"
+import notificationsIcon from "assets/header/headerNotifications.svg"
+import arrow from "assets/header/headerArrow.svg"
 import {url} from "../../../utils/utils";
 import userStore from "../../../store/userStore";
 
 const Container = styled.header`
+	position: sticky;
+	top: 0;
 	width: 100%;
 	height: 102px;
 	background: white;
 	display: flex;
 	align-items: center;
 	padding: 0 48px;
+	z-index: 7;
 `
 const Notifications = styled.img`
 	margin-left: auto;

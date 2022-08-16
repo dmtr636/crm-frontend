@@ -17,28 +17,33 @@ const Button = styled.button<Props>`
     color: white;
 
     border-radius: 5px;
-    background: linear-gradient(91.32deg, #1F232C 0%, #3B4252 100%);
-    background: ${props => props.processing && '#1F232C'};
-
-
-    ${props => props.error && `
-    background: #1F232C;
-  `}
-
-    ${props => props.disabled && `
-    background: none;
-    color: #1F232C;
-    opacity: 0.5;
-    border: 3px solid #1F232C;
-    cursor: default;
-  `} ${props => (!props.disabled && !props.processing && !props.error) && `
-    &:hover {
-      background: linear-gradient(91.32deg, #363D4B 0%, #454D60 100%);
-    }
-    &:active {
-      background: #1F232C;
-    }
-  `} @media screen and ${device.phone} {
+	
+	background: ${props => {
+		switch (props.state) {
+			case "active": return `#1F232C`
+			case "disabled": return 'none'
+			case "error": return `#0F131C`
+			case "processing": return '#0F131C'
+		}
+	}};
+	
+    ${props => props.state === "disabled" && `
+		color: #1F232C;
+		opacity: 0.7;
+		border: 3px solid #1F232C;
+		cursor: default;
+  	`} 
+	
+	${props => props.state === "active" && `
+		&:hover {
+		  background: #2D313A;
+		}
+		&:active {
+		  background: #0F131C;
+		}
+  	`} 
+	
+	@media screen and ${device.phone} {
         width: 280px;
         height: 48px;
         border-width: 2px;
@@ -47,15 +52,15 @@ const Button = styled.button<Props>`
 `
 
 type Props = {
-	disabled?: boolean,
-	error?: boolean,
-	processing?: boolean
+	state: LoginFormButtonState
 }
+
+export type LoginFormButtonState = "active" | "disabled" | "error" | "processing"
 
 export const LoginFormButton = observer((props: Props) => {
 	const loginStore = LoginStore
 	let text = "войти"
-	if (loginStore.isLogining) {
+	if (loginStore.isProcessing) {
 		text = "момент.."
 	}
 	if (loginStore.error) {
@@ -64,10 +69,9 @@ export const LoginFormButton = observer((props: Props) => {
 
 	return (
 		<Button
-			disabled={props.disabled}
-			error={props.error}
+			state={props.state}
+			disabled={props.state !== "active"}
 			type={"submit"}
-			processing={loginStore.isLogining}
 		>
 			{text}
 		</Button>

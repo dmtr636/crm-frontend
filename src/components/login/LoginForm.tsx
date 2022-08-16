@@ -1,6 +1,6 @@
 import {LoginFormHeader} from "./LoginFormHeader";
 import {LoginFormField} from "./LoginFormField";
-import {LoginFormButton} from "./LoginFormButton";
+import {LoginFormButton, LoginFormButtonState} from "./LoginFormButton";
 import {LoginFormLink} from "./LoginFormLink";
 import {FormEvent, useState} from "react";
 import loginStore from "../../store/loginStore";
@@ -24,9 +24,6 @@ const Form = styled.form`
     row-gap: 30px;
 
     background: #FFFFFF;
-    opacity: 0.97;
-    box-shadow: 0px 4px 60px #000000;
-    backdrop-filter: blur(10px);
     border-radius: 5px;
 
     @media screen and ${device.phone} {
@@ -50,17 +47,6 @@ const Form = styled.form`
     @media screen and ${device.desktopL} {
         margin-right: 240px;
     }
-
-    animation: fadein 1s;
-
-    @keyframes fadein {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 0.97;
-        }
-    }
 `
 
 export const LoginForm = observer(() => {
@@ -74,6 +60,19 @@ export const LoginForm = observer(() => {
 		if (isLoggedIn) {
 			navigate("/", {replace: true})
 		}
+	}
+
+	const getLoginFormButtonState = ():LoginFormButtonState => {
+		if (loginStore.error) {
+			return "error"
+		}
+		if (loginStore.isProcessing) {
+			return "processing"
+		}
+		if (!loginStore.formValidated) {
+			return "disabled"
+		}
+		return "active"
 	}
 
 	return (
@@ -102,8 +101,7 @@ export const LoginForm = observer(() => {
                 />
 			}
 			<LoginFormButton
-				error={loginStore.error}
-				disabled={!loginStore.formValidated}
+				state={getLoginFormButtonState()}
 			/>
 			<LoginFormLink
 				onClick={() => {

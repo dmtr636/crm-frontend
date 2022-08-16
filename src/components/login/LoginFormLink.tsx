@@ -12,26 +12,14 @@ const ProblemsButton = styled.a<{error?: boolean}>`
   letter-spacing: 0.03em;
   margin-top: 10px;
 
-  background: ${props => props.error ? '#BF616A' : 'linear-gradient(91.32deg, #1F232C 0%, #3B4252 100%)'};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+  color: ${props => props.error ? '#BF616A' : '#1F232C'};
   
   &:hover {
-    background: linear-gradient(91.32deg, #363D4B 0%, #454D60 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+    color: #2D313A;
   }
   
   &:active {
-    background: black;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+    color: #0F131C;
   }
   
   @media screen and ${device.phone} {

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import emailIcon from "../../assets/emailFieldIcon.svg"
-import passwordIcon from "../../assets/passwordFieldIcon.svg"
-import showPasswordIcon from "../../assets/showPasswordIcon.svg"
-import hidePasswordIcon from "../../assets/hidePasswordIcon.svg"
+import emailIcon from "../../assets/login/emailFieldIcon.svg"
+import passwordIcon from "../../assets/login/passwordFieldIcon.svg"
+import showPasswordIcon from "../../assets/login/showPasswordIcon.svg"
+import hidePasswordIcon from "../../assets/login/hidePasswordIcon.svg"
 import {useEffect, useRef, useState} from "react";
 import LoginStore from "../../store/loginStore";
 import {device} from "../../constants/breakpoints";
@@ -80,8 +80,9 @@ const TogglePasswordVisibilityButton = styled.button<{ icon: string; error: bool
 `
 const Img = styled.img<{ error: boolean }>`
     ${props => props.error && `
-    filter: brightness(0) saturate(100%) invert(48%) sepia(18%) saturate(1292%) hue-rotate(305deg) brightness(91%) contrast(89%);
-  `} @media screen and ${device.phone} {
+    	filter: brightness(0) saturate(100%) invert(48%) sepia(18%) saturate(1292%) hue-rotate(305deg) brightness(91%) contrast(89%);
+  	`} 
+	@media screen and ${device.phone} {
         width: 24px;
         height: 24px;
     }
