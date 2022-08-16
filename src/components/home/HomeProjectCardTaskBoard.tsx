@@ -17,18 +17,25 @@ const Container = styled.div<{columnCount: number}>`
 `
 
 const makeColumns = (project: IHomeProject, columnCount: number) => {
+	let tasks
+	if (project.tasks_filter === "completed") {
+		tasks = project.tasks.filter(task => task.completed)
+	} else {
+		tasks = project.tasks
+	}
+
 	const columns: (ITask[])[] = []
 
 	for (let i = 0; i < columnCount; i++) {
 		columns.push([])
 	}
 
-	for (let i = 0; i < project.tasks.length; i++) {
+	for (let i = 0; i < tasks.length; i++) {
 		let colIdx = Math.floor(i / ITEMS_IN_COLUMN)
 		if (i >= columnCount * ITEMS_IN_COLUMN) {
 			colIdx = i % columnCount
 		}
-		columns[colIdx].push(project.tasks[i])
+		columns[colIdx].push(tasks[i])
 	}
 
 	return columns
@@ -56,11 +63,11 @@ export const HomeProjectCardTaskBoard = observer(() => {
 
 	useEffect(() => {
 		setColumns(makeColumns(project, columnCount))
-	}, [columnCount, project, project.tasks])
+	}, [columnCount, project, project.tasks, project.tasks_filter])
 
 	return (
 		<Container columnCount={columnCount}>
-			{columns?.map(column =>
+			{columns?.map(column => column.length > 0 &&
 				<HomeProjectCardTaskColumn tasks={column} key={column[0].id} />
 			)}
 		</Container>

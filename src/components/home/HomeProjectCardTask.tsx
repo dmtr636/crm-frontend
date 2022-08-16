@@ -42,7 +42,6 @@ const Text = styled.div<{completed: boolean}>`
 	cursor: pointer;
 	user-select: none;
 	text-decoration: ${props => props.completed && 'line-through'};
-	text-decoration-thickness: auto;
 `
 
 const cmpFunc = (task1: ITask, task2: ITask) => {
