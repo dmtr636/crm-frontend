@@ -1,6 +1,6 @@
-import {ITaskType} from "../interfaces/ITaskType";
+import {ITabOption} from "../interfaces/ITabOption";
 
-export const taskTypes: ITaskType[] = [
+export const homeTabs: ITabOption[] = [
 	{
 		id: "my_project",
 		value: "Мои проекты"

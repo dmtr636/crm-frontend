@@ -14,7 +14,7 @@ const Container = styled.div`
     align-items: center;
     padding: 48px 0;
     row-gap: 48px;
-	z-index: 7;
+	z-index: 15;
 `
 const Link = styled.img<{ active?: boolean }>`
     opacity: ${props => props.active ? 1 : 0.5};

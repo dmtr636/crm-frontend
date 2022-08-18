@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import {ITaskType} from "../../interfaces/ITaskType";
 import {observer} from "mobx-react";
-import {taskStore} from "../../store/taskStore";
+import {ITabOption} from "../../../interfaces/ITabOption";
+import {TabStore} from "../../../store/tabStore";
 
-const Tab = styled.button<{active: boolean}>`
+const Container = styled.button<{active: boolean}>`
 	height: 50px;
 	display: flex;
 	justify-content: center;
@@ -27,15 +27,20 @@ const Tab = styled.button<{active: boolean}>`
 	`}
 `
 
-export const HomeSelectTypeTab = observer((props: {taskType: ITaskType}) => {
-	const active = props.taskType.id === taskStore.taskType.id
+type Props = {
+	option: ITabOption,
+	store: TabStore
+}
+
+export const Tab = observer((props: Props) => {
+	const active = props.option.id === props.store.option.id
 
 	return (
-		<Tab
+		<Container
 			active={active}
-			onClick={() => taskStore.setType(props.taskType)}
+			onClick={() => props.store.setOption(props.option)}
 		>
-			{props.taskType.value}
-		</Tab>
+			{props.option.value}
+		</Container>
 	)
 })

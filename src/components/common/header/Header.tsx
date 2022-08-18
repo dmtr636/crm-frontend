@@ -14,7 +14,7 @@ const Container = styled.header`
 	display: flex;
 	align-items: center;
 	padding: 0 48px;
-	z-index: 7;
+	z-index: 15;
 `
 const Notifications = styled.img`
 	margin-left: auto;

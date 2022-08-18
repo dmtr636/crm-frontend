@@ -15,9 +15,9 @@ const Background = styled.div<{zIndex: number}>`
 export const Backdrop = (props: {type: BackdropType}) => {
 	const getZIndex = () => {
 		if (props.type === "content") {
-			return 5
-		} else {
 			return 10
+		} else {
+			return 20
 		}
 	}
 

@@ -1,8 +1,10 @@
 import {IRoute} from "../interfaces/IRoute";
-import {HomePage} from "../pages/HomePage";
+import {HomePage} from "../pages/main/HomePage";
 import sidebarHome from "assets/sidebar/sidebarHome.svg"
 import sidebarProjects from "assets/sidebar/sidebarProjects.svg"
-import {ProjectsPage} from "../pages/ProjectsPage";
+import sidebarStudio from "assets/sidebar/sidebarStudio.svg"
+import {ProjectsPage} from "../pages/main/ProjectsPage";
+import {StudioPage} from "../pages/main/StudioPage";
 
 export const sidebarRoutes: IRoute[] = [
 	{
@@ -15,5 +17,10 @@ export const sidebarRoutes: IRoute[] = [
 		path: "/projects",
 		component: <ProjectsPage/>,
 		icon: sidebarProjects
+	},
+	{
+		path: "/studio",
+		component: <StudioPage />,
+		icon: sidebarStudio
 	}
 ]
