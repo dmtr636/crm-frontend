@@ -7,16 +7,19 @@ export const studioTabs: ITabOption[] = [
 	{
 		id: "money",
 		value: "Деньги",
-		component: <StudioMoney />
+		component: <StudioMoney />,
+		actionButtonText: "Добавить операцию"
 	},
 	{
 		id: "access",
 		value: "Доступы",
-		component: <StudioAccess />
+		component: <StudioAccess />,
+		actionButtonText: "Добавить доступ"
 	},
 	{
 		id: "command",
 		value: "Команда",
-		component: <StudioCommand />
+		component: <StudioCommand />,
+		actionButtonText: "Добавить участника"
 	}
 ]

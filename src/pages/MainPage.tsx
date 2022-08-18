@@ -5,6 +5,7 @@ import {Header} from "../components/common/header/Header";
 import {observer} from "mobx-react";
 import {Backdrop} from "../components/common/Backdrop";
 import {appStore} from "../store/appStore";
+import {Dialog} from "../components/common/dialog/Dialog";
 
 const Layout = styled.div`
 	height: 100vh;
@@ -27,6 +28,7 @@ export const MainPage = observer(() => {
 			 </ContentLayout>
 
 			 {appStore.isShowBackdrop && <Backdrop type={appStore.backdropType} />}
+			 <Dialog />
 		 </Layout>
 	)
 })

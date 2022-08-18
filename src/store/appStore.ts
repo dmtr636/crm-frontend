@@ -6,7 +6,10 @@ class AppStore {
 	isShowBackdrop = false
 	backdropType: BackdropType = "content"
 
-	setIsShowBackdrop(value: boolean) {
+	setIsShowBackdrop(value: boolean, type?: BackdropType) {
+		if (type) {
+			this.backdropType = type
+		}
 		this.isShowBackdrop = value
 	}
 
