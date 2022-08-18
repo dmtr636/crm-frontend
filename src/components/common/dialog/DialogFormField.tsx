@@ -6,18 +6,20 @@ import React, {FormEvent} from "react";
 const Container = styled.div`
 	
 `
-const Label = styled.div`
+const Label = styled.div<{validated: boolean}>`
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 110%;
     letter-spacing: 0.03em;
-    color: #1F232C;
+	color: ${props => props.validated ? '#1F232C' : '#BF616A'};
 `
-const Input = styled.input`
+const Input = styled.input<{validated: boolean}>`
+	width: 100%;
 	margin-top: 26px;
-    border: 3px solid #1F232C;
+    border: 3px solid;
+    border-color: ${props => props.validated ? '#1F232C' : '#BF616A'};
     border-radius: 5px;
 	padding: 13px 0 13px 23px;
     font-family: 'Montserrat';
@@ -33,14 +35,15 @@ export const DialogFormField = observer((props: {field: IDialogField}) => {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		field.value = event.target.value
+		field.validated = true
 	}
 
 	return (
 		<Container>
-			<Label>
+			<Label validated={field.validated ?? true}>
 				{field.label}
 			</Label>
-			<Input value={field.value} onChange={handleChange} />
+			<Input value={field.value} onChange={handleChange} validated={field.validated ?? true} />
 		</Container>
 	)
 })

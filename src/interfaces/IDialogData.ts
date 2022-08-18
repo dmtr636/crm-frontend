@@ -9,7 +9,14 @@ export interface IDialogField {
 	label: string,
 	name: string,
 	columns?: number,
-	value?: string
+	value?: string,
+	validated?: boolean
+}
+
+export interface IDialogAction {
+	type: "save" | "add" | "delete" | "ok" | "cancel",
+	label: string,
+	onClick: (data: IDialogData) => void
 }
 
 export interface IDialogData {
@@ -17,5 +24,6 @@ export interface IDialogData {
 	form?: {
 		columns: number,
 		fields: IDialogField[]
-	}
+	},
+	actions?: IDialogAction[]
 }

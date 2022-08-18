@@ -1,4 +1,5 @@
 import {IDialogData} from "../../interfaces/IDialogData";
+import {memberStore} from "../../store/memberStore";
 
 export const studioCommandDialog: IDialogData = {
 	title: {
@@ -32,5 +33,12 @@ export const studioCommandDialog: IDialogData = {
 				name: "telegram"
 			}
 		]
-	}
+	},
+	actions: [
+		{
+			label: "Добавить",
+			type: "add",
+			onClick: data => memberStore.addMemberFromDialog(data)
+		}
+	]
 }

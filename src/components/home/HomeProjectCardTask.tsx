@@ -3,11 +3,11 @@ import styled from "styled-components";
 import {observer} from "mobx-react";
 import {useContext} from "react";
 import {HomeProjectContext} from "./HomeProject";
-import {colors} from "../../theme/colors";
+import {darkColors} from "../../theme/colors";
 
 const Task = styled.div`
     width: 312px;
-    background: ${colors.default};
+    background: ${darkColors.default};
 	color: white;
     border-radius: 5px;
 	padding: 17px 34px;
@@ -17,10 +17,10 @@ const Task = styled.div`
 	cursor: pointer;
 	
 	&:hover {
-		background: ${colors.hover};
+		background: ${darkColors.hover};
 	}
 	&:active {
-        background: ${colors.pressed};
+        background: ${darkColors.pressed};
     }
 `
 const Checkbox = styled.button<{completed: boolean}>`

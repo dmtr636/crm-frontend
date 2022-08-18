@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {IDialogData} from "../interfaces/IDialogData";
+import {IDialogAction, IDialogData} from "../interfaces/IDialogData";
 
 export type DialogType = "add" | "edit" | "confirm" | "success"
 
@@ -16,6 +16,28 @@ export class DialogStore {
 
 	close() {
 		this.isOpen = false
+	}
+
+	validate() {
+		let isValid = true
+		this.data?.form?.fields.forEach(field => {
+			if (field.value?.trim().length) {
+				field.validated = true
+			} else {
+				field.validated = false
+				isValid = false
+			}
+		})
+		return isValid
+	}
+
+	handleAction(action: IDialogAction) {
+		if (action.type === "add") {
+			if (this.validate()) {
+				this.close()
+				action.onClick(this.data!)
+			}
+		}
 	}
 
 	constructor() {

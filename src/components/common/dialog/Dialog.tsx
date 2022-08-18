@@ -3,6 +3,7 @@ import {observer} from "mobx-react";
 import {dialogStore} from "../../../store/dialogStore";
 import {DialogHeader} from "./DialogHeader";
 import {DialogForm} from "./DialogForm";
+import {DialogActions} from "./DialogActions";
 
 const Backdrop = styled.div`
     position: fixed;
@@ -45,6 +46,7 @@ export const Dialog = observer(() => {
 							{dialogStore.data?.form &&
 								<DialogForm />
 							}
+							<DialogActions />
                         </Content>
                     </Container>
                 </Backdrop>

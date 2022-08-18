@@ -1,11 +1,11 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import {colors} from "../../../theme/colors";
+import {darkColors} from "../../../theme/colors";
 import {ReactNode} from "react";
 
 const Container = styled.button`
 	height: 50px;
-	background: ${colors.default};
+	background: ${darkColors.default};
 	padding: 0 34px;
 	border-radius: 5px;
 	display: flex;
@@ -20,11 +20,11 @@ const Container = styled.button`
     color: #FFFFFF;
 	
 	&:hover {
-		background: ${colors.hover};
+		background: ${darkColors.hover};
 	}
 	
 	&:active {
-		background: ${colors.pressed};
+		background: ${darkColors.pressed};
 	}
 `
 
