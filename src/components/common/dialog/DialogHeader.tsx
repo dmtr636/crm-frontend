@@ -34,7 +34,10 @@ const CloseButton = styled.button`
 
 export const DialogHeader = observer(() => {
 	const getTitle = () => {
-		return dialogStore.data?.title[dialogStore.type]
+		switch (dialogStore.type) {
+			case "add": return dialogStore.data?.title?.add ?? "Добавить"
+			case "successAdd": return dialogStore.data?.title?.successAdd ?? "Успешно добавлен"
+		}
 	}
 
 	return (

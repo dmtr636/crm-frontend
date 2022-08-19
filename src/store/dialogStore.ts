@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {IDialogAction, IDialogData} from "../interfaces/IDialogData";
 
-export type DialogType = "add" | "edit" | "confirm" | "success"
+export type DialogType = "add" | "edit" | "confirm" | "successAdd" | "successDelete"
 
 export class DialogStore {
 	isOpen = false
@@ -34,8 +34,8 @@ export class DialogStore {
 	handleAction(action: IDialogAction) {
 		if (action.type === "add") {
 			if (this.validate()) {
-				this.close()
-				action.onClick(this.data!)
+				this.type = "successAdd"
+				//action.onClick(this.data!)
 			}
 		}
 	}

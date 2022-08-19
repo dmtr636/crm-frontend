@@ -2,8 +2,8 @@ import styled from "styled-components";
 import {observer} from "mobx-react";
 import {dialogStore} from "../../../store/dialogStore";
 import {DialogHeader} from "./DialogHeader";
-import {DialogForm} from "./DialogForm";
-import {DialogActions} from "./DialogActions";
+import {AddDialog} from "./AddDialog";
+import {SuccessAddDialog} from "./SuccessAddDialog";
 
 const Backdrop = styled.div`
     position: fixed;
@@ -17,23 +17,23 @@ const Backdrop = styled.div`
 	justify-content: center;
 	align-items: center;
 `
-
 const Container = styled.div`
     background: #FFFFFF;
     border-radius: 5px;
 	z-index: 30;
-`
-const Header = styled.div`
-    height: 102px;
-    background: #1F232C;
-	padding: 0 48px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	min-width: 744px;
 `
 const Content = styled.div`
 	padding: 26px 48px;
 `
+
+const getDialogContent = () => {
+	switch (dialogStore.type) {
+		case "add": return <AddDialog />
+		case "successAdd": return <SuccessAddDialog />
+		default: return <AddDialog />
+	}
+}
 
 export const Dialog = observer(() => {
 	return (
@@ -43,10 +43,7 @@ export const Dialog = observer(() => {
                     <Container onClick={(event) => event.stopPropagation()}>
                         <DialogHeader />
                         <Content>
-							{dialogStore.data?.form &&
-								<DialogForm />
-							}
-							<DialogActions />
+							{getDialogContent()}
                         </Content>
                     </Container>
                 </Backdrop>

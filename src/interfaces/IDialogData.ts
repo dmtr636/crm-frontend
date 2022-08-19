@@ -1,8 +1,9 @@
 interface IDialogTitle {
-	add: string,
+	add?: string,
 	edit?: string,
 	confirm?: string,
-	success?: string
+	successAdd?: string,
+	successDelete?: string
 }
 
 export interface IDialogField {
@@ -20,7 +21,7 @@ export interface IDialogAction {
 }
 
 export interface IDialogData {
-	title: IDialogTitle,
+	title?: IDialogTitle,
 	form?: {
 		columns: number,
 		fields: IDialogField[]

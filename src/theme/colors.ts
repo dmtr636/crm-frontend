@@ -9,3 +9,8 @@ export const redColors = {
 	hover: '#B15B63',
 	pressed: '#A1434C'
 }
+
+export const colors = {
+	dark: darkColors,
+	red: redColors
+}
