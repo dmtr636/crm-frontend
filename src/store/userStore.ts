@@ -12,8 +12,6 @@ class UserStore {
 	}
 
 	async authenticate() {
-		return true
-
 		const res = await axios.get(AUTHENTICATE_ENDPOINT)
 		let data = res.data
 		if (!data.error) {

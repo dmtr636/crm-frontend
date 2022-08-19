@@ -12,7 +12,7 @@ export const HomeProjectCardTaskColumn = (props: {tasks: ITask[]}) => {
 	return (
 		<Column>
 			{props.tasks.map(task =>
-				<HomeProjectCardTask task={task} />
+				<HomeProjectCardTask task={task} key={task.id} />
 			)}
 		</Column>
 	)

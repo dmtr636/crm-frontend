@@ -34,6 +34,10 @@ export const studioCommandDialog: IDialogData = {
 			}
 		]
 	},
+	text: {
+		successAdd: "{OBJECT} добавлен",
+		successAddObjectFieldName: "name"
+	},
 	actions: [
 		{
 			label: "Добавить",

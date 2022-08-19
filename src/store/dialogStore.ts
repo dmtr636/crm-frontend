@@ -35,7 +35,7 @@ export class DialogStore {
 		if (action.type === "add") {
 			if (this.validate()) {
 				this.type = "successAdd"
-				//action.onClick(this.data!)
+				action.onClick(this.data!)
 			}
 		}
 	}

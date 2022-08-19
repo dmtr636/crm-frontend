@@ -68,7 +68,7 @@ export const HomeProjectCardTaskBoard = observer(() => {
 	return (
 		<Container columnCount={columnCount}>
 			{columns?.map(column => column.length > 0 &&
-				<HomeProjectCardTaskColumn tasks={column} key={column[0].id} />
+				<HomeProjectCardTaskColumn tasks={column} />
 			)}
 		</Container>
 	)

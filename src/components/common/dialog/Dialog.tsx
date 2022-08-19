@@ -39,7 +39,9 @@ export const Dialog = observer(() => {
 	return (
 		<>
 			{dialogStore.isOpen &&
-                <Backdrop onClick={() => dialogStore.close()}>
+                <Backdrop onClick={() => {
+					//dialogStore.close()
+				}}>
                     <Container onClick={(event) => event.stopPropagation()}>
                         <DialogHeader />
                         <Content>

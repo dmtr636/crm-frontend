@@ -14,6 +14,11 @@ export interface IDialogField {
 	validated?: boolean
 }
 
+export interface IDialogText {
+	successAdd?: string,
+	successAddObjectFieldName?: string
+}
+
 export interface IDialogAction {
 	type: "save" | "add" | "delete" | "ok" | "cancel",
 	label: string,
@@ -22,6 +27,7 @@ export interface IDialogAction {
 
 export interface IDialogData {
 	title?: IDialogTitle,
+	text?: IDialogText,
 	form?: {
 		columns: number,
 		fields: IDialogField[]
