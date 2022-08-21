@@ -12,26 +12,32 @@ export const studioCommandDialog: IDialogData = {
 			{
 				label: "Имя",
 				name: "name",
+				required: true
 			},
 			{
 				label: "Роль в команде",
-				name: "role"
+				name: "role",
+				required: true
 			},
 			{
 				label: "Почта",
-				name: "email"
+				name: "email",
+				required: true
 			},
 			{
 				label: "Телефон",
-				name: "phone"
+				name: "phone",
+				required: true
 			},
 			{
 				label: "Пароль",
-				name: "password"
+				name: "password",
+				required: true
 			},
 			{
 				label: "Ссылка на чат",
-				name: "telegram"
+				name: "telegram",
+				required: true
 			}
 		]
 	},

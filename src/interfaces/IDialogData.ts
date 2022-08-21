@@ -10,7 +10,8 @@ export interface IDialogField {
 	name: string,
 	columns?: number,
 	value?: string,
-	validated?: boolean
+	validated?: boolean,
+	required?: boolean
 }
 
 type IDialogTextTemplate = {

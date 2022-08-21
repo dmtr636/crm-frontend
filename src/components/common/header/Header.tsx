@@ -4,6 +4,9 @@ import notificationsIcon from "assets/header/headerNotifications.svg"
 import arrow from "assets/header/headerArrow.svg"
 import {url} from "../../../utils/utils";
 import {memberStore} from "../../../store/memberStore";
+import {useEffect, useState} from "react";
+import {HeaderMemberMenu} from "./HeaderMemberMenu";
+import {appStore} from "../../../store/appStore";
 
 const Container = styled.header`
 	position: sticky;
@@ -26,17 +29,30 @@ const Avatar = styled.img`
 	height: 50px;
 	border-radius: 50%;
 `
-const Arrow = styled.img`
+const Arrow = styled.button`
+	background: url(${arrow});
+	width: 34px;
+	height: 34px;
 	margin-left: 8px;
 `
 
 export const Header = () => {
+	const [isShowMenu, setIsShowMenu] = useState(false)
+
+	useEffect(() => {
+		if (isShowMenu) {
+			appStore.setIsShowBackdrop(true, "content")
+		}
+	}, [isShowMenu])
+
 	return (
 		<Container>
 			<HeaderSearch />
 			<Notifications src={notificationsIcon} />
 			<Avatar src={url(memberStore.member?.avatar!)} />
-			<Arrow src={arrow} />
+			<Arrow onClick={() => setIsShowMenu(true)}/>
+
+			{isShowMenu && <HeaderMemberMenu />}
 		</Container>
 	)
 }

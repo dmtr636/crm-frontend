@@ -1,11 +1,12 @@
 import {makeAutoObservable} from "mobx";
 import {IDialogData} from "../interfaces/IDialogData";
 import axios from "axios";
-import {MEMBERS_ENDPOINT} from "../api/endoints";
+import {ACCESSES_ENDPOINT, MEMBERS_ENDPOINT, OPERATIONS_ENDPOINT} from "../api/endoints";
 import {createFieldsFromDialogData} from "../utils/utils";
 import {IObjectStore} from "../interfaces/IObjectStore";
 import {IMember} from "../interfaces/IMember";
 import {IAccess} from "../interfaces/IAccess";
+import {IOperation} from "../interfaces/IOperation";
 
 export interface IObjectType {
 	id: string
@@ -14,26 +15,28 @@ export interface IObjectType {
 class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 	object?: ObjectType
 	objects?: ObjectType[]
+	endpoint: string
 
-	constructor() {
+	constructor(endpoint: string) {
+		this.endpoint = endpoint
 		makeAutoObservable(this)
 	}
 
-	fetchMembers() {
-		axios.get(MEMBERS_ENDPOINT).then(res => {
+	fetch() {
+		axios.get(this.endpoint).then(res => {
 			this.objects = res.data.result
 		})
 	}
 
 	addFromDialog(data: IDialogData) {
 		const fields = createFieldsFromDialogData(data)
-		axios.post(MEMBERS_ENDPOINT, fields).then(res => {
+		axios.post(this.endpoint, fields).then(res => {
 			this.objects?.push(res.data.result)
 		})
 	}
 
 	delete(id: string) {
-		axios.delete(MEMBERS_ENDPOINT, {
+		axios.delete(this.endpoint, {
 			data: {
 				id: id
 			}
@@ -44,7 +47,7 @@ class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 	editFromDialog(data: IDialogData, id: string) {
 		const fields = createFieldsFromDialogData(data)
 		fields["id"] = id
-		axios.patch(MEMBERS_ENDPOINT, fields).then(res => {
+		axios.patch(this.endpoint, fields).then(res => {
 			let newMember = res.data.result
 			this.objects = this.objects?.map(member =>
 				member.id === newMember.id ? newMember : member
@@ -53,5 +56,6 @@ class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 	}
 }
 
-export const memberObjectStore = new ObjectStore<IMember>()
-export const accessObjectStore = new ObjectStore<IAccess>()
+export const memberObjectStore = new ObjectStore<IMember>(MEMBERS_ENDPOINT)
+export const accessObjectStore = new ObjectStore<IAccess>(ACCESSES_ENDPOINT)
+export const operationsObjectStore = new ObjectStore<IOperation>(OPERATIONS_ENDPOINT)

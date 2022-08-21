@@ -12,6 +12,7 @@ export const studioAccessDialog: IDialogData = {
 			{
 				label: "Ссылка",
 				name: "link",
+				required: true
 			},
 			{
 				label: "PIN",

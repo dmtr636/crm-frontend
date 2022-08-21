@@ -28,7 +28,7 @@ export class DialogStore {
 	validate() {
 		let isValid = true
 		this.data?.form?.fields.forEach(field => {
-			if (field.value?.trim().length) {
+			if (field.value?.trim().length || !field.required) {
 				field.validated = true
 			} else {
 				field.validated = false
