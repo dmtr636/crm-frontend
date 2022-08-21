@@ -1,6 +1,6 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import {memberStore} from "../../store/memberStore";
+import {memberObjectStore} from "../../store/objectStore";
 import {StudioCommandMember} from "./StudioCommandMember";
 
 const Container = styled.div`
@@ -8,9 +8,11 @@ const Container = styled.div`
 `
 
 export const StudioCommand = observer(() => {
+	const members = memberObjectStore.objects
+
 	return (
 		<Container>
-			{memberStore.members?.map(member =>
+			{members?.map(member =>
 				<StudioCommandMember member={member} key={member.id} />
 			)}
 		</Container>

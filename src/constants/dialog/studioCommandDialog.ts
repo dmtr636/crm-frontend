@@ -1,6 +1,6 @@
 import {IDialogData} from "../../interfaces/IDialogData";
-import {memberStore} from "../../store/memberStore";
 import {DialogType} from "../../store/dialogStore";
+import {memberObjectStore} from "../../store/objectStore";
 
 export const studioCommandDialog: IDialogData = {
 	title: {
@@ -41,5 +41,5 @@ export const studioCommandDialog: IDialogData = {
 		},
 		objectFieldName: "name"
 	},
-	store: memberStore
+	store: memberObjectStore
 }
