@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx";
 import {validateEmail} from "../utils/utils";
 import axios from "axios";
 import {LOGIN_ENDPOINT} from "../api/endoints";
-import UserStore from "./userStore";
+import {memberStore} from "./memberStore";
 
 class LoginStore {
 	email = ""
@@ -37,7 +37,7 @@ class LoginStore {
 
 		let data = res.data
 		if (!data.error) {
-			UserStore.user = data
+			memberStore.member = data
 			this.error = false
 			return true
 		} else {

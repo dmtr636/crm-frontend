@@ -1,17 +1,24 @@
 import {makeAutoObservable} from "mobx";
-import {IDialogAction, IDialogData} from "../interfaces/IDialogData";
+import {DialogActionType, IDialogAction, IDialogData} from "../interfaces/IDialogData";
+import {IObjectStore} from "../interfaces/IObjectStore";
 
-export type DialogType = "add" | "edit" | "confirm" | "successAdd" | "successDelete"
+export enum DialogType {add, edit, confirm, successAdd, successEdit, successDelete}
 
 export class DialogStore {
 	isOpen = false
-	type: DialogType = "add"
+	type: DialogType = DialogType.add
 	data?: IDialogData
+	object?: object
+	objectId?: string
+	store?: IObjectStore
 
-	open(type: DialogType, data: IDialogData) {
+	open(type: DialogType, data: IDialogData, object?: object, objectId?: string) {
 		this.type = type
 		this.isOpen = true
 		this.data = data
+		this.object = object
+		this.objectId = objectId
+		this.store = data.store
 	}
 
 	close() {
@@ -32,11 +39,33 @@ export class DialogStore {
 	}
 
 	handleAction(action: IDialogAction) {
-		if (action.type === "add") {
-			if (this.validate()) {
-				this.type = "successAdd"
-				action.onClick(this.data!)
-			}
+		switch (action.type) {
+			case DialogActionType.add:
+				if (this.validate()) {
+					this.type = DialogType.successAdd
+					this.store?.addFromDialog(this.data!)
+				}
+				break
+			case DialogActionType.delete:
+				if (this.type === DialogType.confirm) {
+					this.store?.delete(this.objectId!)
+					this.type = DialogType.successDelete
+				} else {
+					this.type = DialogType.confirm
+				}
+				break
+			case DialogActionType.save:
+				if (this.validate()) {
+					this.type = DialogType.successEdit
+					this.store?.editFromDialog(this.data!, this.objectId!)
+				}
+				break
+			case DialogActionType.ok:
+				this.close()
+				break
+			case DialogActionType.cancel:
+				this.close()
+				break
 		}
 	}
 

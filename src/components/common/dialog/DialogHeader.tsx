@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {observer} from "mobx-react";
 import {dialogStore} from "../../../store/dialogStore";
 import closeIcon from "assets/dialog/dialogClose.svg"
+import {defaultDialog} from "../../../constants/dialog/defaultDialog";
 
 const Header = styled.div`
     height: 102px;
@@ -34,9 +35,13 @@ const CloseButton = styled.button`
 
 export const DialogHeader = observer(() => {
 	const getTitle = () => {
-		switch (dialogStore.type) {
-			case "add": return dialogStore.data?.title?.add ?? "Добавить"
-			case "successAdd": return dialogStore.data?.title?.successAdd ?? "Успешно добавлен"
+		const title = dialogStore.data?.title
+		const defaultTitle = defaultDialog.title
+		if (title && title[dialogStore.type]) {
+			return title[dialogStore.type]
+		}
+		if (defaultTitle) {
+			return defaultTitle[dialogStore.type]
 		}
 	}
 

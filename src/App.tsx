@@ -3,11 +3,11 @@ import styled from "styled-components";
 import {Route, Routes, useNavigate} from "react-router-dom";
 import {LoginPage} from "./pages/LoginPage";
 import {LoadingPage} from "./pages/LoadingPage";
-import UserStore from "./store/userStore";
 import {observer} from "mobx-react";
 import {MainPage} from "./pages/MainPage";
 import {Page404} from "./pages/Page404";
 import {sidebarRoutes} from "./routes/routes";
+import {memberStore} from "./store/memberStore";
 
 const AppContainer = styled.div`
 
@@ -16,10 +16,9 @@ const AppContainer = styled.div`
 export const App = observer(() => {
 	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
-	const userStore = UserStore
 
 	const authenticate = async () => {
-		const isAuthenticated = await userStore.authenticate()
+		const isAuthenticated = await memberStore.authenticate()
 		if (!isAuthenticated) {
 			navigate("/login", {replace: true})
 		}

@@ -1,10 +1,9 @@
-interface IDialogTitle {
-	add?: string,
-	edit?: string,
-	confirm?: string,
-	successAdd?: string,
-	successDelete?: string
-}
+import { DialogType } from "store/dialogStore";
+import {IObjectStore} from "./IObjectStore";
+
+type IDialogTitle = {
+	[key in DialogType]?: string;
+};
 
 export interface IDialogField {
 	label: string,
@@ -14,15 +13,25 @@ export interface IDialogField {
 	validated?: boolean
 }
 
-export interface IDialogText {
-	successAdd?: string,
-	successAddObjectFieldName?: string
+type IDialogTextTemplate = {
+	[key in DialogType]?: string
 }
 
+export interface IDialogText {
+	template?: IDialogTextTemplate
+	objectFieldName?: string
+}
+
+export enum DialogActionType {save, add, delete, ok, cancel}
+
 export interface IDialogAction {
-	type: "save" | "add" | "delete" | "ok" | "cancel",
+	type: DialogActionType,
 	label: string,
-	onClick: (data: IDialogData) => void
+	onClick?: (data?: any, id?: string) => void
+}
+
+export type DialogDataAction = {
+	[key in DialogType]: IDialogAction[]
 }
 
 export interface IDialogData {
@@ -32,5 +41,6 @@ export interface IDialogData {
 		columns: number,
 		fields: IDialogField[]
 	},
-	actions?: IDialogAction[]
+	actions?: DialogDataAction,
+	store?: IObjectStore
 }

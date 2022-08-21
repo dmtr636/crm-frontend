@@ -1,11 +1,13 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import {darkColors} from "../../../theme/colors";
+import {darkColors, redColors} from "../../../theme/colors";
 import {ReactNode} from "react";
 
-const Container = styled.button`
+type ButtonColor = "dark" | "red"
+
+const Container = styled.button<{color: ButtonColor}>`
 	height: 50px;
-	background: ${darkColors.default};
+	background: ${props => props.color === "dark" ? darkColors.default : redColors.default};
 	padding: 0 34px;
 	border-radius: 5px;
 	display: flex;
@@ -20,22 +22,23 @@ const Container = styled.button`
     color: #FFFFFF;
 	
 	&:hover {
-		background: ${darkColors.hover};
+        background: ${props => props.color === "dark" ? darkColors.hover : redColors.hover};
 	}
 	
 	&:active {
-		background: ${darkColors.pressed};
+        background: ${props => props.color === "dark" ? darkColors.pressed : redColors.pressed};
 	}
 `
 
 type Props = {
 	onClick: () => void,
-	children: ReactNode
+	children: ReactNode,
+	color?: ButtonColor
 }
 
 export const Button = observer((props: Props) => {
 	return (
-		<Container onClick={props.onClick}>
+		<Container onClick={props.onClick} color={props.color ?? "dark"}>
 			{props.children}
 		</Container>
 	)

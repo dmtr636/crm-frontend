@@ -3,7 +3,7 @@ import {HeaderSearch} from "./HeaderSearch";
 import notificationsIcon from "assets/header/headerNotifications.svg"
 import arrow from "assets/header/headerArrow.svg"
 import {url} from "../../../utils/utils";
-import userStore from "../../../store/userStore";
+import {memberStore} from "../../../store/memberStore";
 
 const Container = styled.header`
 	position: sticky;
@@ -35,7 +35,7 @@ export const Header = () => {
 		<Container>
 			<HeaderSearch />
 			<Notifications src={notificationsIcon} />
-			<Avatar src={url(userStore.user?.avatar!)} />
+			<Avatar src={url(memberStore.member?.avatar!)} />
 			<Arrow src={arrow} />
 		</Container>
 	)

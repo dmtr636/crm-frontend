@@ -6,6 +6,7 @@ import {OpenDialogButton} from "../../components/common/button/OpenDialogButton"
 import {studioCommandDialog} from "../../constants/dialog/studioCommandDialog";
 import {studioMoneyDialog} from "../../constants/dialog/studioMoneyDialog";
 import {studioAccessDialog} from "../../constants/dialog/studioAccessDialog";
+import {DialogType} from "../../store/dialogStore";
 
 const Container = styled.div`
     padding: 26px 46px;
@@ -34,7 +35,7 @@ export const StudioPage = observer(() => {
 		<Container>
 			<TopPanel>
 				<Tabs store={studioTabStore}/>
-				<OpenDialogButton dialogType={"add"} dialogData={getDialogData()}>
+				<OpenDialogButton dialogType={DialogType.add} dialogData={getDialogData()}>
 					{studioTabStore.option.actionButtonText}
 				</OpenDialogButton>
 			</TopPanel>

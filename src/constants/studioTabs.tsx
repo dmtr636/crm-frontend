@@ -1,7 +1,7 @@
 import {ITabOption} from "../interfaces/ITabOption";
-import {StudioMoney} from "../components/common/studio/StudioMoney";
-import {StudioAccess} from "../components/common/studio/StudioAccess";
-import {StudioCommand} from "../components/common/studio/StudioCommand";
+import {StudioMoney} from "../components/studio/StudioMoney";
+import {StudioAccess} from "../components/studio/StudioAccess";
+import {StudioCommand} from "../components/studio/StudioCommand";
 
 export const studioTabs: ITabOption[] = [
 	{

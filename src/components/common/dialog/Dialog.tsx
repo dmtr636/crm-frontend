@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import {observer} from "mobx-react";
-import {dialogStore} from "../../../store/dialogStore";
+import {dialogStore, DialogType} from "../../../store/dialogStore";
 import {DialogHeader} from "./DialogHeader";
-import {AddDialog} from "./AddDialog";
-import {SuccessAddDialog} from "./SuccessAddDialog";
+import {FormDialog} from "./FormDialog";
+import {TextDialog} from "./TextDialog";
+import {DialogActions} from "./DialogActions";
 
 const Backdrop = styled.div`
     position: fixed;
@@ -29,9 +30,17 @@ const Content = styled.div`
 
 const getDialogContent = () => {
 	switch (dialogStore.type) {
-		case "add": return <AddDialog />
-		case "successAdd": return <SuccessAddDialog />
-		default: return <AddDialog />
+		case DialogType.add:
+		case DialogType.edit:
+			return <FormDialog />
+
+		case DialogType.successAdd:
+		case DialogType.successEdit:
+		case DialogType.successDelete:
+		case DialogType.confirm:
+			return <TextDialog />
+
+		default: return <FormDialog />
 	}
 }
 
@@ -46,6 +55,7 @@ export const Dialog = observer(() => {
                         <DialogHeader />
                         <Content>
 							{getDialogContent()}
+                            <DialogActions />
                         </Content>
                     </Container>
                 </Backdrop>

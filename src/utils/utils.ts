@@ -1,4 +1,5 @@
 import {SERVER_HOST} from "../constants/config";
+import {IDialogData} from "../interfaces/IDialogData";
 
 export const validateEmail = (email: string) => {
 	return String(email)
@@ -26,4 +27,12 @@ export const dateTsToString = (ts: number) => {
 		day: "numeric"
 	}
 	return date.toLocaleDateString('ru-RU', options).toUpperCase().split(".")[0]
+}
+
+export const createFieldsFromDialogData = (data: IDialogData) => {
+	let fields: { [key: string]: string } = {}
+	data.form?.fields.forEach(field =>
+		fields[field.name] = field.value ?? ""
+	)
+	return fields
 }

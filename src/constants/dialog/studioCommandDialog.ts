@@ -1,16 +1,17 @@
 import {IDialogData} from "../../interfaces/IDialogData";
 import {memberStore} from "../../store/memberStore";
+import {DialogType} from "../../store/dialogStore";
 
 export const studioCommandDialog: IDialogData = {
 	title: {
-		add: "Добавить участника"
+		[DialogType.add]: "Добавить участника"
 	},
 	form: {
 		columns: 2,
 		fields: [
 			{
 				label: "Имя",
-				name: "name"
+				name: "name",
 			},
 			{
 				label: "Роль в команде",
@@ -35,14 +36,10 @@ export const studioCommandDialog: IDialogData = {
 		]
 	},
 	text: {
-		successAdd: "{OBJECT} добавлен",
-		successAddObjectFieldName: "name"
+		template: {
+			[DialogType.confirm]: "Вы удаляете следующего участника: {OBJECT}",
+		},
+		objectFieldName: "name"
 	},
-	actions: [
-		{
-			label: "Добавить",
-			type: "add",
-			onClick: data => memberStore.addMemberFromDialog(data)
-		}
-	]
+	store: memberStore
 }

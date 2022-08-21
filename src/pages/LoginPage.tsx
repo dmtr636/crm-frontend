@@ -4,9 +4,9 @@ import {LoginForm} from "../components/login/LoginForm";
 import loginPageLogo from "../assets/login/loginPageLogo.svg"
 import {observer} from "mobx-react";
 import {useEffect} from "react";
-import UserStore from "../store/userStore";
 import {useNavigate} from "react-router-dom";
 import {device} from "../constants/breakpoints";
+import {memberStore} from "../store/memberStore";
 
 const Container = styled.div`
 	background-image: url(${loginPageBg});
@@ -57,11 +57,10 @@ const Logotype = styled.img`
 `
 
 export const LoginPage = observer(() => {
-	const userStore = UserStore
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		if (userStore.user) {
+		if (memberStore.member) {
 			navigate("/", {replace: true})
 		}
 	}, [])

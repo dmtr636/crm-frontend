@@ -42,10 +42,16 @@ const makeColumns = (project: IHomeProject, columnCount: number) => {
 }
 
 const getColumnCount = (width: number) => {
-	if (width < 1600) {
+	if (width < 960) {
+		return 1
+	} else if (width < 1280) {
+		return 2
+	} else if (width < 1600) {
 		return 3
-	} else if (width < 2560) {
+	} else if (width < 1980) {
 		return 4
+	} else if (width < 2560) {
+		return 5
 	} else {
 		return 6
 	}

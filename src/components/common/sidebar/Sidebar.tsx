@@ -21,7 +21,7 @@ const Link = styled.img<{ active?: boolean }>`
     cursor: pointer;
 
     &:hover {
-        opacity: 1;
+        opacity: ${props => !props.active && 0.7};
     }
 `
 const ReportButton = styled(Link)`
