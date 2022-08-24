@@ -43,19 +43,7 @@ export const dateToTs = (date: Date) => {
 export const createFieldsFromDialogData = (data: IDialogData) => {
 	let fields: { [key: string]: string | number } = {}
 	data.form?.fields.forEach(field => {
-		switch (field.type) {
-			case "date":
-				fields[field.name] = Number(field.value ?? "")
-				break
-			case "text":
-				fields[field.name] = field.value ?? ""
-				break
-			case "number":
-				fields[field.name] = Number(field.value ?? "")
-				break
-			default:
-				fields[field.name] = field.value ?? ""
-		}
+		fields[field.name] = field.value ?? ""
 	})
 	return fields
 }
