@@ -1,4 +1,4 @@
-import {IDialogData} from "../../interfaces/IDialogData";
+import {DialogActionType, IDialogData} from "../../interfaces/IDialogData";
 import {DialogType} from "../../store/dialogStore";
 import {operationsObjectStore} from "../../store/objectStore";
 
@@ -17,12 +17,14 @@ export const studioMoneyDialog: IDialogData = {
 			{
 				label: "Дата",
 				name: "date",
-				required: true
+				required: true,
+				type: "date"
 			},
 			{
 				label: "Сумма",
 				name: "amount",
-				required: true
+				required: true,
+				type: "number"
 			},
 		]
 	},
@@ -32,5 +34,23 @@ export const studioMoneyDialog: IDialogData = {
 		},
 		objectFieldName: "purpose"
 	},
-	store: operationsObjectStore
+	store: operationsObjectStore,
+	actions: {
+		[DialogType.add]: [
+			{
+				label: "Доход",
+				type: DialogActionType.add,
+				args: {
+					type: "income"
+				}
+			},
+			{
+				label: "Расход",
+				type: DialogActionType.add,
+				args: {
+					type: "expense"
+				}
+			}
+		]
+	}
 }

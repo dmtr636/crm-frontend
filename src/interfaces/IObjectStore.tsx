@@ -1,7 +1,7 @@
 import {IDialogData} from "./IDialogData";
 
 export interface IObjectStore {
-	addFromDialog: (data: IDialogData) => void
-	editFromDialog: (data: IDialogData, id: string) => void
-	delete: (id: string) => void
+	addFromDialog: (data: IDialogData, args?: object) => void
+	editFromDialog: (data: IDialogData, id: number) => void
+	delete: (id: number) => void
 }

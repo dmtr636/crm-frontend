@@ -9,10 +9,10 @@ export class DialogStore {
 	type: DialogType = DialogType.add
 	data?: IDialogData
 	object?: object
-	objectId?: string
+	objectId?: number
 	store?: IObjectStore
 
-	open(type: DialogType, data: IDialogData, object?: object, objectId?: string) {
+	open(type: DialogType, data: IDialogData, object?: object, objectId?: number) {
 		this.type = type
 		this.isOpen = true
 		this.data = data
@@ -28,11 +28,22 @@ export class DialogStore {
 	validate() {
 		let isValid = true
 		this.data?.form?.fields.forEach(field => {
-			if (field.value?.trim().length || !field.required) {
-				field.validated = true
-			} else {
-				field.validated = false
-				isValid = false
+			switch (field.type) {
+				case "number":
+					if ((field.required && field.value?.length === 0) || isNaN(Number(field.value))) {
+						field.validated = false
+						isValid = false
+					} else {
+						field.validated = true
+					}
+					break
+				default:
+					if (field.value?.trim().length || !field.required) {
+						field.validated = true
+					} else {
+						field.validated = false
+						isValid = false
+					}
 			}
 		})
 		return isValid
@@ -43,7 +54,7 @@ export class DialogStore {
 			case DialogActionType.add:
 				if (this.validate()) {
 					this.type = DialogType.successAdd
-					this.store?.addFromDialog(this.data!)
+					this.store?.addFromDialog(this.data!, action.args)
 				}
 				break
 			case DialogActionType.delete:

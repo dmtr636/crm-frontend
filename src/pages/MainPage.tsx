@@ -7,7 +7,7 @@ import {Backdrop} from "../components/common/Backdrop";
 import {appStore} from "../store/appStore";
 import {Dialog} from "../components/common/dialog/Dialog";
 import {useEffect} from "react";
-import {accessObjectStore, memberObjectStore} from "../store/objectStore";
+import {accessObjectStore, memberObjectStore, operationsObjectStore} from "../store/objectStore";
 
 const Layout = styled.div`
 	height: 100vh;
@@ -24,6 +24,7 @@ export const MainPage = observer(() => {
 	useEffect(() => {
 		memberObjectStore.fetch()
 		accessObjectStore.fetch()
+		operationsObjectStore.fetch()
 	}, [])
 
 	return (

@@ -21,7 +21,7 @@ export const DialogForm = observer(() => {
 			Object.entries(initialValues).forEach(([key, value]) => {
 				let field = fields?.find(field => field.name === key)
 				if (field) {
-					field.value = value
+					field.value = value.toString()
 				}
 			})
 		}

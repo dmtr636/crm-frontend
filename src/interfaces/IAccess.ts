@@ -1,5 +1,5 @@
 export interface IAccess {
-	id: string,
+	id: number,
 	link: string,
 	pin: string,
 	email: string,

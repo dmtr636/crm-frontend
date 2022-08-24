@@ -1,6 +1,7 @@
 export interface IOperation {
-	id: string,
+	id: number,
 	purpose: string,
-	date: string,
-	amount: string
+	date: number,
+	amount: number,
+	type: string
 }

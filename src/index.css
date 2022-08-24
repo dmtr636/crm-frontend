@@ -8,7 +8,7 @@ button {
     border: none;
     outline: none;
     background: none;
-    line-height: 0;
+    line-height: 1;
     cursor: pointer;
 }
 
@@ -25,4 +25,13 @@ input {
 
 input:-webkit-autofill {
     -webkit-background-clip: text;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
 }

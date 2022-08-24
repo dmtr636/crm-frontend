@@ -17,22 +17,45 @@ export const preloadImages = (images: string[]) => {
 }
 
 export const url = (path: string) => {
-	return `${SERVER_HOST}${path}`
+	return `${SERVER_HOST}/${path}`
 }
 
-export const dateTsToString = (ts: number) => {
+export const dateTsToString = (ts: number, format?: "number" | "text") => {
 	const date = new Date(ts * 1000)
 	const options: Intl.DateTimeFormatOptions = {
 		month: "short",
 		day: "numeric"
 	}
-	return date.toLocaleDateString('ru-RU', options).toUpperCase().split(".")[0]
+
+	switch (format) {
+		case "number":
+			return date.toLocaleDateString()
+		case "text":
+		default:
+			return date.toLocaleDateString('ru-RU', options).toUpperCase().split(".")[0]
+	}
+}
+
+export const dateToTs = (date: Date) => {
+	return Math.floor(date.getTime() / 1000)
 }
 
 export const createFieldsFromDialogData = (data: IDialogData) => {
-	let fields: { [key: string]: string } = {}
-	data.form?.fields.forEach(field =>
-		fields[field.name] = field.value ?? ""
-	)
+	let fields: { [key: string]: string | number } = {}
+	data.form?.fields.forEach(field => {
+		switch (field.type) {
+			case "date":
+				fields[field.name] = Number(field.value ?? "")
+				break
+			case "text":
+				fields[field.name] = field.value ?? ""
+				break
+			case "number":
+				fields[field.name] = Number(field.value ?? "")
+				break
+			default:
+				fields[field.name] = field.value ?? ""
+		}
+	})
 	return fields
 }
