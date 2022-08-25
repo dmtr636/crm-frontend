@@ -7,6 +7,7 @@ import DatePicker, {registerLocale} from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ru from 'date-fns/locale/ru';
 import {dateToTs} from "../../../utils/utils";
+import {SelectField} from "./SelectField";
 
 registerLocale('ru', ru)
 
@@ -22,7 +23,7 @@ const Label = styled.div<{ validated: boolean }>`
     letter-spacing: 0.03em;
     color: ${props => props.validated ? '#1F232C' : '#BF616A'};
 `
-const Input = styled.input<{ validated: boolean }>`
+const Input = styled.input<{ validated: boolean; edited: boolean }>`
     width: 100%;
     margin-top: 26px;
     border: 3px solid;
@@ -35,8 +36,10 @@ const Input = styled.input<{ validated: boolean }>`
     font-size: 16px;
     line-height: 110%;
     letter-spacing: 0.03em;
+	
+	color: ${props => props.validated && !props.edited && 'rgba(31, 35, 44, 0.7)'};
 `
-const DatePickerStyled = styled(DatePicker)<{ validated: boolean }>`
+const DatePickerStyled = styled(DatePicker)<{ validated: boolean; edited: boolean }>`
     width: 100%;
     margin-top: 26px;
     border: 3px solid;
@@ -49,6 +52,8 @@ const DatePickerStyled = styled(DatePicker)<{ validated: boolean }>`
     font-size: 16px;
     line-height: 110%;
     letter-spacing: 0.03em;
+	
+    color: ${props => props.validated && !props.edited && 'rgba(31, 35, 44, 0.7)'};
 `
 
 export const DialogFormField = observer((props: { field: IDialogField }) => {
@@ -57,6 +62,7 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 	const handleTextFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		field.value = event.target.value
 		field.validated = true
+		field.edited = true
 	}
 
 	const handleDateFieldChange = (date: Date) => {
@@ -74,6 +80,7 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 			field.value = Math.floor(Number(event.target.value)).toString()
 			field.validated = true
 		}
+		field.edited = true
 	}
 
 	const [startDate, setStartDate] = useState<Date | null>(null);
@@ -94,6 +101,7 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 						locale={"ru"}
 						validated={field.validated ?? true}
 						dateFormat="dd.MM.yyyy"
+						edited={field.edited ?? false}
 					/>
 				)
 			case "number":
@@ -102,6 +110,7 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 						value={field.value ?? ""}
 						onChange={handleNumberFieldChange}
 						validated={field.validated ?? true}
+						edited={field.edited ?? false}
 					/>
 				)
 			case "text":
@@ -110,7 +119,12 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 						value={field.value ?? ""}
 						onChange={handleTextFieldChange}
 						validated={field.validated ?? true}
+						edited={field.edited ?? false}
 					/>
+				)
+			case "select":
+				return (
+					<SelectField field={field} />
 				)
 			default:
 				return (
@@ -118,6 +132,7 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 						value={field.value ?? ""}
 						onChange={handleTextFieldChange}
 						validated={field.validated ?? true}
+						edited={field.edited ?? false}
 					/>
 				)
 		}

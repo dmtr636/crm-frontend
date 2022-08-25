@@ -3,14 +3,14 @@ import styled from "styled-components";
 import {projectObjectStore} from "../../store/objectStore";
 import {ProjectListItem} from "./ProjectListItem";
 import {projectStore} from "../../store/projectStore";
-import {projectsTabStore} from "../../store/tabStore";
+import {projectListTabStore} from "../../store/tabStore";
 
 const Container = styled.div`
     margin-top: 48px;
 `
 
 export const ProjectList = observer(() => {
-	const projects = projectStore.filterByCategory(projectsTabStore.option.id)
+	const projects = projectStore.filterByCategory(projectListTabStore.option.id)
 
 	return (
 		<Container>

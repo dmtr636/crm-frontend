@@ -4,9 +4,10 @@ import {dateTsToString} from "../../utils/utils";
 import editButton from "assets/common/editButton.svg"
 import {IOperation} from "../../interfaces/IOperation";
 import {IProject} from "../../interfaces/IProject";
+import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
-    margin-bottom: 26px;
+    margin-bottom: 48px;
     padding: 0 48px;
     height: 84px;
     background: #1F232C;
@@ -68,9 +69,10 @@ const getAmountText = (operation: IOperation) => {
 
 export const ProjectListItem = observer((props: { project: IProject }) => {
 	const {project} = props
+	const navigate = useNavigate()
 
 	const handleClick = () => {
-
+		navigate(`../${project.id}`)
 	}
 
 	return (

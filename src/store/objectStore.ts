@@ -60,6 +60,10 @@ class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 			)
 		})
 	}
+
+	findById(id: number) {
+		return this.objects?.find(object => object.id === id)
+	}
 }
 
 export const memberObjectStore = new ObjectStore<IMember>(MEMBERS_ENDPOINT)

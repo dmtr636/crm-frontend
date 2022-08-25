@@ -3,7 +3,7 @@ import {HomePage} from "../pages/main/HomePage";
 import sidebarHome from "assets/sidebar/sidebarHome.svg"
 import sidebarProjects from "assets/sidebar/sidebarProjects.svg"
 import sidebarStudio from "assets/sidebar/sidebarStudio.svg"
-import {ProjectsPage} from "../pages/main/ProjectsPage";
+import {ProjectListPage} from "../pages/main/ProjectListPage";
 import {StudioPage} from "../pages/main/StudioPage";
 
 export const sidebarRoutes: IRoute[] = [
@@ -15,7 +15,7 @@ export const sidebarRoutes: IRoute[] = [
 	},
 	{
 		path: "/projects",
-		component: <ProjectsPage/>,
+		component: <ProjectListPage/>,
 		icon: sidebarProjects
 	},
 	{

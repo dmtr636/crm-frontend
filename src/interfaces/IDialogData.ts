@@ -1,11 +1,17 @@
 import { DialogType } from "store/dialogStore";
 import {IObjectStore} from "./IObjectStore";
+import {ITabOption} from "./ITabOption";
 
 type IDialogTitle = {
 	[key in DialogType]?: string;
 };
 
-export type DialogFieldType = "text" | "date" | "number"
+export type DialogFieldType = "text" | "date" | "number" | "select"
+
+export interface ISelectOption {
+	id: string,
+	value: string
+}
 
 export interface IDialogField {
 	label: string,
@@ -14,7 +20,9 @@ export interface IDialogField {
 	value?: string,
 	validated?: boolean,
 	required?: boolean,
-	type?: DialogFieldType
+	type?: DialogFieldType,
+	selectOptions?: ISelectOption[],
+	edited?: boolean
 }
 
 type IDialogTextTemplate = {

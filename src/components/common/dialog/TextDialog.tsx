@@ -25,7 +25,7 @@ const getTemplate = () => {
 }
 
 const getText = () => {
-    let objectFieldName = dialogStore.data?.text?.objectFieldName
+    let objectFieldName = dialogStore.data?.text?.objectFieldName ?? defaultDialog.text?.objectFieldName
     let template = getTemplate()
     let fields = dialogStore.data?.form?.fields
     let object = fields?.find(field => field.name === objectFieldName)?.value ?? ""

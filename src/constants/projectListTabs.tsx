@@ -1,6 +1,6 @@
 import {ITabOption} from "../interfaces/ITabOption";
 
-export const projectsTabs: ITabOption[] = [
+export const projectListTabs: ITabOption[] = [
 	{
 		id: "in_work",
 		value: "В работе",

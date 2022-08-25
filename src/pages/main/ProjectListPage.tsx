@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Tabs} from "../../components/common/tabs/Tabs";
-import {projectsTabStore, studioTabStore} from "../../store/tabStore";
+import {projectListTabStore, studioTabStore} from "../../store/tabStore";
 import {OpenDialogButton} from "../../components/common/button/OpenDialogButton";
 import {DialogType} from "../../store/dialogStore";
 import {defaultDialog} from "../../constants/dialog/defaultDialog";
@@ -20,11 +20,11 @@ const Line = styled.div`
     margin-top: 48px;
 `
 
-export const ProjectsPage = () => {
+export const ProjectListPage = () => {
 	return (
 		<Container>
 			<TopPanel>
-				<Tabs store={projectsTabStore}/>
+				<Tabs store={projectListTabStore}/>
 				<OpenDialogButton dialogType={DialogType.add} dialogData={newProjectDialog}>
 					Новый проект
 				</OpenDialogButton>

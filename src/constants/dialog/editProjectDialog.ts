@@ -1,10 +1,11 @@
 import {DialogActionType, IDialogData} from "../../interfaces/IDialogData";
 import {DialogType} from "../../store/dialogStore";
 import {projectObjectStore} from "../../store/objectStore";
+import {projectListTabs} from "../projectListTabs";
 
-export const newProjectDialog: IDialogData = {
+export const editProjectDialog: IDialogData = {
 	title: {
-		[DialogType.add]: "Новый проект"
+		[DialogType.edit]: "Редактировать проект"
 	},
 	form: {
 		columns: 2,
@@ -20,21 +21,22 @@ export const newProjectDialog: IDialogData = {
 				required: true,
 				type: "date"
 			},
+			{
+				label: "Категория проекта",
+				name: "category",
+				required: true,
+				type: "select",
+				selectOptions: projectListTabs
+			}
 		]
 	},
 	store: projectObjectStore,
 	actions: {
-		[DialogType.add]: [
+		[DialogType.edit]: [
 			{
-				label: "Создать",
-				type: DialogActionType.add,
+				label: "Сохранить",
+				type: DialogActionType.save,
 			},
 		]
-	},
-	text: {
-		template: {
-			[DialogType.successAdd]: "{OBJECT} добавлен",
-		},
-		objectFieldName: "name"
-	},
+	}
 }
