@@ -2,6 +2,7 @@ import {ITabOption} from "../interfaces/ITabOption";
 import {makeAutoObservable} from "mobx";
 import {studioTabs} from "../constants/studioTabs";
 import {homeTabs} from "../constants/homeTabs";
+import {projectsTabs} from "../constants/projectsTabs";
 
 export class TabStore {
 	options: ITabOption[]
@@ -20,3 +21,4 @@ export class TabStore {
 
 export const studioTabStore = new TabStore(studioTabs)
 export const homeTabStore = new TabStore(homeTabs)
+export const projectsTabStore = new TabStore(projectsTabs)

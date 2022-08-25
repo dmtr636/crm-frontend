@@ -29,6 +29,7 @@ export class DialogStore {
 		let isValid = true
 		this.data?.form?.fields.forEach(field => {
 			switch (field.type) {
+				case "date":
 				case "number":
 					if ((field.required && field.value?.length === 0) || isNaN(Number(field.value))) {
 						field.validated = false
@@ -38,7 +39,7 @@ export class DialogStore {
 					}
 					break
 				default:
-					if (field.value?.trim().length || !field.required) {
+					if (field.value?.toString().trim().length || !field.required) {
 						field.validated = true
 					} else {
 						field.validated = false

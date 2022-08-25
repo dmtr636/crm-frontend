@@ -1,28 +1,10 @@
 import {IProject} from "../interfaces/IProject";
 import {makeAutoObservable} from "mobx";
 import {IHomeProject} from "../interfaces/IHomeProject";
+import {projectObjectStore} from "./objectStore";
 
-const testProjects = [
-	{
-		id: 1,
-		name: "Кафе Гурман"
-	},
-	{
-		id: 2,
-		name: "Быстрый грузовой"
-	},
-	{
-		id: 3,
-		name: "Kodim.Space"
-	},
-	{
-		id: 4,
-		name: "Kodim.Studio"
-	},
-	{
-		id: 5,
-		name: "Starosta.pro"
-	},
+const testProjects: any = [
+
 ]
 
 const testHomeProjects: IHomeProject[] = [
@@ -128,15 +110,22 @@ const testHomeProjects: IHomeProject[] = [
 ]
 
 class ProjectStore {
-	projects: IProject[] = testProjects
 	homeProjects: IHomeProject[] = testHomeProjects
 
 	constructor() {
 		makeAutoObservable(this)
 	}
 
+	get projects() {
+		return projectObjectStore.objects
+	}
+
+	filterByCategory(category: string) {
+		return this.projects?.filter(project => project.category === category)
+	}
+
 	search(query: string) {
-		return this.projects.filter(project => project.name.toLowerCase().includes(query.toLowerCase()))
+		return this.projects?.filter(project => project.name.toLowerCase().includes(query.toLowerCase()))
 	}
 }
 

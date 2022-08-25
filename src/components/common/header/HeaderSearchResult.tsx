@@ -17,10 +17,10 @@ export const HeaderSearchResult = observer((props: {searchQuery: string}) => {
 
 	return (
 		<Container>
-			{projects.map(project =>
+			{projects?.map(project =>
 				<HeaderSearchResultItem text={project.name} />
 			)}
-			{projects.length === 0 &&
+			{projects?.length === 0 &&
                 <HeaderSearchResultItem text={"Совпадений не найдено"} />
 			}
 		</Container>
