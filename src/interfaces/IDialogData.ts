@@ -1,6 +1,6 @@
-import { DialogType } from "store/dialogStore";
+import {DialogType} from "store/dialogStore";
 import {IObjectStore} from "./IObjectStore";
-import {ITabOption} from "./ITabOption";
+import {ISelectOptionsStore} from "./ISelectOptionsStore";
 
 type IDialogTitle = {
 	[key in DialogType]?: string;
@@ -22,7 +22,8 @@ export interface IDialogField {
 	required?: boolean,
 	type?: DialogFieldType,
 	selectOptions?: ISelectOption[],
-	edited?: boolean
+	edited?: boolean,
+	selectOptionsStore?: ISelectOptionsStore
 }
 
 type IDialogTextTemplate = {

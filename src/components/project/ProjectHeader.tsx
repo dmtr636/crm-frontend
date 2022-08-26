@@ -3,21 +3,22 @@ import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import {projectObjectStore} from "../../store/objectStore";
 import {dateTsToString} from "../../utils/utils";
-import {Button} from "components/common/button/Button";
-import {dialogStore, DialogType} from "../../store/dialogStore";
-import {editProjectDialog} from "../../constants/dialog/editProjectDialog";
+import {projectTabStore} from "../../store/tabStore";
+import {ProjectHeaderAction} from "./ProjectHeaderAction";
+import {IOpenDialogParamsRequestFields} from "../../store/dialogStore";
+import {useMemo} from "react";
 
 const Container = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: start;
-	column-gap: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    column-gap: 26px;
 `
 const Column = styled.div`
-	display: flex;
-	flex-direction: column;
-	row-gap: 15px;
-	margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    margin-right: auto;
 `
 const Name = styled.div`
     font-family: 'Raleway';
@@ -43,24 +44,30 @@ export const ProjectHeader = observer(() => {
 	const id = Number(params.id)
 	const project = projectObjectStore.findById(id)
 
+	const requestFields = useMemo(() => {
+		if (project) {
+			return {"projectId": project?.id}
+		}
+	}, [project])
+
 	return (
 		<Container>
 			{project &&
-				<>
-					<Column>
-						<Name>{project.name}</Name>
-						<Date>{dateTsToString(project.deadline, "number")}</Date>
-					</Column>
-					<Button onClick={() => {dialogStore.open(DialogType.edit, editProjectDialog, project, project.id)}}>
-						Редактировать проект
-					</Button>
-                    <Button onClick={() => {}}>
-                        Добавить задачу
-                    </Button>
-                    <Button onClick={() => {}}>
-                        Добавить квест
-                    </Button>
-				</>
+                <>
+                    <Column>
+                        <Name>{project.name}</Name>
+                        <Date>{dateTsToString(project.deadline, "number")}</Date>
+                    </Column>
+
+					{projectTabStore.option.actions?.map(action =>
+						<ProjectHeaderAction
+							action={action}
+							object={project}
+							objectId={project.id}
+							requestFields={requestFields}
+						/>
+					)}
+                </>
 			}
 		</Container>
 	)

@@ -1,6 +1,6 @@
 import {IDialogField, ISelectOption} from "../../../interfaces/IDialogData";
 import styled from "styled-components";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {observer} from "mobx-react";
 import {colors} from "../../../theme/colors";
 import arrow from "assets/dialog/selectArrow.svg"
@@ -55,20 +55,44 @@ export const SelectField = observer((props: Props) => {
 	const {field} = props
 	const [expanded, setExpanded] = useState(false)
 
-	const value = useMemo(
-		() => field.selectOptions?.find(option => option.id === field.value)?.value,
-		[field.selectOptions, field.value]
-	)
-
-	const availableOptions = useMemo(
-		() => field.selectOptions?.filter(option => option.id !== field.value),
-		[field.selectOptions, field.value]
+	const selectOptions = useMemo(
+		() => {
+			if (field.selectOptionsStore) {
+				return field.selectOptionsStore.selectOptions
+			} else {
+				return field.selectOptions
+			}
+		},
+		[field.selectOptions, field.selectOptionsStore]
 	)
 
 	const handleChange = (option: ISelectOption) => {
 		field.value = option.id
 		field.edited = true
 	}
+
+	const value = useMemo(
+		() => {
+			if (field.value) {
+				return selectOptions?.find(option => option.id === field.value)?.value
+			} else {
+				return "Отсутствуют значения"
+			}
+		},
+		[field.value, selectOptions]
+	)
+
+	useEffect(() => {
+		if (!field.value && selectOptions && selectOptions[0]) {
+			field.value = selectOptions[0].id
+			field.edited = true
+		}
+	}, [field, selectOptions])
+
+	const availableOptions = useMemo(
+		() => selectOptions?.filter(option => option.id !== field.value),
+		[field.value, selectOptions]
+	)
 
 	return (
 		<Container onClick={() => setExpanded(!expanded)}>

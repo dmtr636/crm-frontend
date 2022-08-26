@@ -11,8 +11,8 @@ import {SelectField} from "./SelectField";
 
 registerLocale('ru', ru)
 
-const Container = styled.div`
-
+const Container = styled.div< {columns?: number} >`
+	grid-column: ${props => props.columns && `span ${props.columns}`};
 `
 const Label = styled.div<{ validated: boolean }>`
     font-family: 'Raleway';
@@ -139,7 +139,7 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 	}
 
 	return (
-		<Container>
+		<Container columns={field.columns}>
 			<Label validated={field.validated ?? true}>
 				{field.label}
 			</Label>

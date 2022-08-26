@@ -4,6 +4,18 @@ import {IObjectStore} from "../interfaces/IObjectStore";
 
 export enum DialogType {add, edit, confirm, successAdd, successEdit, successDelete}
 
+export type IOpenDialogParamsRequestFields = {
+	[key: string]: string | number
+}
+
+export interface IOpenDialogParams {
+	type?: DialogType,
+	data?: IDialogData,
+	object?: object,
+	objectId?: number,
+	requestFields?: IOpenDialogParamsRequestFields
+}
+
 export class DialogStore {
 	isOpen = false
 	type: DialogType = DialogType.add
@@ -11,6 +23,7 @@ export class DialogStore {
 	object?: object
 	objectId?: number
 	store?: IObjectStore
+	requestFields?: IOpenDialogParamsRequestFields
 
 	open(type: DialogType, data: IDialogData, object?: object, objectId?: number) {
 		this.type = type
@@ -19,6 +32,16 @@ export class DialogStore {
 		this.object = object
 		this.objectId = objectId
 		this.store = data.store
+	}
+
+	openV2(params: IOpenDialogParams) {
+		this.type = params.type!
+		this.isOpen = true
+		this.data = params.data
+		this.object = params.object
+		this.objectId = params.objectId
+		this.store = params.data?.store
+		this.requestFields = params.requestFields
 	}
 
 	close() {
@@ -55,7 +78,10 @@ export class DialogStore {
 			case DialogActionType.add:
 				if (this.validate()) {
 					this.type = DialogType.successAdd
-					this.store?.addFromDialog(this.data!, action.args)
+					this.store?.addFromDialog(
+						this.data!,
+						{...action.args, ...this.requestFields}
+					)
 				}
 				break
 			case DialogActionType.delete:
