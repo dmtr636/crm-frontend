@@ -6,4 +6,5 @@ export interface IObjectStore {
 	editFromDialog: (data: IDialogData, id: number) => void
 	delete: (id: number) => void
 	findById: (id: number) => IObjectType | undefined
+	setFilter: (filter: object) => void
 }

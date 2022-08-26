@@ -1,13 +1,20 @@
 import {makeAutoObservable} from "mobx";
 import {IDialogData} from "../interfaces/IDialogData";
 import axios from "axios";
-import {ACCESSES_ENDPOINT, MEMBERS_ENDPOINT, OPERATIONS_ENDPOINT, PROJECTS_ENDPOINT} from "../api/endoints";
+import {
+	ACCESSES_ENDPOINT,
+	MEMBERS_ENDPOINT,
+	OPERATIONS_ENDPOINT,
+	PROJECTS_ENDPOINT,
+	TASKS_ENDPOINT
+} from "../api/endoints";
 import {createFieldsFromDialogData} from "../utils/utils";
 import {IObjectStore} from "../interfaces/IObjectStore";
-import {IMember} from "../interfaces/IMember";
-import {IAccess} from "../interfaces/IAccess";
-import {IOperation} from "../interfaces/IOperation";
-import {IProject} from "../interfaces/IProject";
+import {IMember} from "../interfaces/entities/IMember";
+import {IAccess} from "../interfaces/entities/IAccess";
+import {IOperation} from "../interfaces/entities/IOperation";
+import {IProject} from "../interfaces/entities/IProject";
+import {ITask} from "../interfaces/entities/ITask";
 
 export interface IObjectType {
 	id: number
@@ -17,14 +24,23 @@ class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 	object?: ObjectType
 	objects?: ObjectType[]
 	endpoint: string
+	filter?: object
 
 	constructor(endpoint: string) {
 		this.endpoint = endpoint
 		makeAutoObservable(this)
 	}
 
-	fetch() {
-		axios.get(this.endpoint).then(res => {
+	setFilter = (filter: object) => {
+		this.filter = filter
+	};
+
+	fetchObjects() {
+		axios.get(this.endpoint, {
+			params: {
+				filter: this.filter
+			}
+		}).then(res => {
 			this.objects = res.data.result
 		})
 	}
@@ -70,3 +86,4 @@ export const memberObjectStore = new ObjectStore<IMember>(MEMBERS_ENDPOINT)
 export const accessObjectStore = new ObjectStore<IAccess>(ACCESSES_ENDPOINT)
 export const operationsObjectStore = new ObjectStore<IOperation>(OPERATIONS_ENDPOINT)
 export const projectObjectStore = new ObjectStore<IProject>(PROJECTS_ENDPOINT)
+export const taskObjectStore = new ObjectStore<ITask>(TASKS_ENDPOINT)

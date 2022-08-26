@@ -2,6 +2,7 @@ import {ITabOption} from "../interfaces/ITabOption";
 import {dialogStore, DialogType} from "../store/dialogStore";
 import {editProjectDialog} from "./dialog/editProjectDialog";
 import {addTaskDialog} from "./dialog/addTaskDialog";
+import {ProjectTasks} from "../components/project/ProjectTasks";
 
 export const projectTabs: ITabOption[] = [
 	{
@@ -10,7 +11,7 @@ export const projectTabs: ITabOption[] = [
 		actions: [
 			{
 				buttonText: "Редактировать проект",
-				onClick: params => dialogStore.open(DialogType.add, editProjectDialog, params.object, params.objectId)
+				onClick: params => dialogStore.open(DialogType.edit, editProjectDialog, params.object, params.objectId)
 			},
 			{
 				buttonText: "Добавить задачу",
@@ -24,7 +25,8 @@ export const projectTabs: ITabOption[] = [
 				buttonText: "Добавить квест",
 				onClick: params => {}
 			}
-		]
+		],
+		component: <ProjectTasks />
 	},
 	{
 		id: "accesses",

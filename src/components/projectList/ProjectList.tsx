@@ -1,6 +1,5 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import {projectObjectStore} from "../../store/objectStore";
 import {ProjectListItem} from "./ProjectListItem";
 import {projectStore} from "../../store/projectStore";
 import {projectListTabStore} from "../../store/tabStore";

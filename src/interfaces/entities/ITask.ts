@@ -5,6 +5,6 @@ export interface ITask {
 	text: string,
 	completed: boolean,
 	category: ITaskCategory,
-	executorId: number,
-	projectId: number
+	executor_id: number,
+	project_id: number
 }

@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {HomeProjectContext} from "./HomeProject";
 import styled from "styled-components";
-import {ITask} from "../../interfaces/ITask";
+import {ITask} from "../../interfaces/entities/ITask";
 import {IHomeProject} from "../../interfaces/IHomeProject";
 import {HomeProjectCardTaskColumn} from "./HomeProjectCardTaskColumn";
 import useWindowDimensions from "../../hooks/hooks";

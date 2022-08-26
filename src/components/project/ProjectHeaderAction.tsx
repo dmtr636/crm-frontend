@@ -13,11 +13,13 @@ export const ProjectHeaderAction = (props: Props) => {
 	const {action, object, objectId, requestFields} = props
 
 	return (
-		<Button onClick={() => action.onClick({
-			object: object,
-			objectId: objectId,
-			requestFields: requestFields
-		})}>
+		<Button
+			onClick={() => action.onClick({
+				object: object,
+				objectId: objectId,
+				requestFields: requestFields
+			})}
+		>
 			{action.buttonText}
 		</Button>
 	)

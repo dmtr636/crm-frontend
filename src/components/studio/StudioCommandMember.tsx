@@ -1,5 +1,5 @@
 import {observer} from "mobx-react";
-import {IMember} from "../../interfaces/IMember";
+import {IMember} from "../../interfaces/entities/IMember";
 import styled from "styled-components";
 import {url} from "../../utils/utils";
 import editButton from "assets/common/editButton.svg"

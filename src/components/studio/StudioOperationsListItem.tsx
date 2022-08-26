@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {dateTsToString} from "../../utils/utils";
 import editButton from "assets/common/editButton.svg"
 import {dialogStore, DialogType} from "../../store/dialogStore";
-import {IOperation} from "../../interfaces/IOperation";
+import {IOperation} from "../../interfaces/entities/IOperation";
 import {studioMoneyDialog} from "../../constants/dialog/studioMoneyDialog";
 
 const Container = styled.div`

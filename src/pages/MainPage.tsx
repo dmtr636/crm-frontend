@@ -22,10 +22,10 @@ const ContentLayout = styled.div`
 
 export const MainPage = observer(() => {
 	useEffect(() => {
-		memberObjectStore.fetch()
-		accessObjectStore.fetch()
-		operationsObjectStore.fetch()
-		projectObjectStore.fetch()
+		memberObjectStore.fetchObjects()
+		accessObjectStore.fetchObjects()
+		operationsObjectStore.fetchObjects()
+		projectObjectStore.fetchObjects()
 	}, [])
 
 	return (

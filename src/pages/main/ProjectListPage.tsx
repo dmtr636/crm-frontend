@@ -5,7 +5,7 @@ import {OpenDialogButton} from "../../components/common/button/OpenDialogButton"
 import {DialogType} from "../../store/dialogStore";
 import {defaultDialog} from "../../constants/dialog/defaultDialog";
 import {newProjectDialog} from "../../constants/dialog/newProjectDialog";
-import {ProjectList} from "../../components/projects/ProjectList";
+import {ProjectList} from "../../components/projectList/ProjectList";
 
 const Container = styled.div`
     padding: 26px 46px;

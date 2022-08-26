@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx";
 import axios from "axios";
 import {AUTHENTICATE_ENDPOINT, LOGOUT_ENDPOINT} from "../api/endoints";
 import LoginStore from "./loginStore";
-import {IMember} from "../interfaces/IMember";
+import {IMember} from "../interfaces/entities/IMember";
 import {ISelectOptionsStore} from "../interfaces/ISelectOptionsStore";
 import {ISelectOption} from "../interfaces/IDialogData";
 import {memberObjectStore} from "./objectStore";

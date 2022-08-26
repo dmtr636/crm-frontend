@@ -1,4 +1,4 @@
-import {ITask} from "./ITask";
+import {ITask} from "./entities/ITask";
 
 export interface IHomeProject {
 	project_id: number,

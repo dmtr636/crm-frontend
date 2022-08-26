@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {ITask} from "../../interfaces/ITask";
+import {ITask} from "../../interfaces/entities/ITask";
 import {HomeProjectCardTask} from "./HomeProjectCardTask";
 
 const Column = styled.div`

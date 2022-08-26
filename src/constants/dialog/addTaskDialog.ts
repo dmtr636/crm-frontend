@@ -1,11 +1,12 @@
 import {DialogActionType, IDialogData} from "../../interfaces/IDialogData";
 import {DialogType} from "../../store/dialogStore";
-import {projectObjectStore} from "../../store/objectStore";
+import {projectObjectStore, taskObjectStore} from "../../store/objectStore";
 import {memberStore} from "../../store/memberStore";
 
 export const addTaskDialog: IDialogData = {
 	title: {
-		[DialogType.add]: "Добавить задачу"
+		[DialogType.add]: "Добавить задачу",
+		[DialogType.successAdd]: "Успешно добавлена"
 	},
 	form: {
 		columns: 2,
@@ -50,19 +51,22 @@ export const addTaskDialog: IDialogData = {
 			},
 		]
 	},
-	store: projectObjectStore,
+	store: taskObjectStore,
 	actions: {
 		[DialogType.add]: [
 			{
 				label: "Создать",
 				type: DialogActionType.add,
+				args: {
+					"type": "task"
+				}
 			},
 		]
 	},
 	text: {
 		template: {
-			[DialogType.successAdd]: "{OBJECT} добавлен",
+			[DialogType.successAdd]: "Задача добавлена",
 		},
-		objectFieldName: "name"
+		objectFieldName: "text"
 	},
 }

@@ -1,4 +1,4 @@
-import {IProject} from "../interfaces/IProject";
+import {IProject} from "../interfaces/entities/IProject";
 import {makeAutoObservable} from "mobx";
 import {IHomeProject} from "../interfaces/IHomeProject";
 import {projectObjectStore} from "./objectStore";

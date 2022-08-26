@@ -1,4 +1,4 @@
-import {ITask} from "../../interfaces/ITask";
+import {ITask} from "../../interfaces/entities/ITask";
 import styled from "styled-components";
 import {observer} from "mobx-react";
 import {useContext} from "react";

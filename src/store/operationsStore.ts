@@ -1,5 +1,5 @@
 import {makeAutoObservable} from "mobx";
-import {IOperation} from "../interfaces/IOperation";
+import {IOperation} from "../interfaces/entities/IOperation";
 
 class OperationsStore {
 	operations?: IOperation[]
