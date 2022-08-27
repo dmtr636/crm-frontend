@@ -25,6 +25,7 @@ class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 	objects?: ObjectType[]
 	endpoint: string
 	filter?: object
+	isReady = false
 
 	constructor(endpoint: string) {
 		this.endpoint = endpoint
@@ -32,6 +33,7 @@ class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 	}
 
 	setFilter = (filter: object) => {
+		this.isReady = false
 		this.filter = filter
 	};
 
@@ -42,6 +44,7 @@ class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 			}
 		}).then(res => {
 			this.objects = res.data.result
+			this.isReady = true
 		})
 	}
 

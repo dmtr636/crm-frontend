@@ -13,7 +13,8 @@ export interface IOpenDialogParams {
 	data?: IDialogData,
 	object?: object,
 	objectId?: number,
-	requestFields?: IOpenDialogParamsRequestFields
+	requestFields?: IOpenDialogParamsRequestFields,
+
 }
 
 export class DialogStore {

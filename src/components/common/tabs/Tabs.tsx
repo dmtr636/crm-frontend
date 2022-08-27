@@ -14,7 +14,7 @@ type Props = {
 export const Tabs = observer((props: Props) => {
 	return (
 		<Container>
-			{props.store.options.map(option =>
+			{props.store.tabs.map(option =>
 				<Tab option={option} store={props.store} key={option.id} />
 			)}
 		</Container>

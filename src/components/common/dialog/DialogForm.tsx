@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {observer} from "mobx-react";
 import {dialogStore} from "../../../store/dialogStore";
 import {DialogFormField} from "./DialogFormField";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 const Form = styled.div<{columns: number}>`
 	display: grid;
@@ -15,6 +15,7 @@ export const DialogForm = observer(() => {
 	const columns = dialogStore.data?.form?.columns!
 	const fields = dialogStore.data?.form?.fields
 	const initialValues = dialogStore.object
+	const [readyToRender, setReadyToRender] = useState(false)
 
 	const fillFields = () => {
 		if (initialValues) {
@@ -25,6 +26,7 @@ export const DialogForm = observer(() => {
 				}
 			})
 		}
+		setReadyToRender(true)
 	}
 
 	useEffect(() => {
@@ -32,10 +34,14 @@ export const DialogForm = observer(() => {
 	}, [])
 
 	return (
-		<Form columns={columns}>
-			{fields?.map(field =>
-				<DialogFormField field={field} key={field.name} />
-			)}
-		</Form>
+		<>
+			{readyToRender &&
+                <Form columns={columns}>
+					{fields?.map(field =>
+						<DialogFormField field={field} key={field.name} />
+					)}
+                </Form>
+			}
+		</>
 	)
 })

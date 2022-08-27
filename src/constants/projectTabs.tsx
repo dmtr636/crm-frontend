@@ -1,10 +1,10 @@
-import {ITabOption} from "../interfaces/ITabOption";
+import {ITab} from "../interfaces/ITab";
 import {dialogStore, DialogType} from "../store/dialogStore";
 import {editProjectDialog} from "./dialog/editProjectDialog";
 import {addTaskDialog} from "./dialog/addTaskDialog";
 import {ProjectTasks} from "../components/project/ProjectTasks";
 
-export const projectTabs: ITabOption[] = [
+export const projectTabs: ITab[] = [
 	{
 		id: "tasks",
 		value: "Задачи",

@@ -46,7 +46,7 @@ export const ProjectHeader = observer(() => {
 
 	const requestFields = useMemo(() => {
 		if (project) {
-			return {"projectId": project?.id}
+			return {"project_id": project?.id}
 		}
 	}, [project])
 
@@ -59,12 +59,13 @@ export const ProjectHeader = observer(() => {
                         <Date>{dateTsToString(project.deadline, "number")}</Date>
                     </Column>
 
-					{projectTabStore.option.actions?.map(action =>
+					{projectTabStore.tab.actions?.map(action =>
 						<ProjectHeaderAction
 							action={action}
 							object={project}
 							objectId={project.id}
 							requestFields={requestFields}
+							key={action.buttonText}
 						/>
 					)}
                 </>

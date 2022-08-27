@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import {Tabs} from "../../components/common/tabs/Tabs";
-import {projectListTabStore, studioTabStore} from "../../store/tabStore";
+import {projectListTabStore} from "../../store/tabStore";
 import {OpenDialogButton} from "../../components/common/button/OpenDialogButton";
 import {DialogType} from "../../store/dialogStore";
-import {defaultDialog} from "../../constants/dialog/defaultDialog";
 import {newProjectDialog} from "../../constants/dialog/newProjectDialog";
 import {ProjectList} from "../../components/projectList/ProjectList";
 

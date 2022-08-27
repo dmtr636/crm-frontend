@@ -4,6 +4,7 @@ import {useEffect, useMemo, useState} from "react";
 import {observer} from "mobx-react";
 import {colors} from "../../../theme/colors";
 import arrow from "assets/dialog/selectArrow.svg"
+import {projectTasksTabStore} from "../../../store/tabStore";
 
 const Container = styled.div`
     width: 100%;
@@ -83,8 +84,12 @@ export const SelectField = observer((props: Props) => {
 	)
 
 	useEffect(() => {
-		if (!field.value && selectOptions && selectOptions[0]) {
-			field.value = selectOptions[0].id
+		if (!field.value) {
+			if (field.tabStore === "projectTasksTabStore") {
+				field.value = projectTasksTabStore.tab.id
+			} else if (selectOptions && selectOptions[0]) {
+				field.value = selectOptions[0].id
+			}
 			field.edited = true
 		}
 	}, [field, selectOptions])

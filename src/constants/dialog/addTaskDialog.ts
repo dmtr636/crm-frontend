@@ -1,6 +1,6 @@
 import {DialogActionType, IDialogData} from "../../interfaces/IDialogData";
 import {DialogType} from "../../store/dialogStore";
-import {projectObjectStore, taskObjectStore} from "../../store/objectStore";
+import {taskObjectStore} from "../../store/objectStore";
 import {memberStore} from "../../store/memberStore";
 
 export const addTaskDialog: IDialogData = {
@@ -33,7 +33,8 @@ export const addTaskDialog: IDialogData = {
 						id: "ceo",
 						value: "СЕО"
 					},
-				]
+				],
+				tabStore: "projectTasksTabStore"
 			},
 			{
 				label: "Текст задачи",
@@ -44,7 +45,7 @@ export const addTaskDialog: IDialogData = {
 			},
 			{
 				label: "Исполнитель",
-				name: "executorId",
+				name: "executor_id",
 				type: "select",
 				required: true,
 				selectOptionsStore: memberStore

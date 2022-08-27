@@ -6,9 +6,10 @@ export interface ITabAction {
 	onClick: (params: IOpenDialogParams) => void
 }
 
-export interface ITabOption {
+export interface ITab {
 	id: string,
-	value: string,
+	value?: string,
+	title?: string,
 	component?: ReactNode,
 	actionButtonText?: string,
 	actions?: ITabAction[]

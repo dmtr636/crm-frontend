@@ -1,5 +1,7 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
+import {ITab} from "../../interfaces/ITab";
+import {projectTasksTabStore} from "../../store/tabStore";
 
 const Container = styled.button<{active: boolean}>`
 	padding: 26px 48px;
@@ -27,16 +29,13 @@ const Value = styled.div`
 `
 
 type Props = {
-	tab: {
-		title: string,
-		value: string
-	},
+	tab: ITab,
 	active: boolean,
 	onClick: () => void
 }
 
 export const ProjectTasksTab = observer((props: Props) => {
-	const {active, onClick, tab} = props
+	const {tab, active, onClick} = props
 
 	return (
 		<Container

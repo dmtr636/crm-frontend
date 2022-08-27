@@ -1,20 +1,20 @@
-import {ITabOption} from "../interfaces/ITabOption";
+import {ITab} from "../interfaces/ITab";
 
-export const projectTasksTabs: ITabOption[] = [
+export const projectTasksTabs: ITab[] = [
 	{
 		id: "design",
-		value: "Дизайн"
+		title: "Дизайн"
 	},
 	{
 		id: "development",
-		value: "Разработка"
+		title: "Разработка"
 	},
 	{
 		id: "marketing",
-		value: "Маркетинг"
+		title: "Маркетинг"
 	},
 	{
 		id: "ceo",
-		value: "СЕО"
+		title: "СЕО"
 	}
 ]

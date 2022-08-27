@@ -1,16 +1,17 @@
 import {DialogType} from "store/dialogStore";
 import {IObjectStore} from "./IObjectStore";
 import {ISelectOptionsStore} from "./ISelectOptionsStore";
+import {TabStore} from "../store/tabStore";
 
 type IDialogTitle = {
 	[key in DialogType]?: string;
 };
 
-export type DialogFieldType = "text" | "date" | "number" | "select"
+export type DialogFieldType = "text" | "date" | "number" | "select" | "string"
 
 export interface ISelectOption {
 	id: string,
-	value: string
+	value?: string
 }
 
 export interface IDialogField {
@@ -23,7 +24,8 @@ export interface IDialogField {
 	type?: DialogFieldType,
 	selectOptions?: ISelectOption[],
 	edited?: boolean,
-	selectOptionsStore?: ISelectOptionsStore
+	selectOptionsStore?: ISelectOptionsStore,
+	tabStore?: string
 }
 
 type IDialogTextTemplate = {

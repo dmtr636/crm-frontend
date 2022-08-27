@@ -22,7 +22,7 @@ const Line = styled.div`
 `
 
 const getDialogData = () => {
-	switch (studioTabStore.option.id) {
+	switch (studioTabStore.tab.id) {
 		case "money": return studioMoneyDialog
 		case "access": return studioAccessDialog
 		case "command": return studioCommandDialog
@@ -36,11 +36,11 @@ export const StudioPage = observer(() => {
 			<TopPanel>
 				<Tabs store={studioTabStore}/>
 				<OpenDialogButton dialogType={DialogType.add} dialogData={getDialogData()}>
-					{studioTabStore.option.actionButtonText}
+					{studioTabStore.tab.actionButtonText}
 				</OpenDialogButton>
 			</TopPanel>
 			<Line/>
-			{studioTabStore.option.component}
+			{studioTabStore.tab.component}
 		</Container>
 	)
 })

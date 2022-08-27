@@ -1,6 +1,6 @@
-import {ITabOption} from "../interfaces/ITabOption";
+import {ITab} from "../interfaces/ITab";
 
-export const homeTabs: ITabOption[] = [
+export const homeTabs: ITab[] = [
 	{
 		id: "my_project",
 		value: "Мои проекты"

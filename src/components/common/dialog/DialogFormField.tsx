@@ -39,6 +39,24 @@ const Input = styled.input<{ validated: boolean; edited: boolean }>`
 	
 	color: ${props => props.validated && !props.edited && 'rgba(31, 35, 44, 0.7)'};
 `
+const TextArea = styled.textarea<{ validated: boolean; edited: boolean }>`
+    width: 488px;
+	height: 105px;
+    margin-top: 26px;
+    border: 3px solid;
+    border-color: ${props => props.validated ? '#1F232C' : '#BF616A'};
+    border-radius: 5px;
+    padding: 13px 0 13px 23px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 110%;
+    letter-spacing: 0.03em;
+	resize: vertical;	
+	
+	color: ${props => props.validated && !props.edited && 'rgba(31, 35, 44, 0.7)'};
+`
 const DatePickerStyled = styled(DatePicker)<{ validated: boolean; edited: boolean }>`
     width: 100%;
     margin-top: 26px;
@@ -59,7 +77,13 @@ const DatePickerStyled = styled(DatePicker)<{ validated: boolean; edited: boolea
 export const DialogFormField = observer((props: { field: IDialogField }) => {
 	const field = props.field
 
-	const handleTextFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleStringFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		field.value = event.target.value
+		field.validated = true
+		field.edited = true
+	}
+
+	const handleTextFieldChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		field.value = event.target.value
 		field.validated = true
 		field.edited = true
@@ -113,9 +137,18 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 						edited={field.edited ?? false}
 					/>
 				)
-			case "text":
+			case "string":
 				return (
 					<Input
+						value={field.value ?? ""}
+						onChange={handleStringFieldChange}
+						validated={field.validated ?? true}
+						edited={field.edited ?? false}
+					/>
+				)
+			case "text":
+				return (
+					<TextArea
 						value={field.value ?? ""}
 						onChange={handleTextFieldChange}
 						validated={field.validated ?? true}
@@ -130,7 +163,7 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 				return (
 					<Input
 						value={field.value ?? ""}
-						onChange={handleTextFieldChange}
+						onChange={handleStringFieldChange}
 						validated={field.validated ?? true}
 						edited={field.edited ?? false}
 					/>

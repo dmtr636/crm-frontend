@@ -1,4 +1,4 @@
-import {ITabAction} from "../../interfaces/ITabOption";
+import {ITabAction} from "../../interfaces/ITab";
 import {Button} from "../common/button/Button";
 import {IOpenDialogParamsRequestFields} from "../../store/dialogStore";
 

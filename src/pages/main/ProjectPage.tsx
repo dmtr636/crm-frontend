@@ -31,7 +31,7 @@ export const ProjectPage = observer(() => {
 			<ProjectHeader/>
 			<Line/>
 			<Tabs store={projectTabStore}/>
-			{projectTabStore.option.component}
+			{taskObjectStore.isReady && projectTabStore.tab.component}
 		</Container>
 	)
 })

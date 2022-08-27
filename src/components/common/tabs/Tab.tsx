@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {observer} from "mobx-react";
-import {ITabOption} from "../../../interfaces/ITabOption";
+import {ITab} from "../../../interfaces/ITab";
 import {TabStore} from "../../../store/tabStore";
 
 const Container = styled.button<{active: boolean}>`
@@ -28,17 +28,17 @@ const Container = styled.button<{active: boolean}>`
 `
 
 type Props = {
-	option: ITabOption,
+	option: ITab,
 	store: TabStore
 }
 
 export const Tab = observer((props: Props) => {
-	const active = props.option.id === props.store.option.id
+	const active = props.option.id === props.store.tab.id
 
 	return (
 		<Container
 			active={active}
-			onClick={() => props.store.setOption(props.option)}
+			onClick={() => props.store.setTab(props.option)}
 		>
 			{props.option.value}
 		</Container>

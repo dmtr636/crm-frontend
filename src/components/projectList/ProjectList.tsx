@@ -9,7 +9,7 @@ const Container = styled.div`
 `
 
 export const ProjectList = observer(() => {
-	const projects = projectStore.filterByCategory(projectListTabStore.option.id)
+	const projects = projectStore.filterByCategory(projectListTabStore.tab.id)
 
 	return (
 		<Container>
