@@ -16,8 +16,6 @@ const Tasks = styled.div`
     margin-top: 48px;
 `
 
-
-
 export const ProjectTasks = observer(() => {
 	const tasks = taskStore.getTasksByCategory(projectTasksTabStore.tab.id)
 

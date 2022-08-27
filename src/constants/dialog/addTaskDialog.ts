@@ -6,7 +6,9 @@ import {memberStore} from "../../store/memberStore";
 export const addTaskDialog: IDialogData = {
 	title: {
 		[DialogType.add]: "Добавить задачу",
-		[DialogType.successAdd]: "Успешно добавлена"
+		[DialogType.successAdd]: "Успешно добавлена",
+		[DialogType.successDelete]: "Успешно удалена",
+		[DialogType.successEdit]: "Успешно изменена"
 	},
 	form: {
 		columns: 2,
@@ -67,6 +69,9 @@ export const addTaskDialog: IDialogData = {
 	text: {
 		template: {
 			[DialogType.successAdd]: "Задача добавлена",
+			[DialogType.successEdit]: "Задача изменена",
+			[DialogType.successDelete]: "Задача удалена",
+			[DialogType.confirm]: "Подтвердите удаление"
 		},
 		objectFieldName: "text"
 	},

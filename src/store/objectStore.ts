@@ -20,7 +20,7 @@ export interface IObjectType {
 	id: number
 }
 
-class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
+export class ObjectStore<ObjectType extends IObjectType> implements IObjectStore {
 	object?: ObjectType
 	objects?: ObjectType[]
 	endpoint: string

@@ -1,6 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {DialogActionType, IDialogAction, IDialogData} from "../interfaces/IDialogData";
 import {IObjectStore} from "../interfaces/IObjectStore";
+import {AppStore} from "./AppStore";
 
 export enum DialogType {add, edit, confirm, successAdd, successEdit, successDelete}
 
@@ -14,7 +15,7 @@ export interface IOpenDialogParams {
 	object?: object,
 	objectId?: number,
 	requestFields?: IOpenDialogParamsRequestFields,
-
+	store?: AppStore
 }
 
 export class DialogStore {

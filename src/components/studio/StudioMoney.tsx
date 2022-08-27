@@ -18,7 +18,6 @@ const Operations = styled.div`
 `
 
 export const StudioMoney = observer(() => {
-	const operations = operationsObjectStore.objects
 	const [activeTabIndex, setActiveTabIndex] = useState(0)
 
 	const tabs = [
@@ -43,10 +42,6 @@ export const StudioMoney = observer(() => {
 			case 2: return operationsStore.expenseOperations
 		}
 	}
-
-	useEffect(() => {
-		operationsStore.operations = operations
-	}, [operations])
 
 	return (
 		<Container>

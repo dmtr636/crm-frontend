@@ -6,7 +6,7 @@ import {url} from "../../../utils/utils";
 import {memberStore} from "../../../store/memberStore";
 import {useEffect, useState} from "react";
 import {HeaderMemberMenu} from "./HeaderMemberMenu";
-import {appStore} from "../../../store/appStore";
+import {appStore} from "../../../store/backdropStore";
 
 const Container = styled.header`
 	position: sticky;

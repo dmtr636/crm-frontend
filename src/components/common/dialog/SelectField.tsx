@@ -85,6 +85,7 @@ export const SelectField = observer((props: Props) => {
 
 	useEffect(() => {
 		if (!field.value) {
+			// TODO: Fix stores
 			if (field.tabStore === "projectTasksTabStore") {
 				field.value = projectTasksTabStore.tab.id
 			} else if (selectOptions && selectOptions[0]) {

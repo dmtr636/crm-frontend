@@ -1,11 +1,14 @@
 import {makeAutoObservable} from "mobx";
 import {IOperation} from "../interfaces/entities/IOperation";
+import {operationsObjectStore} from "./objectStore";
 
 class OperationsStore {
-	operations?: IOperation[]
-
 	constructor() {
 		makeAutoObservable(this)
+	}
+
+	get operations() {
+		return operationsObjectStore.objects
 	}
 
 	get allOperations() {

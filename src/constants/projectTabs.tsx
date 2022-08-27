@@ -3,6 +3,8 @@ import {dialogStore, DialogType} from "../store/dialogStore";
 import {editProjectDialog} from "./dialog/editProjectDialog";
 import {addTaskDialog} from "./dialog/addTaskDialog";
 import {ProjectTasks} from "../components/project/ProjectTasks";
+import {ProjectAccess} from "../components/project/ProjectAccess";
+import {createProjectAccessDialogData} from "./dialog/projectAccessDialog";
 
 export const projectTabs: ITab[] = [
 	{
@@ -18,12 +20,22 @@ export const projectTabs: ITab[] = [
 				onClick: params => dialogStore.openV2({
 					type: DialogType.add,
 					data: addTaskDialog,
-					requestFields: params.requestFields
+					requestFields: {
+						type: "task",
+						...params.requestFields
+					}
 				})
 			},
 			{
 				buttonText: "Добавить квест",
-				onClick: params => {}
+				onClick: params => dialogStore.openV2({
+					type: DialogType.add,
+					data: addTaskDialog,
+					requestFields: {
+						type: "quest",
+						...params.requestFields
+					}
+				})
 			}
 		],
 		component: <ProjectTasks />
@@ -36,7 +48,16 @@ export const projectTabs: ITab[] = [
 				buttonText: "Редактировать проект",
 				onClick: params => dialogStore.open(DialogType.edit, editProjectDialog, params.object, params.objectId)
 			},
-		]
+			{
+				buttonText: "Добавить доступ",
+				onClick: params => dialogStore.openV2({
+					type: DialogType.add,
+					data: createProjectAccessDialogData(params.store!),
+					requestFields: params.requestFields
+				})
+			},
+		],
+		component: <ProjectAccess />
 	},
 	{
 		id: "links",

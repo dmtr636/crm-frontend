@@ -3,7 +3,7 @@ import searchIcon from "assets/header/headerSearchFieldSearchIcon.svg"
 import {Backdrop} from "../Backdrop";
 import {useEffect, useState} from "react";
 import {HeaderSearchResult} from "./HeaderSearchResult";
-import {appStore} from "../../../store/appStore";
+import {appStore} from "../../../store/backdropStore";
 
 const Container = styled.div<{showBackdrop: boolean}>`
 	position: relative;

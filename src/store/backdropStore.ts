@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx";
 
 export type BackdropType = "content" | "fullscreen"
 
-class AppStore {
+class BackdropStore {
 	isShowBackdrop = false
 	backdropType: BackdropType = "content"
 
@@ -22,4 +22,4 @@ class AppStore {
 	}
 }
 
-export const appStore = new AppStore()
+export const appStore = new BackdropStore()

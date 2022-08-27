@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 import {Header} from "../components/common/header/Header";
 import {observer} from "mobx-react";
 import {Backdrop} from "../components/common/Backdrop";
-import {appStore} from "../store/appStore";
+import {appStore} from "../store/backdropStore";
 import {Dialog} from "../components/common/dialog/Dialog";
 import {useEffect} from "react";
 import {accessObjectStore, memberObjectStore, operationsObjectStore, projectObjectStore} from "../store/objectStore";

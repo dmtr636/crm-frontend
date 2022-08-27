@@ -85,6 +85,14 @@ export const ProjectTasksListItem = observer((props: {task: ITask}) => {
 				 <Label>{"Текст"}</Label>
 				 <Value>{task.text}</Value>
 			 </Column>
+			 <Column>
+				 <Label>{"Тип"}</Label>
+				 <Value>{task.type === "task" ? "Задача" : "Квест"}</Value>
+			 </Column>
+			 <Column>
+				 <Label>{"Выполнена"}</Label>
+				 <Value>{task.completed ? "Да" : "Нет"}</Value>
+			 </Column>
 			 <Button src={editButton} onClick={handleEditClick} />
 		 </Container>
 	)

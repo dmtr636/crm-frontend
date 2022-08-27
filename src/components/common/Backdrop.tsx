@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BackdropType} from "../../store/appStore";
+import {BackdropType} from "../../store/backdropStore";
 
 const Background = styled.div<{zIndex: number}>`
 	position: fixed;

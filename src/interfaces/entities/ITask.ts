@@ -6,5 +6,6 @@ export interface ITask {
 	completed: boolean,
 	category: ITaskCategory,
 	executor_id: number,
-	project_id: number
+	project_id: number,
+	type: "task" | "quest"
 }
