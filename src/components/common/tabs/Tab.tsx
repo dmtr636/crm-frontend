@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {observer} from "mobx-react";
 import {ITab} from "../../../interfaces/ITab";
 import {TabStore} from "../../../store/tabStore";
+import {computed} from "mobx";
 
 const Container = styled.button<{active: boolean}>`
 	height: 50px;
@@ -33,7 +34,9 @@ type Props = {
 }
 
 export const Tab = observer((props: Props) => {
-	const active = props.option.id === props.store.tab.id
+	const active = computed(() =>
+		props.option.id === props.store.tab.id
+	).get()
 
 	return (
 		<Container
