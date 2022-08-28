@@ -58,7 +58,7 @@ export const projectTaskDialogData: IDialogData = {
 	actions: {
 		[DialogType.add]: [
 			{
-				label: "Создать",
+				label: "Добавить",
 				type: DialogActionType.add,
 			},
 		]

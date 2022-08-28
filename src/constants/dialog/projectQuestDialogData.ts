@@ -58,7 +58,7 @@ export const projectQuestDialogData: IDialogData = {
 	actions: {
 		[DialogType.add]: [
 			{
-				label: "Создать",
+				label: "Добавить",
 				type: DialogActionType.add,
 			},
 		]
