@@ -3,18 +3,18 @@ import {DialogType} from "../../store/dialogStore";
 import {taskObjectStore} from "../../store/objectStore";
 import {memberStore} from "../../store/memberStore";
 
-export const addTaskDialog: IDialogData = {
+export const projectQuestDialogData: IDialogData = {
 	title: {
-		[DialogType.add]: "Добавить задачу",
-		[DialogType.successAdd]: "Успешно добавлена",
-		[DialogType.successDelete]: "Успешно удалена",
-		[DialogType.successEdit]: "Успешно изменена"
+		[DialogType.add]: "Добавить квест",
+		[DialogType.successAdd]: "Успешно добавлен",
+		[DialogType.successDelete]: "Успешно удалён",
+		[DialogType.successEdit]: "Успешно изменён"
 	},
 	form: {
 		columns: 2,
 		fields: [
 			{
-				label: "Категория задачи",
+				label: "Категория квеста",
 				name: "category",
 				type: "select",
 				required: true,
@@ -39,7 +39,7 @@ export const addTaskDialog: IDialogData = {
 				tabStore: "projectTasksTabStore"
 			},
 			{
-				label: "Текст задачи",
+				label: "Текст квеста",
 				name: "text",
 				required: true,
 				type: "text",
@@ -60,17 +60,14 @@ export const addTaskDialog: IDialogData = {
 			{
 				label: "Создать",
 				type: DialogActionType.add,
-				args: {
-					"type": "task"
-				}
 			},
 		]
 	},
 	text: {
 		template: {
-			[DialogType.successAdd]: "Задача добавлена",
-			[DialogType.successEdit]: "Задача изменена",
-			[DialogType.successDelete]: "Задача удалена",
+			[DialogType.successAdd]: "Квест добавлен",
+			[DialogType.successEdit]: "Квест изменён",
+			[DialogType.successDelete]: "Квест удалён",
 			[DialogType.confirm]: "Подтвердите удаление"
 		},
 		objectFieldName: "text"

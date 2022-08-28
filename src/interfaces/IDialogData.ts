@@ -7,7 +7,7 @@ type IDialogTitle = {
 	[key in DialogType]?: string;
 };
 
-export type DialogFieldType = "text" | "date" | "number" | "select" | "string"
+export type DialogFieldType = "text" | "date" | "number" | "select" | "string" | "select_member"
 
 export interface ISelectOption {
 	id: string,
@@ -15,7 +15,7 @@ export interface ISelectOption {
 }
 
 export interface IDialogField {
-	label: string,
+	label?: string,
 	name: string,
 	columns?: number,
 	value?: string,

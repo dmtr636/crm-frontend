@@ -1,13 +1,16 @@
 import {ITab} from "../interfaces/ITab";
 import {dialogStore, DialogType} from "../store/dialogStore";
 import {editProjectDialog} from "./dialog/editProjectDialog";
-import {addTaskDialog} from "./dialog/addTaskDialog";
+import {projectTaskDialogData} from "./dialog/projectTaskDialogData";
 import {ProjectTasks} from "../components/project/ProjectTasks";
 import {ProjectAccess} from "../components/project/ProjectAccess";
 import {createProjectAccessDialogData} from "./dialog/projectAccessDialog";
 import {createProjectLinksDialogData} from "./dialog/projectLinksDialogData";
 import {AppStore} from "../store/AppStore";
 import {ProjectLinks} from "../components/project/ProjectLinks";
+import {projectQuestDialogData} from "./dialog/projectQuestDialogData";
+import {createProjectMemberDialog} from "./dialog/projectMemberDialog";
+import {ProjectMembersList} from "../components/project/ProjectMembersList";
 
 export const createProjectTabs = (store: AppStore): ITab[] => {
 	return [
@@ -23,7 +26,7 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 					buttonText: "Добавить задачу",
 					onClick: params => dialogStore.openV2({
 						type: DialogType.add,
-						data: addTaskDialog,
+						data: projectTaskDialogData,
 						requestFields: {
 							type: "task",
 							...params.requestFields
@@ -34,7 +37,7 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 					buttonText: "Добавить квест",
 					onClick: params => dialogStore.openV2({
 						type: DialogType.add,
-						data: addTaskDialog,
+						data: projectQuestDialogData,
 						requestFields: {
 							type: "quest",
 							...params.requestFields
@@ -84,19 +87,26 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 					}
 				}
 			],
-			component: <ProjectLinks />
+			component: <ProjectLinks/>
 		},
 		{
 			id: "team",
-			value:
-				"Команда",
-			actions:
-				[
-					{
-						buttonText: "Редактировать проект",
-						onClick: params => dialogStore.open(DialogType.edit, editProjectDialog, params.object, params.objectId)
-					},
-				]
+			value: "Команда",
+			actions: [
+				{
+					buttonText: "Редактировать проект",
+					onClick: params => dialogStore.open(DialogType.edit, editProjectDialog, params.object, params.objectId)
+				},
+				{
+					buttonText: "Добавить в команду",
+					onClick: params => dialogStore.openV2({
+						type: DialogType.add,
+						data: createProjectMemberDialog(params.store!),
+						requestFields: params.requestFields
+					})
+				},
+			],
+			component: <ProjectMembersList />
 		}
 	]
 }

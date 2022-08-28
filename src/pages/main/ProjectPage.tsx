@@ -25,7 +25,8 @@ export const ProjectPage = observer(() => {
 	const stores = [
 		taskObjectStore,
 		store.projectAccessObjectStore,
-		store.projectLinksObjectStore
+		store.projectLinksObjectStore,
+		store.projectMemberObjectStore
 	]
 
 	useEffect(() => {

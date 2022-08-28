@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ru from 'date-fns/locale/ru';
 import {dateToTs} from "../../../utils/utils";
 import {SelectField} from "./SelectField";
+import {SelectMemberList} from "./SelectMemberList";
 
 registerLocale('ru', ru)
 
@@ -22,10 +23,10 @@ const Label = styled.div<{ validated: boolean }>`
     line-height: 110%;
     letter-spacing: 0.03em;
     color: ${props => props.validated ? '#1F232C' : '#BF616A'};
+	margin-bottom: 26px;
 `
 const Input = styled.input<{ validated: boolean; edited: boolean }>`
     width: 100%;
-    margin-top: 26px;
     border: 3px solid;
     border-color: ${props => props.validated ? '#1F232C' : '#BF616A'};
     border-radius: 5px;
@@ -42,7 +43,6 @@ const Input = styled.input<{ validated: boolean; edited: boolean }>`
 const TextArea = styled.textarea<{ validated: boolean; edited: boolean }>`
     width: 488px;
 	height: 105px;
-    margin-top: 26px;
     border: 3px solid;
     border-color: ${props => props.validated ? '#1F232C' : '#BF616A'};
     border-radius: 5px;
@@ -59,7 +59,6 @@ const TextArea = styled.textarea<{ validated: boolean; edited: boolean }>`
 `
 const DatePickerStyled = styled(DatePicker)<{ validated: boolean; edited: boolean }>`
     width: 100%;
-    margin-top: 26px;
     border: 3px solid;
     border-color: ${props => props.validated ? '#1F232C' : '#BF616A'};
     border-radius: 5px;
@@ -159,6 +158,10 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 				return (
 					<SelectField field={field} />
 				)
+			case "select_member":
+				return (
+					<SelectMemberList field={field} />
+				)
 			default:
 				return (
 					<Input
@@ -173,9 +176,11 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 
 	return (
 		<Container columns={field.columns}>
-			<Label validated={field.validated ?? true}>
-				{field.label}
-			</Label>
+			{field.label &&
+                <Label validated={field.validated ?? true}>
+					{field.label}
+                </Label>
+			}
 			{getInputField()}
 		</Container>
 	)

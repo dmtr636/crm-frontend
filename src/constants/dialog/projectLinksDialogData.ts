@@ -44,9 +44,6 @@ export const createProjectLinksDialogData = (store: AppStore): IDialogData => {
 				{
 					label: "Создать",
 					type: DialogActionType.add,
-					args: {
-						"type": "task"
-					}
 				},
 			]
 		},

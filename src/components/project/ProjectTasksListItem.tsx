@@ -9,9 +9,10 @@ import {studioCommandDialog} from "../../constants/dialog/studioCommandDialog";
 import {IAccess} from "../../interfaces/entities/IAccess";
 import {studioAccessDialog} from "../../constants/dialog/studioAccessDialog";
 import {ITask} from "../../interfaces/entities/ITask";
-import {addTaskDialog} from "../../constants/dialog/addTaskDialog";
+import {projectTaskDialogData} from "../../constants/dialog/projectTaskDialogData";
 import {memberStore} from "../../store/memberStore";
 import {projectTasksTabs} from "../../constants/projectTasksTabs";
+import {projectQuestDialogData} from "../../constants/dialog/projectQuestDialogData";
 
 const Container = styled.div`
 	margin-bottom: 26px;
@@ -60,7 +61,11 @@ export const ProjectTasksListItem = observer((props: {task: ITask}) => {
 	const {task} = props
 
 	const handleEditClick = () => {
-		dialogStore.open(DialogType.edit, addTaskDialog, task, task.id)
+		if (task.type === "task") {
+			dialogStore.open(DialogType.edit, projectTaskDialogData, task, task.id)
+		} else {
+			dialogStore.open(DialogType.edit, projectQuestDialogData, task, task.id)
+		}
 	}
 
 	const getExecutorName = () => {

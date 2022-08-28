@@ -63,6 +63,13 @@ export class DialogStore {
 						field.validated = true
 					}
 					break
+				case "select_member":
+					if (field.value) {
+						field.validated = true
+					} else {
+						isValid = false
+					}
+					break
 				default:
 					if (field.value?.toString().trim().length || !field.required) {
 						field.validated = true
