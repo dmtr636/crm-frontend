@@ -3,10 +3,9 @@ import styled from "styled-components";
 import {useParams} from "react-router-dom";
 import {projectObjectStore} from "../../store/objectStore";
 import {dateTsToString} from "../../utils/utils";
-import {projectTabStore} from "../../store/tabStore";
 import {ProjectHeaderAction} from "./ProjectHeaderAction";
-import {IOpenDialogParamsRequestFields} from "../../store/dialogStore";
 import {useMemo} from "react";
+import {useStore} from "../../hooks/hooks";
 
 const Container = styled.div`
     display: flex;
@@ -43,6 +42,7 @@ export const ProjectHeader = observer(() => {
 	const params = useParams()
 	const id = Number(params.id)
 	const project = projectObjectStore.findById(id)
+	const store = useStore()
 
 	const requestFields = useMemo(() => {
 		if (project) {
@@ -59,7 +59,7 @@ export const ProjectHeader = observer(() => {
                         <Date>{dateTsToString(project.deadline, "number")}</Date>
                     </Column>
 
-					{projectTabStore.tab.actions?.map(action =>
+					{store.projectTabStore.tab.actions?.map(action =>
 						<ProjectHeaderAction
 							action={action}
 							object={project}

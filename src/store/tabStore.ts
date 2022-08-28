@@ -3,7 +3,6 @@ import {makeAutoObservable, runInAction} from "mobx";
 import {studioTabs} from "../constants/studioTabs";
 import {homeTabs} from "../constants/homeTabs";
 import {projectListTabs} from "../constants/projectListTabs";
-import {projectTabs} from "../constants/projectTabs";
 import {projectTasksTabs} from "../constants/projectTasksTabs";
 
 export class TabStore {
@@ -28,5 +27,4 @@ export class TabStore {
 export const studioTabStore = new TabStore(studioTabs)
 export const homeTabStore = new TabStore(homeTabs)
 export const projectListTabStore = new TabStore(projectListTabs)
-export const projectTabStore = new TabStore(projectTabs)
 export const projectTasksTabStore = new TabStore(projectTasksTabs)

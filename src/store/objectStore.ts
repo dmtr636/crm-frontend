@@ -69,9 +69,14 @@ export class ObjectStore<ObjectType extends IObjectType> implements IObjectStore
 		this.objects = this.objects?.filter(member => member.id !== id)
 	}
 
-	editFromDialog(data: IDialogData, id: number) {
+	editFromDialog(data: IDialogData, id: number, args?: object) {
 		const fields = createFieldsFromDialogData(data)
 		fields["id"] = id
+		if (args) {
+			Object.entries(args).forEach(([key, value]) => {
+				fields[key] = value
+			})
+		}
 		axios.patch(this.endpoint, fields).then(res => {
 			let newMember = res.data.result
 			this.objects = this.objects?.map(member =>

@@ -97,7 +97,7 @@ export class DialogStore {
 			case DialogActionType.save:
 				if (this.validate()) {
 					this.type = DialogType.successEdit
-					this.store?.editFromDialog(this.data!, this.objectId!)
+					this.store?.editFromDialog(this.data!, this.objectId!, {...this.requestFields})
 				}
 				break
 			case DialogActionType.ok:

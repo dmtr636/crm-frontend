@@ -2,7 +2,6 @@ import {observer} from "mobx-react";
 import styled from "styled-components";
 import {ProjectHeader} from "../../components/project/ProjectHeader";
 import {Tabs} from "../../components/common/tabs/Tabs";
-import {projectTabStore} from "../../store/tabStore";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {taskObjectStore} from "../../store/objectStore";
@@ -23,22 +22,27 @@ export const ProjectPage = observer(() => {
 	const id = Number(params.id)
 	const store = useStore()
 
-	useEffect(() => {
-		taskObjectStore.setFilter({"project_id": id})
-		taskObjectStore.fetchObjects()
+	const stores = [
+		taskObjectStore,
+		store.projectAccessObjectStore,
+		store.projectLinksObjectStore
+	]
 
-		store.projectAccessObjectStore.setFilter({"project_id": id})
-		store.projectAccessObjectStore.fetchObjects()
+	useEffect(() => {
+		stores.forEach(store => {
+			store.setFilter({"project_id": id})
+			store.fetchObjects()
+		})
 	}, [id])
 
-	const isReady = taskObjectStore.isReady && store.projectAccessObjectStore.isReady
+	const isReady = stores.every(store => store.isReady)
 
 	return (
 		<Container>
 			<ProjectHeader/>
 			<Line/>
-			<Tabs store={projectTabStore}/>
-			{isReady && projectTabStore.tab.component}
+			<Tabs store={store.projectTabStore}/>
+			{isReady && store.projectTabStore.tab.component}
 		</Container>
 	)
 })

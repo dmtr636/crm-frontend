@@ -9,3 +9,4 @@ export const OPERATIONS_ENDPOINT = `${SERVER_HOST}/api/operations`
 export const PROJECTS_ENDPOINT = `${SERVER_HOST}/api/projects`
 export const TASKS_ENDPOINT = `${SERVER_HOST}/api/tasks`
 export const PROJECT_ACCESSES_ENDPOINT = `${SERVER_HOST}/api/project-accesses`
+export const PROJECT_LINKS_ENDPOINT = `${SERVER_HOST}/api/project-links`
