@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {ITask} from "../../interfaces/entities/ITask";
-import {HomeProjectCardTask} from "./HomeProjectCardTask";
+import {HomeProjectTasksCardTask} from "./HomeProjectTasksCardTask";
 
 const Column = styled.div`
 	display: flex;
@@ -8,11 +8,11 @@ const Column = styled.div`
 	row-gap: 26px;
 `
 
-export const HomeProjectCardTaskColumn = (props: {tasks: ITask[]}) => {
+export const HomeProjectTasksColumn = (props: {tasks: ITask[]}) => {
 	return (
 		<Column>
 			{props.tasks.map(task =>
-				<HomeProjectCardTask task={task} key={task.id} />
+				<HomeProjectTasksCardTask task={task} key={task.id} />
 			)}
 		</Column>
 	)

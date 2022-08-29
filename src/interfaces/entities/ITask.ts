@@ -1,10 +1,10 @@
-export type ITaskCategory = "design" | "development" | "marketing" | "ceo"
+export type TaskCategory = "design" | "development" | "marketing" | "ceo"
 
 export interface ITask {
 	id: number,
 	text: string,
 	completed: boolean,
-	category: ITaskCategory,
+	category: TaskCategory,
 	executor_id: number,
 	project_id: number,
 	type: "task" | "quest"

@@ -21,6 +21,10 @@ class ProjectStore {
 	search(query: string) {
 		return this.projects?.filter(project => project.name.toLowerCase().includes(query.toLowerCase()))
 	}
+
+	getProjectById(id: number) {
+		return this.projects?.find(project => project.id === id)
+	}
 }
 
 export const projectStore = new ProjectStore()

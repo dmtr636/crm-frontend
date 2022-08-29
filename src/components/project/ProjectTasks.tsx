@@ -1,6 +1,6 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import {taskStore} from "../../store/taskStore";
+import {taskStore} from "../../store/projectTaskStore";
 import {projectTasksTabStore} from "../../store/tabStore";
 import {ProjectTasksTabs} from "./ProjectTasksTabs";
 import {ProjectTasksListItem} from "./ProjectTasksListItem";

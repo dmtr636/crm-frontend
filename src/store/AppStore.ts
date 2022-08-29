@@ -6,11 +6,14 @@ import {IProjectLinks} from "../interfaces/entities/IProjectLinks";
 import {TabStore} from "./tabStore";
 import {createProjectTabs} from "../constants/projectTabs";
 import {IProjectMember} from "../interfaces/entities/IProjectMember";
+import {TaskStore} from "./taskStore";
 
 export class AppStore {
 	projectAccessObjectStore: ObjectStore<IProjectAccess>
 	projectLinksObjectStore: ObjectStore<IProjectLinks>
 	projectMemberObjectStore: ObjectStore<IProjectMember>
+
+	taskStore: TaskStore
 
 	projectTabStore: TabStore
 
@@ -20,6 +23,7 @@ export class AppStore {
 		this.projectMemberObjectStore = new ObjectStore<IProjectMember>(PROJECT_MEMBERS_ENDPOINT)
 
 		this.projectTabStore = new TabStore(createProjectTabs(this))
+		this.taskStore = new TaskStore()
 
 		makeAutoObservable(this)
 	}

@@ -1,28 +1,30 @@
-import {useContext, useEffect, useState} from "react";
-import {HomeProjectContext} from "./HomeProject";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
 import {ITask} from "../../interfaces/entities/ITask";
-import {IHomeProject} from "../../interfaces/IHomeProject";
-import {HomeProjectCardTaskColumn} from "./HomeProjectCardTaskColumn";
+import {HomeProjectTasksColumn} from "./HomeProjectTasksColumn";
 import useWindowDimensions from "../../hooks/hooks";
 import {observer} from "mobx-react";
+import {computed} from "mobx";
 
 const ITEMS_IN_COLUMN = 3
 
-const Container = styled.div<{columnCount: number}>`
-	display: grid;
-	grid-template-columns: repeat(${props => props.columnCount}, 312px);
-	grid-gap: 26px;
-	margin-top: 48px;
+const Container = styled.div<{ columnCount: number }>`
+    display: grid;
+    grid-template-columns: repeat(${props => props.columnCount}, 312px);
+    grid-gap: 26px;
+    margin-top: 48px;
 `
 
-const makeColumns = (project: IHomeProject, columnCount: number) => {
-	let tasks
-	if (project.tasks_filter === "completed") {
-		tasks = project.tasks.filter(task => task.completed)
+const cmpFunc = (task1: ITask, task2: ITask) => {
+	if (task1.completed !== task2.completed) {
+		return task1.completed ? 1 : -1
 	} else {
-		tasks = project.tasks
+		return task1.id > task2.id ? 1 : -1
 	}
+}
+
+const makeColumns = (tasks: ITask[], columnCount: number) => {
+	tasks.sort(cmpFunc)
 
 	const columns: (ITask[])[] = []
 
@@ -57,24 +59,32 @@ const getColumnCount = (width: number) => {
 	}
 }
 
-export const HomeProjectCardTaskBoard = observer(() => {
-	const project = useContext(HomeProjectContext)!
+type Props = {
+	tasks: ITask[]
+}
+
+export const HomeProjectTasksCardTaskBoard = observer((props: Props) => {
+	const {tasks} = props
 	const {width} = useWindowDimensions()
 	const [columns, setColumns] = useState<(ITask[])[]>()
 	const [columnCount, setColumnCount] = useState(3)
+
+	const completedCount = computed(() => {
+		return tasks.filter(task => task.completed).length
+	}).get()
 
 	useEffect(() => {
 		setColumnCount(getColumnCount(width))
 	}, [width])
 
 	useEffect(() => {
-		setColumns(makeColumns(project, columnCount))
-	}, [columnCount, project, project.tasks, project.tasks_filter])
+		setColumns(makeColumns(tasks, columnCount))
+	}, [columnCount, tasks, completedCount])
 
 	return (
 		<Container columnCount={columnCount}>
 			{columns?.map(column => column.length > 0 &&
-				<HomeProjectCardTaskColumn tasks={column} />
+                <HomeProjectTasksColumn tasks={column}/>
 			)}
 		</Container>
 	)

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import infoIcon from "assets/home/homeProjectInfo.svg"
-import {useContext} from "react";
-import {HomeProjectContext} from "./HomeProject";
+import {observer} from "mobx-react";
 
 const Header = styled.div`
     height: 84px;
@@ -28,15 +27,17 @@ const InfoButton = styled.button`
     height: 48px;
 `
 
-export const HomeProjectCardHeader = () => {
-	const project = useContext(HomeProjectContext)!
+type Props = {
+	projectName: string
+}
 
+export const HomeProjectTasksCardHeader = observer((props: Props) => {
 	return (
 		<Header>
 			<ProjectName>
-				{project.project_name}
+				{props.projectName}
 			</ProjectName>
 			<InfoButton/>
 		</Header>
 	)
-}
+})

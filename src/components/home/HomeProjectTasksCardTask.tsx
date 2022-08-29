@@ -1,8 +1,6 @@
 import {ITask} from "../../interfaces/entities/ITask";
 import styled from "styled-components";
 import {observer} from "mobx-react";
-import {useContext} from "react";
-import {HomeProjectContext} from "./HomeProject";
 import {darkColors} from "../../theme/colors";
 
 const Task = styled.div`
@@ -44,24 +42,9 @@ const Text = styled.div<{completed: boolean}>`
 	text-decoration: ${props => props.completed && 'line-through'};
 `
 
-const cmpFunc = (task1: ITask, task2: ITask) => {
-	if (task1.completed !== task2.completed) {
-		return task1.completed ? 1 : -1
-	} else {
-		return task1.id > task2.id ? 1 : -1
-	}
-}
-
-export const HomeProjectCardTask = observer((props: {task: ITask}) => {
-	const project = useContext(HomeProjectContext)!
-
-	const reorderTasks = () => {
-		project.tasks = [...project.tasks.sort(cmpFunc)]
-	}
-
+export const HomeProjectTasksCardTask = observer((props: {task: ITask}) => {
 	const handleClick = () => {
 		props.task.completed = !props.task.completed
-		reorderTasks()
 	}
 
 	return (

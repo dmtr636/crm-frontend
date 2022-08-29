@@ -1,23 +1,30 @@
 import {makeAutoObservable} from "mobx";
-import {taskObjectStore} from "./objectStore";
+import {ITask} from "../interfaces/entities/ITask";
+import {memberStore} from "./memberStore";
+import axios from "axios";
+import {TASKS_ENDPOINT} from "../api/endoints";
+import _ from "lodash";
 
-class TaskStore {
+export class TaskStore {
+	tasks: ITask[] = []
 
 	constructor() {
 		makeAutoObservable(this)
 	}
 
-	get tasks() {
-		return taskObjectStore.objects
+	fetchTasks() {
+		const filter = {"executor_id": memberStore.member?.id}
+		axios.get(TASKS_ENDPOINT, {
+			params: {
+				filter: filter
+			}
+		}).then(res => this.tasks = res.data.result)
 	}
 
-	getTasksByCategory(category: string) {
-		return this.tasks?.filter(task => task.category === category)
-	}
-
-	getCompletedTasksByCategory(category: string) {
-		return this.getTasksByCategory(category)?.filter(task => task.completed)
+	get groupedTasks() {
+		return _.groupBy(
+			this.tasks,
+			(task: ITask) => task.project_id
+		)
 	}
 }
-
-export const taskStore = new TaskStore()

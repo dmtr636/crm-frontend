@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import {ProjectTasksTab} from "./ProjectTasksTab";
 import styled from "styled-components";
-import {taskStore} from "../../store/taskStore";
+import {taskStore} from "../../store/projectTaskStore";
 import {projectTasksTabStore} from "../../store/tabStore";
 import {ITab} from "../../interfaces/ITab";
 
