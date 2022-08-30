@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {HomeProjectTasksDate} from "./HomeProjectTasksDate";
 import {HomeProjectTasksCard} from "./HomeProjectTasksCard";
 import {ITask} from "../../interfaces/entities/ITask";
-import {projectStore} from "../../store/projectStore";
+import {useStore} from "../../hooks/hooks";
 
 const Container = styled.div`
     margin-top: 48px;
@@ -15,7 +15,8 @@ type Props = {
 }
 
 export const HomeProjectTasks = observer((props: Props) => {
-	const project = projectStore.getProjectById(props.project_id)!
+	const store = useStore()
+	const project = store.projectStore.getProjectById(props.project_id)!
 
 	return (
 		<Container>

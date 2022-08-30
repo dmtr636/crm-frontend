@@ -6,22 +6,23 @@ import {LoadingPage} from "./pages/LoadingPage";
 import {observer} from "mobx-react";
 import {MainPage} from "./pages/MainPage";
 import {Page404} from "./pages/Page404";
-import {memberStore} from "./store/memberStore";
 import {HomePage} from "./pages/main/HomePage";
 import {ProjectListPage} from "./pages/main/ProjectListPage";
 import {ProjectPage} from "./pages/main/ProjectPage";
 import {StudioPage} from 'pages/main/StudioPage';
+import {useStore} from "./hooks/hooks";
 
 const AppContainer = styled.div`
 
 `
 
 export const App = observer(() => {
+	const store = useStore()
 	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
 
 	const authenticate = async () => {
-		const isAuthenticated = await memberStore.authenticate()
+		const isAuthenticated = await store.memberStore.authenticate()
 		if (!isAuthenticated) {
 			navigate("/login", {replace: true})
 		}

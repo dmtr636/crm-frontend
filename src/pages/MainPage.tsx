@@ -4,10 +4,9 @@ import {Outlet} from "react-router-dom";
 import {Header} from "../components/common/header/Header";
 import {observer} from "mobx-react";
 import {Backdrop} from "../components/common/Backdrop";
-import {appStore} from "../store/backdropStore";
+import {backdropStore} from "../store/backdropStore";
 import {Dialog} from "../components/common/dialog/Dialog";
 import {useEffect} from "react";
-import {accessObjectStore, memberObjectStore, operationsObjectStore, projectObjectStore} from "../store/objectStore";
 import {useStore} from "../hooks/hooks";
 
 const Layout = styled.div`
@@ -25,10 +24,10 @@ export const MainPage = observer(() => {
 	const store = useStore()
 
 	useEffect(() => {
-		memberObjectStore.fetchObjects()
-		accessObjectStore.fetchObjects()
-		operationsObjectStore.fetchObjects()
-		projectObjectStore.fetchObjects()
+		store.memberObjectStore.fetchObjects()
+		store.accessObjectStore.fetchObjects()
+		store.operationsObjectStore.fetchObjects()
+		store.projectObjectStore.fetchObjects()
 
 		store.taskStore.fetchTasks()
 	}, [])
@@ -41,7 +40,7 @@ export const MainPage = observer(() => {
 				 <Outlet/>
 			 </ContentLayout>
 
-			 {appStore.isShowBackdrop && <Backdrop type={appStore.backdropType} />}
+			 {backdropStore.isShowBackdrop && <Backdrop type={backdropStore.backdropType} />}
 			 <Dialog />
 		 </Layout>
 	)

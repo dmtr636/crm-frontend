@@ -1,15 +1,16 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
 import {ProjectListItem} from "./ProjectListItem";
-import {projectStore} from "../../store/projectStore";
 import {projectListTabStore} from "../../store/tabStore";
+import {useStore} from "../../hooks/hooks";
 
 const Container = styled.div`
     margin-top: 48px;
 `
 
 export const ProjectList = observer(() => {
-	const projects = projectStore.filterByCategory(projectListTabStore.tab.id)
+	const store = useStore()
+	const projects = store.projectStore.filterByCategory(projectListTabStore.tab.id)
 
 	return (
 		<Container>

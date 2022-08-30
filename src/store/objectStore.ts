@@ -15,6 +15,7 @@ import {IAccess} from "../interfaces/entities/IAccess";
 import {IOperation} from "../interfaces/entities/IOperation";
 import {IProject} from "../interfaces/entities/IProject";
 import {ITask} from "../interfaces/entities/ITask";
+import {AppStore} from "./AppStore";
 
 export interface IObjectType {
 	id: number
@@ -26,9 +27,12 @@ export class ObjectStore<ObjectType extends IObjectType> implements IObjectStore
 	endpoint: string
 	filter?: object
 	isReady = false
+	appStore: AppStore
 
-	constructor(endpoint: string) {
+	constructor(endpoint: string, store: AppStore) {
 		this.endpoint = endpoint
+		this.appStore = store
+
 		makeAutoObservable(this)
 	}
 
@@ -67,6 +71,9 @@ export class ObjectStore<ObjectType extends IObjectType> implements IObjectStore
 			}
 		})
 		this.objects = this.objects?.filter(member => member.id !== id)
+		if (this.endpoint === TASKS_ENDPOINT) {
+			this.appStore.taskStore.tasks.filter(task => task.id !== id)
+		}
 	}
 
 	editFromDialog(data: IDialogData, id: number, args?: object) {
@@ -78,10 +85,15 @@ export class ObjectStore<ObjectType extends IObjectType> implements IObjectStore
 			})
 		}
 		axios.patch(this.endpoint, fields).then(res => {
-			let newMember = res.data.result
-			this.objects = this.objects?.map(member =>
-				member.id === newMember.id ? newMember : member
+			let newObject = res.data.result
+			this.objects = this.objects?.map(object =>
+				object.id === newObject.id ? newObject : object
 			)
+			if (this.endpoint === TASKS_ENDPOINT) {
+				this.appStore.taskStore.tasks.map(task =>
+					task.id === newObject.id ? newObject : task
+				)
+			}
 		})
 	}
 
@@ -89,9 +101,3 @@ export class ObjectStore<ObjectType extends IObjectType> implements IObjectStore
 		return this.objects?.find(object => object.id === id)
 	}
 }
-
-export const memberObjectStore = new ObjectStore<IMember>(MEMBERS_ENDPOINT)
-export const accessObjectStore = new ObjectStore<IAccess>(ACCESSES_ENDPOINT)
-export const operationsObjectStore = new ObjectStore<IOperation>(OPERATIONS_ENDPOINT)
-export const projectObjectStore = new ObjectStore<IProject>(PROJECTS_ENDPOINT)
-export const taskObjectStore = new ObjectStore<ITask>(TASKS_ENDPOINT)

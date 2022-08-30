@@ -4,9 +4,9 @@ import passwordIcon from "../../assets/login/passwordFieldIcon.svg"
 import showPasswordIcon from "../../assets/login/showPasswordIcon.svg"
 import hidePasswordIcon from "../../assets/login/hidePasswordIcon.svg"
 import {useEffect, useRef, useState} from "react";
-import LoginStore from "../../store/loginStore";
 import {device} from "../../constants/breakpoints";
 import {preloadImages} from "../../utils/utils";
+import {useStore} from "../../hooks/hooks";
 
 const EMAIL = "email"
 const PASSWORD = "password"
@@ -95,6 +95,7 @@ type Props = {
 }
 
 export const LoginFormField = (props: Props) => {
+	const LoginStore = useStore().loginStore
 	const ref = useRef(null)
 	const [showPassword, setShowPassword] = useState(false)
 

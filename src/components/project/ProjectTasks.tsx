@@ -1,10 +1,10 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import {taskStore} from "../../store/projectTaskStore";
 import {projectTasksTabStore} from "../../store/tabStore";
 import {ProjectTasksTabs} from "./ProjectTasksTabs";
 import {ProjectTasksListItem} from "./ProjectTasksListItem";
 import {computed} from "mobx";
+import {useStore} from "../../hooks/hooks";
 
 const Container = styled.div`
     margin-top: 48px;
@@ -15,8 +15,10 @@ const Tasks = styled.div`
 `
 
 export const ProjectTasks = observer(() => {
+	const store = useStore()
+
 	const tasks = computed(() =>
-		taskStore.getTasksByCategory(projectTasksTabStore.tab.id)
+		store.projectTaskStore.getTasksByCategory(projectTasksTabStore.tab.id)
 	).get()
 
 	return (

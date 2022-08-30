@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {observer} from "mobx-react";
-import LoginStore from "../../store/loginStore";
 import {device} from "../../constants/breakpoints";
+import {useStore} from "../../hooks/hooks";
 
 const Button = styled.button<Props>`
     width: 100%;
@@ -58,7 +58,7 @@ type Props = {
 export type LoginFormButtonState = "active" | "disabled" | "error" | "processing"
 
 export const LoginFormButton = observer((props: Props) => {
-	const loginStore = LoginStore
+	const loginStore = useStore().loginStore
 	let text = "войти"
 	if (loginStore.isProcessing) {
 		text = "момент.."

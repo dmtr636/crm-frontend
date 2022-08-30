@@ -4,7 +4,8 @@ import {dateTsToString} from "../../utils/utils";
 import editButton from "assets/common/editButton.svg"
 import {dialogStore, DialogType} from "../../store/dialogStore";
 import {IOperation} from "../../interfaces/entities/IOperation";
-import {studioMoneyDialog} from "../../constants/dialog/studioMoneyDialog";
+import {useStore} from "../../hooks/hooks";
+import {createStudioMoneyDialog} from "../../constants/dialog/studioMoneyDialog";
 
 const Container = styled.div`
     margin-bottom: 26px;
@@ -64,9 +65,10 @@ const getAmountText = (operation: IOperation) => {
 
 export const StudioOperationsListItem = observer((props: { operation: IOperation }) => {
 	const {operation} = props
+	const store = useStore()
 
 	const handleEditClick = () => {
-		dialogStore.open(DialogType.edit, studioMoneyDialog, operation, operation.id)
+		dialogStore.open(DialogType.edit, createStudioMoneyDialog(store), operation, operation.id)
 	}
 
 	return (

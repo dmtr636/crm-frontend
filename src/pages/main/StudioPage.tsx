@@ -3,10 +3,11 @@ import {studioTabStore} from "../../store/tabStore";
 import styled from "styled-components";
 import {observer} from "mobx-react";
 import {OpenDialogButton} from "../../components/common/button/OpenDialogButton";
-import {studioCommandDialog} from "../../constants/dialog/studioCommandDialog";
-import {studioMoneyDialog} from "../../constants/dialog/studioMoneyDialog";
-import {studioAccessDialog} from "../../constants/dialog/studioAccessDialog";
 import {DialogType} from "../../store/dialogStore";
+import {createStudioMoneyDialog} from "../../constants/dialog/studioMoneyDialog";
+import {createStudioAccessDialog} from "../../constants/dialog/studioAccessDialog";
+import {createStudioCommandDialog} from "../../constants/dialog/studioCommandDialog";
+import {useStore} from "../../hooks/hooks";
 
 const Container = styled.div`
     padding: 26px 46px;
@@ -21,16 +22,18 @@ const Line = styled.div`
     margin-top: 48px;
 `
 
-const getDialogData = () => {
-	switch (studioTabStore.tab.id) {
-		case "money": return studioMoneyDialog
-		case "access": return studioAccessDialog
-		case "command": return studioCommandDialog
-		default: return studioCommandDialog
-	}
-}
-
 export const StudioPage = observer(() => {
+	const store = useStore()
+
+	const getDialogData = () => {
+		switch (studioTabStore.tab.id) {
+			case "money": return createStudioMoneyDialog(store)
+			case "access": return createStudioAccessDialog(store)
+			case "command": return createStudioCommandDialog(store)
+			default: return createStudioCommandDialog(store)
+		}
+	}
+
 	return (
 		<Container>
 			<TopPanel>

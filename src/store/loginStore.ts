@@ -2,15 +2,18 @@ import {makeAutoObservable} from "mobx";
 import {validateEmail} from "../utils/utils";
 import axios from "axios";
 import {LOGIN_ENDPOINT} from "../api/endoints";
-import {memberStore} from "./memberStore";
+import {AppStore} from "./AppStore";
 
-class LoginStore {
+export class LoginStore {
 	email = ""
 	password = ""
 	error = false
 	isProcessing = false
+	appStore: AppStore
 
-	constructor() {
+	constructor(store: AppStore) {
+		this.appStore = store
+
 		makeAutoObservable(this)
 	}
 
@@ -37,7 +40,7 @@ class LoginStore {
 
 		let data = res.data
 		if (!data.error) {
-			memberStore.member = data
+			this.appStore.memberStore.member = data
 			this.error = false
 			return true
 		} else {
@@ -51,5 +54,3 @@ class LoginStore {
 		return !!(this.password.length > 0 && validateEmail(this.email));
 	}
 }
-
-export default new LoginStore()

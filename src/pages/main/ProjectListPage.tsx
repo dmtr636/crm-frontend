@@ -3,8 +3,9 @@ import {Tabs} from "../../components/common/tabs/Tabs";
 import {projectListTabStore} from "../../store/tabStore";
 import {OpenDialogButton} from "../../components/common/button/OpenDialogButton";
 import {DialogType} from "../../store/dialogStore";
-import {newProjectDialog} from "../../constants/dialog/newProjectDialog";
 import {ProjectList} from "../../components/projectList/ProjectList";
+import {useStore} from "../../hooks/hooks";
+import {createNewProjectDialog} from "../../constants/dialog/newProjectDialog";
 
 const Container = styled.div`
     padding: 26px 46px;
@@ -20,11 +21,13 @@ const Line = styled.div`
 `
 
 export const ProjectListPage = () => {
+	const store = useStore()
+
 	return (
 		<Container>
 			<TopPanel>
 				<Tabs store={projectListTabStore}/>
-				<OpenDialogButton dialogType={DialogType.add} dialogData={newProjectDialog}>
+				<OpenDialogButton dialogType={DialogType.add} dialogData={createNewProjectDialog(store)}>
 					Новый проект
 				</OpenDialogButton>
 			</TopPanel>

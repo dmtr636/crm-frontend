@@ -3,8 +3,9 @@ import styled from "styled-components";
 import editButton from "assets/common/editButton.svg"
 import {dialogStore, DialogType} from "../../store/dialogStore";
 import {IAccess} from "../../interfaces/entities/IAccess";
-import {studioAccessDialog} from "../../constants/dialog/studioAccessDialog";
 import {colors} from "../../theme/colors";
+import {useStore} from "../../hooks/hooks";
+import {createStudioAccessDialog} from "../../constants/dialog/studioAccessDialog";
 
 const Container = styled.div`
     margin-bottom: 26px;
@@ -76,9 +77,10 @@ const Link = styled.a`
 
 export const StudioAccessListItem = observer((props: { access: IAccess }) => {
 	const {access} = props
+	const store = useStore()
 
 	const handleEditClick = () => {
-		dialogStore.open(DialogType.edit, studioAccessDialog, access, access.id)
+		dialogStore.open(DialogType.edit, createStudioAccessDialog(store), access, access.id)
 	}
 
 	const getLinkText = () => {

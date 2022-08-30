@@ -1,16 +1,16 @@
 import {ITab} from "../interfaces/ITab";
 import {dialogStore, DialogType} from "../store/dialogStore";
-import {editProjectDialog} from "./dialog/editProjectDialog";
-import {projectTaskDialogData} from "./dialog/projectTaskDialogData";
 import {ProjectTasks} from "../components/project/ProjectTasks";
 import {ProjectAccess} from "../components/project/ProjectAccess";
 import {createProjectAccessDialogData} from "./dialog/projectAccessDialog";
 import {createProjectLinksDialogData} from "./dialog/projectLinksDialogData";
 import {AppStore} from "../store/AppStore";
 import {ProjectLinks} from "../components/project/ProjectLinks";
-import {projectQuestDialogData} from "./dialog/projectQuestDialogData";
 import {createProjectMemberDialog} from "./dialog/projectMemberDialog";
 import {ProjectMembersList} from "../components/project/ProjectMembersList";
+import {createEditProjectDialog} from "./dialog/editProjectDialog";
+import {createProjectTaskDialogData} from "./dialog/projectTaskDialogData";
+import {createProjectQuestDialogData} from "./dialog/projectQuestDialogData";
 
 export const createProjectTabs = (store: AppStore): ITab[] => {
 	return [
@@ -20,13 +20,18 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 			actions: [
 				{
 					buttonText: "Редактировать проект",
-					onClick: params => dialogStore.open(DialogType.edit, editProjectDialog, params.object, params.objectId)
+					onClick: params => dialogStore.open(
+						DialogType.edit,
+						createEditProjectDialog(store),
+						params.object,
+						params.objectId
+					)
 				},
 				{
 					buttonText: "Добавить задачу",
 					onClick: params => dialogStore.openV2({
 						type: DialogType.add,
-						data: projectTaskDialogData,
+						data: createProjectTaskDialogData(store),
 						requestFields: {
 							type: "task",
 							...params.requestFields
@@ -37,7 +42,7 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 					buttonText: "Добавить квест",
 					onClick: params => dialogStore.openV2({
 						type: DialogType.add,
-						data: projectQuestDialogData,
+						data: createProjectQuestDialogData(store),
 						requestFields: {
 							type: "quest",
 							...params.requestFields
@@ -53,7 +58,12 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 			actions: [
 				{
 					buttonText: "Редактировать проект",
-					onClick: params => dialogStore.open(DialogType.edit, editProjectDialog, params.object, params.objectId)
+					onClick: params => dialogStore.open(
+						DialogType.edit,
+						createEditProjectDialog(store),
+						params.object,
+						params.objectId
+					)
 				},
 				{
 					buttonText: "Добавить доступ",
@@ -72,7 +82,12 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 			actions: [
 				{
 					buttonText: "Редактировать проект",
-					onClick: params => dialogStore.open(DialogType.edit, editProjectDialog, params.object, params.objectId)
+					onClick: params => dialogStore.open(
+						DialogType.edit,
+						createEditProjectDialog(store),
+						params.object,
+						params.objectId
+					)
 				},
 				{
 					buttonText: "Редактировать ссылки",
@@ -95,7 +110,12 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 			actions: [
 				{
 					buttonText: "Редактировать проект",
-					onClick: params => dialogStore.open(DialogType.edit, editProjectDialog, params.object, params.objectId)
+					onClick: params => dialogStore.open(
+						DialogType.edit,
+						createEditProjectDialog(store),
+						params.object,
+						params.objectId
+					)
 				},
 				{
 					buttonText: "Добавить в команду",

@@ -52,7 +52,7 @@ export const HomeProjectTasksCard = observer((props: Props) => {
 
 	return (
 		<Card>
-			<HomeProjectTasksCardHeader projectName={props.project.name} />
+			<HomeProjectTasksCardHeader project={props.project} />
 			<Content>
 				{tabStore &&
                     <HomeProjectTasksCardSelect tabStore={tabStore} />

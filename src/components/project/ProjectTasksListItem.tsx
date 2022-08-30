@@ -1,18 +1,12 @@
 import {observer} from "mobx-react";
-import {IMember} from "../../interfaces/entities/IMember";
 import styled from "styled-components";
-import {url} from "../../utils/utils";
 import editButton from "assets/common/editButton.svg"
-import messageButton from "assets/common/messageButton.svg"
 import {dialogStore, DialogType} from "../../store/dialogStore";
-import {studioCommandDialog} from "../../constants/dialog/studioCommandDialog";
-import {IAccess} from "../../interfaces/entities/IAccess";
-import {studioAccessDialog} from "../../constants/dialog/studioAccessDialog";
 import {ITask} from "../../interfaces/entities/ITask";
-import {projectTaskDialogData} from "../../constants/dialog/projectTaskDialogData";
-import {memberStore} from "../../store/memberStore";
 import {projectTasksTabs} from "../../constants/projectTasksTabs";
-import {projectQuestDialogData} from "../../constants/dialog/projectQuestDialogData";
+import {createProjectTaskDialogData} from "../../constants/dialog/projectTaskDialogData";
+import {useStore} from "../../hooks/hooks";
+import {createProjectQuestDialogData} from "../../constants/dialog/projectQuestDialogData";
 
 const Container = styled.div`
 	margin-bottom: 26px;
@@ -59,17 +53,18 @@ const Button = styled.button<{src: string}>`
 `
 export const ProjectTasksListItem = observer((props: {task: ITask}) => {
 	const {task} = props
+	const store = useStore()
 
 	const handleEditClick = () => {
 		if (task.type === "task") {
-			dialogStore.open(DialogType.edit, projectTaskDialogData, task, task.id)
+			dialogStore.open(DialogType.edit, createProjectTaskDialogData(store), task, task.id)
 		} else {
-			dialogStore.open(DialogType.edit, projectQuestDialogData, task, task.id)
+			dialogStore.open(DialogType.edit, createProjectQuestDialogData(store), task, task.id)
 		}
 	}
 
 	const getExecutorName = () => {
-		return memberStore.members?.find(member => member.id === task.executor_id)?.name
+		return store.memberStore.members?.find((member: { id: number; }) => member.id === task.executor_id)?.name
 	}
 
 	const getCategoryName = () => {

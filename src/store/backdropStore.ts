@@ -22,4 +22,4 @@ class BackdropStore {
 	}
 }
 
-export const appStore = new BackdropStore()
+export const backdropStore = new BackdropStore()

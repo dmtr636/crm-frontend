@@ -3,7 +3,8 @@ import searchIcon from "assets/header/headerSearchFieldSearchIcon.svg"
 import {Backdrop} from "../Backdrop";
 import {useEffect, useState} from "react";
 import {HeaderSearchResult} from "./HeaderSearchResult";
-import {appStore} from "../../../store/backdropStore";
+import {backdropStore} from "../../../store/backdropStore";
+import {observer} from "mobx-react";
 
 const Container = styled.div<{showBackdrop: boolean}>`
 	position: relative;
@@ -34,30 +35,32 @@ const Icon = styled.img<{showBackdrop: boolean}>`
     border-radius: ${props => props.showBackdrop ? '5px 5px 0 5px' : '5px'};
 `
 
-export const HeaderSearch = () => {
+export const HeaderSearch = observer(() => {
 	const [value, setValue] = useState("")
-	const [showBackdrop, setShowBackdrop] = useState(false)
 
 	useEffect(() => {
-		if (showBackdrop) {
-			appStore.setBackdropType("content")
+		if (!backdropStore.isShowBackdrop) {
+			setValue("")
 		}
-		appStore.setIsShowBackdrop(showBackdrop)
-	}, [showBackdrop])
+	}, [backdropStore.isShowBackdrop])
 
 	return (
 		<>
-			<Container showBackdrop={showBackdrop}>
-				<Icon src={searchIcon} showBackdrop={showBackdrop} alt={""} />
+			<Container showBackdrop={backdropStore.isShowBackdrop}>
+				<Icon src={searchIcon} showBackdrop={backdropStore.isShowBackdrop} alt={""} />
 				<Input
 					value={value}
 					placeholder={"Название проекта..."}
 					onChange={event => setValue(event.target.value)}
-					onFocus={() => setShowBackdrop(true)}
-					onBlur={() => setShowBackdrop(false)}
+					onFocus={() => {
+						backdropStore.setIsShowBackdrop(true)
+						backdropStore.setBackdropType("content")
+					}}
 				/>
-				{showBackdrop && value.length > 0 && <HeaderSearchResult searchQuery={value}/>}
+				{backdropStore.isShowBackdrop && value.length > 0 &&
+					<HeaderSearchResult searchQuery={value}/>
+				}
 			</Container>
 		</>
 	)
-}
+})

@@ -1,14 +1,17 @@
 import {makeAutoObservable} from "mobx";
-import {taskObjectStore} from "./objectStore";
+import {AppStore} from "./AppStore";
 
-class ProjectTaskStore {
+export class ProjectTaskStore {
+	appStore: AppStore
 
-	constructor() {
+	constructor(store: AppStore) {
+		this.appStore = store
+
 		makeAutoObservable(this)
 	}
 
 	get tasks() {
-		return taskObjectStore.objects
+		return this.appStore.taskObjectStore.objects
 	}
 
 	getTasksByCategory(category: string) {
@@ -19,5 +22,3 @@ class ProjectTaskStore {
 		return this.getTasksByCategory(category)?.filter(task => task.completed)
 	}
 }
-
-export const taskStore = new ProjectTaskStore()

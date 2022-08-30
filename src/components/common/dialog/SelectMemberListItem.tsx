@@ -1,10 +1,6 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import editButton from "assets/common/editButton.svg"
-import messageButton from "assets/common/messageButton.svg"
 import {IMember} from "../../../interfaces/entities/IMember";
-import {studioCommandDialog} from "../../../constants/dialog/studioCommandDialog";
-import {dialogStore, DialogType} from "../../../store/dialogStore";
 import {url} from "../../../utils/utils";
 import { colors } from "theme/colors";
 

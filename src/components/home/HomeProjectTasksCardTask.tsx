@@ -2,6 +2,7 @@ import {ITask} from "../../interfaces/entities/ITask";
 import styled from "styled-components";
 import {observer} from "mobx-react";
 import {darkColors} from "../../theme/colors";
+import {useStore} from "../../hooks/hooks";
 
 const Task = styled.div`
     width: 312px;
@@ -43,15 +44,18 @@ const Text = styled.div<{completed: boolean}>`
 `
 
 export const HomeProjectTasksCardTask = observer((props: {task: ITask}) => {
+	const {task} = props
+	const store = useStore()
+
 	const handleClick = () => {
-		props.task.completed = !props.task.completed
+		store.taskStore.updateTask(task)
 	}
 
 	return (
 		<Task onClick={handleClick}>
-			<Checkbox completed={props.task.completed}/>
-			<Text completed={props.task.completed}>
-				{props.task.text}
+			<Checkbox completed={task.completed}/>
+			<Text completed={task.completed}>
+				{task.text}
 			</Text>
 		</Task>
 	)

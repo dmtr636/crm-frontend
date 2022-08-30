@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
+import {backdropStore} from "../../../store/backdropStore";
 
-const Container = styled.div`
+const Container = styled.button`
     height: 50px;
     font-family: 'Montserrat';
     font-style: normal;
@@ -15,9 +17,18 @@ const Container = styled.div`
 	cursor: pointer;
 `
 
-export const HeaderSearchResultItem = (props: {text: string}) => {
+export const HeaderSearchResultItem = (props: {text: string; projectId?: number}) => {
+	const navigate = useNavigate()
+
+	const handleClick = () => {
+		if (props.projectId) {
+			navigate(`/projects/${props.projectId}`)
+			backdropStore.setIsShowBackdrop(false)
+		}
+	}
+
 	return (
-		<Container>
+		<Container onClick={handleClick}>
 			{props.text}
 		</Container>
 	)

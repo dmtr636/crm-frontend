@@ -1,16 +1,18 @@
 import {makeAutoObservable} from "mobx";
 import axios from "axios";
 import {AUTHENTICATE_ENDPOINT, LOGOUT_ENDPOINT} from "../api/endoints";
-import LoginStore from "./loginStore";
 import {IMember} from "../interfaces/entities/IMember";
 import {ISelectOptionsStore} from "../interfaces/ISelectOptionsStore";
 import {ISelectOption} from "../interfaces/IDialogData";
-import {memberObjectStore} from "./objectStore";
+import {AppStore} from "./AppStore";
 
-class MemberStore implements ISelectOptionsStore {
+export class MemberStore implements ISelectOptionsStore {
 	member?: IMember
+	appStore: AppStore
 
-	constructor() {
+	constructor(store: AppStore) {
+		this.appStore = store
+
 		makeAutoObservable(this)
 	}
 
@@ -26,12 +28,12 @@ class MemberStore implements ISelectOptionsStore {
 
 	logout() {
 		this.member = undefined
-		LoginStore.clear()
+		this.appStore.loginStore.clear()
 		axios.get(LOGOUT_ENDPOINT)
 	}
 
 	get members() {
-		return memberObjectStore.objects
+		return this.appStore.memberObjectStore.objects
 	}
 
 	get selectOptions(): ISelectOption[] {
@@ -44,5 +46,3 @@ class MemberStore implements ISelectOptionsStore {
 		}) ?? []
 	}
 }
-
-export const memberStore = new MemberStore()

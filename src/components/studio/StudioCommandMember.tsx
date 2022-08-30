@@ -5,7 +5,8 @@ import {url} from "../../utils/utils";
 import editButton from "assets/common/editButton.svg"
 import messageButton from "assets/common/messageButton.svg"
 import {dialogStore, DialogType} from "../../store/dialogStore";
-import {studioCommandDialog} from "../../constants/dialog/studioCommandDialog";
+import {useStore} from "../../hooks/hooks";
+import {createStudioCommandDialog} from "../../constants/dialog/studioCommandDialog";
 
 const Container = styled.div`
 	margin-bottom: 26px;
@@ -57,9 +58,10 @@ const Button = styled.button<{src: string}>`
 
 export const StudioCommandMember = observer((props: {member: IMember}) => {
 	const {member} = props
+	const store = useStore()
 
 	const handleEditClick = () => {
-		dialogStore.open(DialogType.edit, studioCommandDialog, member, member.id)
+		dialogStore.open(DialogType.edit, createStudioCommandDialog(store), member, member.id)
 	}
 
 	const getAvatarUrl = () => {

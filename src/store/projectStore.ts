@@ -1,17 +1,19 @@
-import {IProject} from "../interfaces/entities/IProject";
 import {makeAutoObservable} from "mobx";
 import {IHomeProject} from "../interfaces/IHomeProject";
-import {projectObjectStore} from "./objectStore";
+import {AppStore} from "./AppStore";
 
-class ProjectStore {
+export class ProjectStore {
+	appStore: AppStore
 	homeProjects: IHomeProject[] = []
 
-	constructor() {
+	constructor(store: AppStore) {
+		this.appStore = store
+
 		makeAutoObservable(this)
 	}
 
 	get projects() {
-		return projectObjectStore.objects
+		return this.appStore.projectObjectStore.objects
 	}
 
 	filterByCategory(category: string) {
@@ -26,5 +28,3 @@ class ProjectStore {
 		return this.projects?.find(project => project.id === id)
 	}
 }
-
-export const projectStore = new ProjectStore()

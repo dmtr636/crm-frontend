@@ -1,13 +1,7 @@
 import {observer} from "mobx-react";
-import {IMember} from "../../interfaces/entities/IMember";
 import styled from "styled-components";
-import {url} from "../../utils/utils";
 import editButton from "assets/common/editButton.svg"
-import messageButton from "assets/common/messageButton.svg"
 import {dialogStore, DialogType} from "../../store/dialogStore";
-import {studioCommandDialog} from "../../constants/dialog/studioCommandDialog";
-import {IAccess} from "../../interfaces/entities/IAccess";
-import {studioAccessDialog} from "../../constants/dialog/studioAccessDialog";
 import {IProjectAccess} from "../../interfaces/entities/IProjectAccess";
 import {createProjectAccessDialogData} from "../../constants/dialog/projectAccessDialog";
 import {useStore} from "../../hooks/hooks";

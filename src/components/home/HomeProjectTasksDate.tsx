@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {dateTsToString} from "../../utils/utils";
 import {observer} from "mobx-react";
-import {projectStore} from "../../store/projectStore";
 import {IProject} from "../../interfaces/entities/IProject";
 
 const Container = styled.div`

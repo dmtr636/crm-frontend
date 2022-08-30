@@ -1,6 +1,5 @@
 import {DialogActionType, IDialogData} from "../../interfaces/IDialogData";
 import {DialogType} from "../../store/dialogStore";
-import {taskObjectStore} from "../../store/objectStore";
 import {AppStore} from "../../store/AppStore";
 
 export const createProjectLinksDialogData = (store: AppStore): IDialogData => {

@@ -6,7 +6,7 @@ import {observer} from "mobx-react";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {device} from "../constants/breakpoints";
-import {memberStore} from "../store/memberStore";
+import {useStore} from "../hooks/hooks";
 
 const Container = styled.div`
 	background-image: url(${loginPageBg});
@@ -58,9 +58,10 @@ const Logotype = styled.img`
 
 export const LoginPage = observer(() => {
 	const navigate = useNavigate()
+	const store = useStore()
 
 	useEffect(() => {
-		if (memberStore.member) {
+		if (store.memberStore.member) {
 			navigate("/", {replace: true})
 		}
 	}, [])

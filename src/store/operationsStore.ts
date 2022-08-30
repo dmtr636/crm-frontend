@@ -1,14 +1,16 @@
 import {makeAutoObservable} from "mobx";
-import {IOperation} from "../interfaces/entities/IOperation";
-import {operationsObjectStore} from "./objectStore";
+import {AppStore} from "./AppStore";
 
-class OperationsStore {
-	constructor() {
+export class OperationsStore {
+	appStore: AppStore
+
+	constructor(store: AppStore) {
+		this.appStore = store
 		makeAutoObservable(this)
 	}
 
 	get operations() {
-		return operationsObjectStore.objects
+		return this.appStore.operationsObjectStore.objects
 	}
 
 	get allOperations() {
@@ -45,5 +47,3 @@ class OperationsStore {
 		)
 	}
 }
-
-export const operationsStore = new OperationsStore()

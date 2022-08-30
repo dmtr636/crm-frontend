@@ -1,7 +1,6 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
 import {dateTsToString} from "../../utils/utils";
-import editButton from "assets/common/editButton.svg"
 import {IOperation} from "../../interfaces/entities/IOperation";
 import {IProject} from "../../interfaces/entities/IProject";
 import {useNavigate} from "react-router-dom";

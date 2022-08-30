@@ -3,12 +3,12 @@ import {LoginFormField} from "./LoginFormField";
 import {LoginFormButton, LoginFormButtonState} from "./LoginFormButton";
 import {LoginFormLink} from "./LoginFormLink";
 import {FormEvent, useState} from "react";
-import loginStore from "../../store/loginStore";
 import {observer} from "mobx-react";
 import {useNavigate} from "react-router-dom";
 import {LoginFormMessage} from "./LoginFormMessage";
 import styled from "styled-components";
 import {device} from "../../constants/breakpoints";
+import {useStore} from "../../hooks/hooks";
 
 const Form = styled.form`
     width: 580px;
@@ -50,12 +50,13 @@ const Form = styled.form`
 `
 
 export const LoginForm = observer(() => {
+	const store = useStore()
 	const [showProblemMessage, setShowProblemMessage] = useState(false)
 	const navigate = useNavigate()
 
 	const login = async (event: FormEvent) => {
 		event.preventDefault()
-		const isLoggedIn = await loginStore.login()
+		const isLoggedIn = await store.loginStore.login()
 		setShowProblemMessage(false)
 		if (isLoggedIn) {
 			navigate("/", {replace: true})
@@ -63,13 +64,13 @@ export const LoginForm = observer(() => {
 	}
 
 	const getLoginFormButtonState = ():LoginFormButtonState => {
-		if (loginStore.error) {
+		if (store.loginStore.error) {
 			return "error"
 		}
-		if (loginStore.isProcessing) {
+		if (store.loginStore.isProcessing) {
 			return "processing"
 		}
-		if (!loginStore.formValidated) {
+		if (!store.loginStore.formValidated) {
 			return "disabled"
 		}
 		return "active"
@@ -83,15 +84,15 @@ export const LoginForm = observer(() => {
 			<LoginFormHeader/>
 			<LoginFormField
 				type={"email"}
-				value={loginStore.email}
-				onChange={(value) => loginStore.setEmail(value)}
+				value={store.loginStore.email}
+				onChange={(value) => store.loginStore.setEmail(value)}
 			/>
 			<LoginFormField
 				type={"password"}
-				value={loginStore.password}
-				onChange={(value) => loginStore.setPassword(value)}
+				value={store.loginStore.password}
+				onChange={(value) => store.loginStore.setPassword(value)}
 			/>
-			{(loginStore.error) &&
+			{(store.loginStore.error) &&
                 <LoginFormMessage/>
 			}
 			{showProblemMessage &&
@@ -106,7 +107,7 @@ export const LoginForm = observer(() => {
 			<LoginFormLink
 				onClick={() => {
 					setShowProblemMessage(true)
-					loginStore.error = false
+					store.loginStore.error = false
 				}}
 				text={"Проблема со входом"}
 			/>

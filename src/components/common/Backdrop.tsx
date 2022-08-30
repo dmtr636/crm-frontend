@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BackdropType} from "../../store/backdropStore";
+import {backdropStore, BackdropType} from "../../store/backdropStore";
 
 const Background = styled.div<{zIndex: number}>`
 	position: fixed;
@@ -22,6 +22,9 @@ export const Backdrop = (props: {type: BackdropType}) => {
 	}
 
 	return (
-		<Background zIndex={getZIndex()} />
+		<Background
+			zIndex={getZIndex()}
+			onClick={() => backdropStore.setIsShowBackdrop(false)}
+		/>
 	)
 }

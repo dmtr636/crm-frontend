@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {HeaderSearchResultItem} from "./HeaderSearchResultItem";
-import {projectStore} from "../../../store/projectStore";
 import {observer} from "mobx-react";
+import {useStore} from "../../../hooks/hooks";
 
 const Container = styled.div`
 	position: absolute;
@@ -13,12 +13,13 @@ const Container = styled.div`
 `
 
 export const HeaderSearchResult = observer((props: {searchQuery: string}) => {
-	const projects = projectStore.search(props.searchQuery)
+	const store = useStore()
+	const projects = store.projectStore.search(props.searchQuery)
 
 	return (
 		<Container>
 			{projects?.map(project =>
-				<HeaderSearchResultItem text={project.name} />
+				<HeaderSearchResultItem text={project.name} projectId={project.id} />
 			)}
 			{projects?.length === 0 &&
                 <HeaderSearchResultItem text={"Совпадений не найдено"} />

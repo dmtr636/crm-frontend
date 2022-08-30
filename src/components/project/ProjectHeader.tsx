@@ -1,7 +1,6 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
-import {projectObjectStore} from "../../store/objectStore";
 import {dateTsToString} from "../../utils/utils";
 import {ProjectHeaderAction} from "./ProjectHeaderAction";
 import {useMemo} from "react";
@@ -41,8 +40,8 @@ const Date = styled.div`
 export const ProjectHeader = observer(() => {
 	const params = useParams()
 	const id = Number(params.id)
-	const project = projectObjectStore.findById(id)
 	const store = useStore()
+	const project = store.projectObjectStore.findById(id)
 
 	const requestFields = useMemo(() => {
 		if (project) {

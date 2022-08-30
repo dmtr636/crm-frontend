@@ -30,10 +30,12 @@ export const HomePage = observer(() => {
 		)
 	}).get()
 
+	const isReady = store.projectObjectStore.isReady && store.taskStore.isReady
+
 	return (
 		<Container>
 			<Tabs store={homeTabStore}/>
-			{Object.entries(groupedTasks).map(([projectId, tasks]) =>
+			{isReady && Object.entries(groupedTasks).map(([projectId, tasks]) =>
 				<HomeProjectTasks
 					project_id={Number(projectId)}
 					tasks={tasks}

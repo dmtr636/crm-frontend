@@ -4,7 +4,6 @@ import {ProjectHeader} from "../../components/project/ProjectHeader";
 import {Tabs} from "../../components/common/tabs/Tabs";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
-import {taskObjectStore} from "../../store/objectStore";
 import {useStore} from "../../hooks/hooks";
 
 const Container = styled.div`
@@ -23,7 +22,7 @@ export const ProjectPage = observer(() => {
 	const store = useStore()
 
 	const stores = [
-		taskObjectStore,
+		store.taskObjectStore,
 		store.projectAccessObjectStore,
 		store.projectLinksObjectStore,
 		store.projectMemberObjectStore
