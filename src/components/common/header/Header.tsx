@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {HeaderMemberMenu} from "./HeaderMemberMenu";
 import {backdropStore} from "../../../store/backdropStore";
 import {useStore} from "../../../hooks/hooks";
+import {IMember} from "../../../interfaces/entities/IMember";
 
 const Container = styled.header`
 	position: sticky;
@@ -29,31 +30,42 @@ const Avatar = styled.img`
 	height: 50px;
 	border-radius: 50%;
 `
-const Arrow = styled.button`
+const Arrow = styled.button<{ rotated: boolean }>`
 	background: url(${arrow});
 	width: 34px;
 	height: 34px;
 	margin-left: 8px;
+	
+	transform: rotate(${props => props.rotated && '180deg'});
 `
 
 export const Header = () => {
 	const store = useStore()
 	const [isShowMenu, setIsShowMenu] = useState(false)
 
-	useEffect(() => {
-		if (isShowMenu) {
-			backdropStore.setIsShowBackdrop(true, "content")
+	const getAvatarUrl = (member: IMember) => {
+		if (member.avatar.length) {
+			return url(member.avatar)
+		} else {
+			return `https://ui-avatars.com/api/?name=${member.name}`
 		}
-	}, [isShowMenu])
+	}
 
 	return (
-		<Container>
-			<HeaderSearch />
-			<Notifications src={notificationsIcon} />
-			<Avatar src={url(store.memberStore.member?.avatar!)} />
-			<Arrow onClick={() => setIsShowMenu(true)}/>
+		<>
+			<Container>
+				<HeaderSearch />
+				<Notifications src={notificationsIcon} />
+				<Avatar src={getAvatarUrl(store.memberStore.member!)} />
+				<Arrow
+					onClick={() => setIsShowMenu(!isShowMenu)}
+					rotated={isShowMenu}
+				/>
+			</Container>
 
-			{isShowMenu && <HeaderMemberMenu />}
-		</Container>
+			{isShowMenu &&
+                <HeaderMemberMenu onClose={() => setIsShowMenu(false)} />
+			}
+		</>
 	)
 }

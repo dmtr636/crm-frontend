@@ -2,6 +2,7 @@ import {observer} from "mobx-react";
 import {useStore} from "../../../hooks/hooks";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
+import {ProjectInfoDrawerHeader} from "./ProjectInfoDrawerHeader";
 
 const ANIMATION_DURATION = 100
 
@@ -53,11 +54,8 @@ export const ProjectInfoDrawer = observer(() => {
 		<>
 			{store.projectInfoDrawerStore.isShowDrawer &&
                 <Background backgroundOpacity={backgroundOpacity}>
-					<Drawer
-						drawerTranslate={drawerTranslate}
-						onClick={handleClose}
-					>
-
+					<Drawer drawerTranslate={drawerTranslate}>
+						<ProjectInfoDrawerHeader onClose={handleClose} />
 					</Drawer>
                 </Background>
 			}
