@@ -7,6 +7,7 @@ import {HomeProjectTasks} from "../../components/home/HomeProjectTasks";
 import {computed} from "mobx";
 import _ from "lodash";
 import {ITask} from "../../interfaces/entities/ITask";
+import {ProjectInfoDrawer} from "../../components/common/drawer/ProjectInfoDrawer";
 
 const Container = styled.div`
     padding: 26px 46px;
@@ -41,6 +42,8 @@ export const HomePage = observer(() => {
 					tasks={tasks}
 				/>
 			)}
+
+			<ProjectInfoDrawer />
 		</Container>
 	)
 })

@@ -31,7 +31,7 @@ export const MainPage = observer(() => {
 
 		store.taskStore.fetchTasks()
 	}, [])
-
+	
 	return (
 		 <Layout>
 			 <Sidebar/>
@@ -41,6 +41,7 @@ export const MainPage = observer(() => {
 			 </ContentLayout>
 
 			 {backdropStore.isShowBackdrop && <Backdrop type={backdropStore.backdropType} />}
+
 			 <Dialog />
 		 </Layout>
 	)

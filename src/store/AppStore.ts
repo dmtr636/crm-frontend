@@ -23,6 +23,7 @@ import {MemberStore} from "./memberStore";
 import {LoginStore} from "./loginStore";
 import {ProjectStore} from "./projectStore";
 import {ProjectTaskStore} from "./projectTaskStore";
+import {ProjectInfoDrawerStore} from "./projectInfoDrawerStore";
 
 export class AppStore {
 	projectAccessObjectStore: ObjectStore<IProjectAccess>
@@ -43,6 +44,8 @@ export class AppStore {
 
 	projectTabStore: TabStore
 
+	projectInfoDrawerStore: ProjectInfoDrawerStore
+
 	constructor() {
 		this.projectAccessObjectStore = new ObjectStore<IProjectAccess>(PROJECT_ACCESSES_ENDPOINT, this)
 		this.projectLinksObjectStore = new ObjectStore<IProjectLinks>(PROJECT_LINKS_ENDPOINT, this)
@@ -53,14 +56,16 @@ export class AppStore {
 		this.projectObjectStore = new ObjectStore<IProject>(PROJECTS_ENDPOINT, this)
 		this.taskObjectStore = new ObjectStore<ITask>(TASKS_ENDPOINT, this)
 
-		this.projectTabStore = new TabStore(createProjectTabs(this))
-
 		this.taskStore = new TaskStore(this)
 		this.operationsStore = new OperationsStore(this)
 		this.memberStore = new MemberStore(this)
 		this.loginStore = new LoginStore(this)
 		this.projectStore = new ProjectStore(this)
 		this.projectTaskStore = new ProjectTaskStore(this)
+
+		this.projectTabStore = new TabStore(createProjectTabs(this))
+
+		this.projectInfoDrawerStore = new ProjectInfoDrawerStore(this)
 
 		makeAutoObservable(this)
 	}

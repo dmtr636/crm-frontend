@@ -2,7 +2,8 @@ import styled from "styled-components";
 import infoIcon from "assets/home/homeProjectInfo.svg"
 import {observer} from "mobx-react";
 import {IProject} from "../../interfaces/entities/IProject";
-import {useNavigate} from "react-router-dom";
+import {useStore} from "../../hooks/hooks";
+import {ProjectInfoDrawer} from "../common/drawer/ProjectInfoDrawer";
 
 const Header = styled.div`
     height: 84px;
@@ -27,6 +28,10 @@ const InfoButton = styled.button`
     background-color: white;
     width: 48px;
     height: 48px;
+	
+	&:hover {
+		opacity: 0.85;
+	}
 `
 
 type Props = {
@@ -34,14 +39,18 @@ type Props = {
 }
 
 export const HomeProjectTasksCardHeader = observer((props: Props) => {
-	const navigate = useNavigate()
+	const store = useStore()
+
+	const handleInfoButtonClick = () => {
+		store.projectInfoDrawerStore.open(props.project)
+	}
 
 	return (
 		<Header>
 			<ProjectName>
 				{props.project.name}
 			</ProjectName>
-			<InfoButton onClick={() => navigate(`/projects/${props.project.id}`)}/>
+			<InfoButton onClick={handleInfoButtonClick} />
 		</Header>
 	)
 })
