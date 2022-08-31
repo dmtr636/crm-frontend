@@ -24,12 +24,11 @@ export const MainPage = observer(() => {
 	const store = useStore()
 
 	useEffect(() => {
-		store.memberObjectStore.fetchObjects()
-		store.accessObjectStore.fetchObjects()
-		store.operationsObjectStore.fetchObjects()
-		store.projectObjectStore.fetchObjects()
-
 		store.taskStore.fetchTasks()
+		store.projectObjectStore.fetchObjects()
+		store.operationsObjectStore.fetchObjects()
+		store.accessObjectStore.fetchObjects()
+		store.memberObjectStore.fetchObjects()
 	}, [])
 	
 	return (

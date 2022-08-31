@@ -8,6 +8,7 @@ import {computed} from "mobx";
 import _ from "lodash";
 import {ITask} from "../../interfaces/entities/ITask";
 import {ProjectInfoDrawer} from "../../components/common/drawer/ProjectInfoDrawer";
+import {Drawer} from "../../components/common/drawer/Drawer";
 
 const Container = styled.div`
     padding: 26px 46px;
@@ -43,7 +44,13 @@ export const HomePage = observer(() => {
 				/>
 			)}
 
-			<ProjectInfoDrawer />
+			<Drawer
+				title={store.projectInfoDrawerStore.project?.name}
+			 	isShow={store.projectInfoDrawerStore.isShowDrawer}
+				onClose={() => store.projectInfoDrawerStore.close()}
+			>
+				<ProjectInfoDrawer />
+			</Drawer>
 		</Container>
 	)
 })

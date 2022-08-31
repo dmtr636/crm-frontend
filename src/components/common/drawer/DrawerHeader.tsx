@@ -1,17 +1,15 @@
 import styled from "styled-components";
 import {observer} from "mobx-react";
-import {dialogStore} from "../../../store/dialogStore";
 import closeIcon from "assets/dialog/dialogClose.svg"
-import {defaultDialog} from "../../../constants/dialog/defaultDialog";
-import {useStore} from "../../../hooks/hooks";
 
 const Header = styled.div`
     height: 102px;
     background: #1F232C;
-	padding: 0 48px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    padding: 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	flex-shrink: 0;
 `
 const Title = styled.div`
     font-family: 'Raleway';
@@ -25,24 +23,29 @@ const Title = styled.div`
     color: #FFFFFF;
 `
 const CloseButton = styled.button`
-	background: url(${closeIcon});
+    background: url(${closeIcon});
     width: 48px;
     height: 48px;
 
-	&:hover {
-		opacity: 0.85;
-	}
+    &:hover {
+        opacity: 0.85;
+    }
 `
 
-export const ProjectInfoDrawerHeader = observer((props: {onClose: () => void}) => {
-	const store = useStore()
+type Props = {
+	onClose: () => void
+	title?: string
+}
+
+export const DrawerHeader = observer((props: Props) => {
+	const {onClose, title} = props
 
 	return (
 		<Header>
 			<Title>
-				{store.projectInfoDrawerStore.project?.name}
+				{title}
 			</Title>
-			<CloseButton onClick={props.onClose}/>
+			<CloseButton onClick={onClose}/>
 		</Header>
 	)
 })

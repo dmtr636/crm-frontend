@@ -1,63 +1,57 @@
 import {observer} from "mobx-react";
 import {useStore} from "../../../hooks/hooks";
+import {useEffect} from "react";
+import {ProjectInfoDrawerSectionTitle} from "./ProjectInfoDrawerSectionTitle";
 import styled from "styled-components";
-import {useEffect, useState} from "react";
-import {ProjectInfoDrawerHeader} from "./ProjectInfoDrawerHeader";
+import { ProjectLinks } from "components/project/ProjectLinks";
+import { ProjectMembersList } from "components/project/ProjectMembersList";
+import { ProjectAccess } from "components/project/ProjectAccess";
+import {ProjectInfoDrawerAccesses} from "./ProjectInfoDrawerAccesses";
 
-const ANIMATION_DURATION = 100
-
-const Background = styled.div<{ backgroundOpacity: number }>`
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-    background: rgba(31, 35, 44, ${props => props.backgroundOpacity});
-	z-index: 20;
-
-    transition: background ${ANIMATION_DURATION}ms ease-out;
-`
-const Drawer = styled.div<{ drawerTranslate: string }>`
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 730px;
-	background: #FFFFFF;
-	min-height: 100%;
-	
-	transform: translateX(${props => props.drawerTranslate});
-	
-	transition: transform ${ANIMATION_DURATION}ms ease-out;
+const LoadingText = styled.div`
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0.03em;
+    color: #1F232C;
 `
 
 export const ProjectInfoDrawer = observer(() => {
 	const store = useStore()
-	const [drawerTranslate, setDrawerTranslate] = useState("100%")
-	const [backgroundOpacity, setBackgroundOpacity] = useState(0)
 
-	const handleClose = () => {
-		setDrawerTranslate("100%")
-		setBackgroundOpacity(0)
-		setTimeout(() => {
-			store.projectInfoDrawerStore.close()
-		}, ANIMATION_DURATION)
-	}
+	const stores = [
+		store.projectLinksObjectStore,
+		store.projectAccessObjectStore,
+		store.projectMemberObjectStore
+	]
 
 	useEffect(() => {
-		if (store.projectInfoDrawerStore.isShowDrawer) {
-			setDrawerTranslate("0")
-			setBackgroundOpacity(0.7)
-		}
-	}, [store.projectInfoDrawerStore.isShowDrawer])
+		stores.forEach(objectStore => {
+			objectStore.setFilter({"project_id": store.projectInfoDrawerStore.project?.id})
+			objectStore.fetchObjects()
+		})
+	}, [store.projectInfoDrawerStore.project?.id])
+
+	const isReady = stores.every(store => store.isReady)
 
 	return (
 		<>
-			{store.projectInfoDrawerStore.isShowDrawer &&
-                <Background backgroundOpacity={backgroundOpacity}>
-					<Drawer drawerTranslate={drawerTranslate}>
-						<ProjectInfoDrawerHeader onClose={handleClose} />
-					</Drawer>
-                </Background>
+			{isReady
+				?
+				<>
+					<ProjectInfoDrawerSectionTitle title={"Ссылки"}/>
+					<ProjectLinks showBorder={false}/>
+					<ProjectInfoDrawerSectionTitle title={"Доступы"}/>
+					<ProjectInfoDrawerAccesses />
+					<ProjectInfoDrawerSectionTitle title={"Команда"}/>
+					<ProjectMembersList />
+				</>
+				:
+				<LoadingText>
+					ЗАГРУЗКА...
+				</LoadingText>
 			}
 		</>
 	)

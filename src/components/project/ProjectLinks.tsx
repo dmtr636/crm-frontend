@@ -1,13 +1,12 @@
 import {observer} from "mobx-react";
-import styled from "styled-components";
-import {ProjectTasksListItem} from "./ProjectTasksListItem";
+import styled, {css} from "styled-components";
 import {useStore} from "../../hooks/hooks";
 import {colors} from "../../theme/colors";
 
 const Container = styled.div`
-    margin-top: 48px;
+    margin: 48px 0;
 `
-const Links = styled.div`
+const Links = styled.div<{ showBorder?: boolean }>`
     margin-top: 48px;
 	padding: 26px 48px;
     background: #FFFFFF;
@@ -16,6 +15,11 @@ const Links = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	gap: 26px;
+	
+	${props => !props.showBorder && css`
+		border: none;
+		padding: 0;
+	`}
 `
 const Link = styled.a<{ active: boolean }>`
 	height: 50px;
@@ -56,7 +60,12 @@ const getLinkName = (key: string) => {
 
 const keys = ["site", "miro", "files", "figma", "old_site", "github"]
 
-export const ProjectLinks = observer(() => {
+type Props = {
+	showBorder?: boolean
+}
+
+export const ProjectLinks = observer((props: Props) => {
+	const {showBorder} = props
 	const store = useStore()
 	const links = Object
 		.entries(store.projectLinksObjectStore.objects?.at(0) ?? {})
@@ -67,7 +76,7 @@ export const ProjectLinks = observer(() => {
 
 	return (
 		<Container>
-			<Links>
+			<Links showBorder={showBorder}>
 				{filledLinks.map(([key, value]) =>
 					<Link href={value} key={key} target={"_blank"} active={true}>
 						{getLinkName(key)}
