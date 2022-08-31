@@ -4,41 +4,37 @@ import {colors} from "../../../theme/colors";
 import {IProjectAccess} from "../../../interfaces/entities/IProjectAccess";
 
 const Container = styled.div`
-	margin-bottom: 26px;
-	height: 60px;
+    height: 50px;
+    margin-bottom: 26px;
 	background: white;
-    border: 3px solid #1F232C;
     border-radius: 5px;
 	display: flex;
 	align-items: center;
-	column-gap: 32px;
-	padding: 0 26px 0 0;
-`
-const Column = styled.div`
-	
-`
-const Label = styled.div`
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 110%;
-    letter-spacing: 0.03em;
-    color: rgba(31, 35, 44, 0.7);
-	margin-bottom: 7px;
+	column-gap: 26px;
 `
 const Value = styled.div`
+	height: 100%;
+    width: 205px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
-    line-height: 110%;
+    line-height: 100%;
     letter-spacing: 0.03em;
     color: #1F232C;
+    border: 3px solid #1F232C;
+	border-radius: 5px;
+	padding: 17px;
+	display: flex;
+	align-items: center;
+	
+	&:last-child {
+		flex-grow: 1;
+	}
 `
 const Link = styled.a`
     width: 135px;
-    height: 60px;
+    height: 100%;
     background: #1F232C;
     border-radius: 5px;
 	display: flex;
@@ -55,41 +51,28 @@ const Link = styled.a`
 	&:hover {
 		background: ${colors.dark.hover};
 	}
-	
 	&:active {
 		background: ${colors.dark.pressed};
 	}
 `
 
-export const ProjectInfoDrawerAccess = observer((props: {access: IProjectAccess}) => {
+export const ProjectInfoDrawerAccessLine = observer((props: {access: IProjectAccess}) => {
 	const {access} = props
 
 	return (
 		<Container>
 			<Link href={access.link} target={"_blank"}>{access.name}</Link>
 			{access.email.length > 0 &&
-                <Column>
-                    <Label>{"Почта"}</Label>
-                    <Value>{access.email}</Value>
-                </Column>
+                <Value>{access.email}</Value>
 			}
 			{access.login.length > 0 &&
-                <Column>
-                    <Label>{"Логин"}</Label>
-                    <Value>{access.login}</Value>
-                </Column>
+                <Value>{access.login}</Value>
 			}
 			{access.password.length > 0 &&
-                <Column>
-                    <Label>{"Пароль"}</Label>
-                    <Value>{access.password}</Value>
-                </Column>
+                <Value>{access.password}</Value>
 			}
 			{access.api.length > 0 &&
-                <Column>
-                    <Label>{"API"}</Label>
-                    <Value>{access.api}</Value>
-                </Column>
+                <Value>{access.api}</Value>
 			}
 		</Container>
 	)

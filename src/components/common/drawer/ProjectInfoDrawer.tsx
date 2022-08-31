@@ -43,10 +43,18 @@ export const ProjectInfoDrawer = observer(() => {
 				<>
 					<ProjectInfoDrawerSectionTitle title={"Ссылки"}/>
 					<ProjectLinks showBorder={false}/>
-					<ProjectInfoDrawerSectionTitle title={"Доступы"}/>
-					<ProjectInfoDrawerAccesses />
-					<ProjectInfoDrawerSectionTitle title={"Команда"}/>
-					<ProjectMembersList />
+					{store.projectAccessStore.accesses?.length > 0 &&
+						<>
+                            <ProjectInfoDrawerSectionTitle title={"Доступы"}/>
+                            <ProjectInfoDrawerAccesses />
+						</>
+					}
+					{store.projectMemberObjectStore.objects && store.projectMemberObjectStore.objects.length > 0 &&
+						<>
+                            <ProjectInfoDrawerSectionTitle title={"Команда"}/>
+                            <ProjectMembersList />
+						</>
+					}
 				</>
 				:
 				<LoadingText>

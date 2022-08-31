@@ -3,7 +3,6 @@ import infoIcon from "assets/home/homeProjectInfo.svg"
 import {observer} from "mobx-react";
 import {IProject} from "../../interfaces/entities/IProject";
 import {useStore} from "../../hooks/hooks";
-import {ProjectInfoDrawer} from "../common/drawer/ProjectInfoDrawer";
 
 const Header = styled.div`
     height: 84px;
@@ -29,8 +28,13 @@ const InfoButton = styled.button`
     width: 48px;
     height: 48px;
 	
+    opacity: 0.5;
+	
 	&:hover {
-		opacity: 0.85;
+		opacity: 0.7;
+	}
+	&:active {
+		opacity: 1;
 	}
 `
 

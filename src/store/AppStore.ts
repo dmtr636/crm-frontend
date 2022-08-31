@@ -24,6 +24,7 @@ import {LoginStore} from "./loginStore";
 import {ProjectStore} from "./projectStore";
 import {ProjectTaskStore} from "./projectTaskStore";
 import {ProjectInfoDrawerStore} from "./projectInfoDrawerStore";
+import {ProjectAccessStore} from "./projectAccessStore";
 
 export class AppStore {
 	projectAccessObjectStore: ObjectStore<IProjectAccess>
@@ -41,6 +42,7 @@ export class AppStore {
 	loginStore: LoginStore
 	projectStore: ProjectStore
 	projectTaskStore: ProjectTaskStore
+	projectAccessStore: ProjectAccessStore
 
 	projectTabStore: TabStore
 
@@ -62,6 +64,7 @@ export class AppStore {
 		this.loginStore = new LoginStore(this)
 		this.projectStore = new ProjectStore(this)
 		this.projectTaskStore = new ProjectTaskStore(this)
+		this.projectAccessStore = new ProjectAccessStore(this)
 
 		this.projectTabStore = new TabStore(createProjectTabs(this))
 

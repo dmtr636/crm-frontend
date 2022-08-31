@@ -28,7 +28,8 @@ const Container = styled.div<{ translateValue: string }>`
     transition: transform ${ANIMATION_DURATION}ms ease-out;
 `
 const Content = styled.div`
-    padding: 48px;
+	margin-right: -1px;
+    padding: 48px 48px 22px 48px;
 	overflow-y: auto;
 `
 
