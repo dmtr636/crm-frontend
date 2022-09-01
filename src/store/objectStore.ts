@@ -61,6 +61,10 @@ export class ObjectStore<ObjectType extends IObjectType> implements IObjectStore
 		}
 		axios.post(this.endpoint, fields).then(res => {
 			this.objects?.push(res.data.result)
+
+			if (this.endpoint === TASKS_ENDPOINT) {
+				this.appStore.taskStore.fetchGroupedTasks()
+			}
 		})
 	}
 

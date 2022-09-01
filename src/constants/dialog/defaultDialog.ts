@@ -28,13 +28,13 @@ export const defaultDialog: IDialogData = {
 		],
 		[DialogType.edit]: [
 			{
+				label: "Удалить",
+				type: DialogActionType.delete,
+			},
+			{
 				label: "Сохранить",
 				type: DialogActionType.save,
 			},
-			{
-				label: "Удалить",
-				type: DialogActionType.delete,
-			}
 		],
 		[DialogType.successAdd]: [
 			{

@@ -66,8 +66,8 @@ type Props = {
 export const HomeProjectTasksCardTaskBoard = observer((props: Props) => {
 	const {tasks} = props
 	const {width} = useWindowDimensions()
-	const [columns, setColumns] = useState<(ITask[])[]>()
 	const [columnCount, setColumnCount] = useState(3)
+	const [columns, setColumns] = useState(makeColumns(tasks, columnCount))
 
 	const completedCount = computed(() => {
 		return tasks.filter(task => task.completed).length

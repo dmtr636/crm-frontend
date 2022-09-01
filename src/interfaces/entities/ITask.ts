@@ -7,5 +7,6 @@ export interface ITask {
 	category: TaskCategory,
 	executor_id: number,
 	project_id: number,
-	type: "task" | "quest"
+	type: "task" | "quest",
+	deadline: number
 }

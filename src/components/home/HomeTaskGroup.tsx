@@ -11,17 +11,23 @@ const Container = styled.div`
 
 type Props = {
 	project_id: number,
+	deadline: number
 	tasks: ITask[]
 }
 
-export const HomeProjectTasks = observer((props: Props) => {
+export const HomeTaskGroup = observer((props: Props) => {
+	const {project_id, deadline, tasks} = props
 	const store = useStore()
-	const project = store.projectStore.getProjectById(props.project_id)!
+	const project = store.projectStore.getProjectById(project_id)!
 
 	return (
-		<Container>
-			<HomeProjectTasksDate project={project} />
-			<HomeProjectTasksCard project={project} tasks={props.tasks} />
-		</Container>
+		<>
+			{tasks.length > 0 &&
+                <Container>
+                    <HomeProjectTasksDate deadline={deadline} />
+                    <HomeProjectTasksCard project={project} tasks={tasks} />
+                </Container>
+			}
+		</>
 	)
 })

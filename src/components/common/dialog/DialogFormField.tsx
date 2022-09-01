@@ -93,6 +93,7 @@ export const DialogFormField = observer((props: { field: IDialogField }) => {
 			setStartDate(date)
 			field.value = dateToTs(date).toString()
 			field.validated = true
+			field.edited = true
 		}
 	}
 

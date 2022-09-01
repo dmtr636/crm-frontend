@@ -31,14 +31,19 @@ const Container = styled.button<{color: ButtonColor}>`
 `
 
 type Props = {
-	onClick: () => void,
+	onClick?: () => void,
 	children: ReactNode,
-	color?: ButtonColor
+	color?: ButtonColor,
+	disabled?: boolean
 }
 
 export const Button = observer((props: Props) => {
 	return (
-		<Container onClick={props.onClick} color={props.color ?? "dark"}>
+		<Container
+			onClick={props.onClick}
+			color={props.color ?? "dark"}
+			disabled={props.disabled}
+		>
 			{props.children}
 		</Container>
 	)

@@ -2,6 +2,7 @@ import {DialogType} from "store/dialogStore";
 import {IObjectStore} from "./IObjectStore";
 import {ISelectOptionsStore} from "./ISelectOptionsStore";
 import {TabStore} from "../store/tabStore";
+import {ReactNode} from "react";
 
 type IDialogTitle = {
 	[key in DialogType]?: string;
@@ -58,5 +59,6 @@ export interface IDialogData {
 		fields: IDialogField[]
 	},
 	actions?: DialogDataAction,
-	store?: IObjectStore
+	store?: IObjectStore,
+	component?: ReactNode
 }

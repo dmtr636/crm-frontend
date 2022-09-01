@@ -3,43 +3,44 @@ import {HeaderSearch} from "./HeaderSearch";
 import notificationsIcon from "assets/header/headerNotifications.svg"
 import arrow from "assets/header/headerArrow.svg"
 import {url} from "../../../utils/utils";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {HeaderMemberMenu} from "./HeaderMemberMenu";
-import {backdropStore} from "../../../store/backdropStore";
 import {useStore} from "../../../hooks/hooks";
 import {IMember} from "../../../interfaces/entities/IMember";
+import {observer} from "mobx-react";
 
 const Container = styled.header`
-	position: sticky;
-	top: 0;
-	width: 100%;
-	height: 102px;
-	background: white;
-	display: flex;
-	align-items: center;
-	padding: 0 48px;
-	z-index: 15;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 102px;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+    z-index: 15;
 `
 const Notifications = styled.img`
-	margin-left: auto;
-	cursor: pointer;
+    margin-left: auto;
+    cursor: pointer;
 `
 const Avatar = styled.img`
-	margin-left: 48px;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
+    margin-left: 48px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+	object-fit: cover;
 `
 const Arrow = styled.button<{ rotated: boolean }>`
-	background: url(${arrow});
-	width: 34px;
-	height: 34px;
-	margin-left: 8px;
-	
-	transform: rotate(${props => props.rotated && '180deg'});
+    background: url(${arrow});
+    width: 34px;
+    height: 34px;
+    margin-left: 8px;
+
+    transform: rotate(${props => props.rotated && '180deg'});
 `
 
-export const Header = () => {
+export const Header = observer(() => {
 	const store = useStore()
 	const [isShowMenu, setIsShowMenu] = useState(false)
 
@@ -54,9 +55,9 @@ export const Header = () => {
 	return (
 		<>
 			<Container>
-				<HeaderSearch />
-				<Notifications src={notificationsIcon} />
-				<Avatar src={getAvatarUrl(store.memberStore.member!)} />
+				<HeaderSearch/>
+				<Notifications src={notificationsIcon}/>
+				<Avatar src={getAvatarUrl(store.memberStore.member!)}/>
 				<Arrow
 					onClick={() => setIsShowMenu(!isShowMenu)}
 					rotated={isShowMenu}
@@ -64,8 +65,8 @@ export const Header = () => {
 			</Container>
 
 			{isShowMenu &&
-                <HeaderMemberMenu onClose={() => setIsShowMenu(false)} />
+                <HeaderMemberMenu onClose={() => setIsShowMenu(false)}/>
 			}
 		</>
 	)
-}
+})

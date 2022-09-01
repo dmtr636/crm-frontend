@@ -54,8 +54,15 @@ export const Dialog = observer(() => {
                     <Container onClick={(event) => event.stopPropagation()}>
                         <DialogHeader />
                         <Content>
-							{getDialogContent()}
-                            <DialogActions />
+							{dialogStore.data?.component
+								?
+								dialogStore.data.component
+								:
+								<>
+									{getDialogContent()}
+									<DialogActions />
+								</>
+							}
                         </Content>
                     </Container>
                 </Backdrop>

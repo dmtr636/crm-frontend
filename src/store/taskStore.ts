@@ -1,11 +1,13 @@
 import {makeAutoObservable} from "mobx";
 import {ITask} from "../interfaces/entities/ITask";
 import axios from "axios";
-import {TASKS_ENDPOINT} from "../api/endoints";
+import {GROUPED_TASKS_ENDPOINT, TASKS_ENDPOINT} from "../api/endoints";
 import {AppStore} from "./AppStore";
+import {ITaskGroup} from "../interfaces/entities/ITaskGroup";
 
 export class TaskStore {
 	tasks: ITask[] = []
+	groupedTasks: ITaskGroup[] = []
 	isReady = false
 	appStore: AppStore
 
@@ -16,13 +18,30 @@ export class TaskStore {
 	}
 
 	fetchTasks() {
-		const filter = {"executor_id": this.appStore.memberStore.member?.id}
+		const filter = {
+			"executor_id": this.appStore.memberStore.member?.id,
+			"project__category": "in_work"
+		}
 		axios.get(TASKS_ENDPOINT, {
 			params: {
 				filter: filter
 			}
 		}).then(res => {
 			this.tasks = res.data.result
+			//this.isReady = true
+		})
+	}
+
+	fetchGroupedTasks() {
+		const filter = {
+			"executor_id": this.appStore.memberStore.member?.id
+		}
+		axios.get(GROUPED_TASKS_ENDPOINT, {
+			params: {
+				filter: filter
+			}
+		}).then(res => {
+			this.groupedTasks = res.data.result
 			this.isReady = true
 		})
 	}

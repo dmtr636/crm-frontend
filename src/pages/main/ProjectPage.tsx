@@ -5,6 +5,7 @@ import {Tabs} from "../../components/common/tabs/Tabs";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import {useStore} from "../../hooks/hooks";
+import {Loading} from "../../components/common/Loading";
 
 const Container = styled.div`
     padding: 26px 46px;
@@ -33,16 +34,27 @@ export const ProjectPage = observer(() => {
 			store.setFilter({"project_id": id})
 			store.fetchObjects()
 		})
+		return () => {
+			stores.forEach(store => {
+				store.setFilter({})
+			})
+		}
 	}, [id])
 
-	const isReady = stores.every(store => store.isReady)
+	const isReady = store.taskObjectStore.isReady
 
 	return (
 		<Container>
-			<ProjectHeader/>
-			<Line/>
-			<Tabs store={store.projectTabStore}/>
-			{isReady && store.projectTabStore.tab.component}
+			{isReady
+				?
+				<>
+					<ProjectHeader/>
+					<Line/>
+					<Tabs store={store.projectTabStore}/>
+					{store.projectTabStore.tab.component}
+				</>
+				: <Loading />
+			}
 		</Container>
 	)
 })

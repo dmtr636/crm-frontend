@@ -24,7 +24,8 @@ export const MainPage = observer(() => {
 	const store = useStore()
 
 	useEffect(() => {
-		store.taskStore.fetchTasks()
+		//store.taskStore.fetchTasks()
+		store.taskStore.fetchGroupedTasks()
 		store.projectObjectStore.fetchObjects()
 		store.operationsObjectStore.fetchObjects()
 		store.accessObjectStore.fetchObjects()

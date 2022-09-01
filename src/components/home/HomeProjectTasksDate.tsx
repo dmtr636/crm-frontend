@@ -25,14 +25,16 @@ const Line = styled.div`
 `
 
 type Props = {
-	project: IProject
+	deadline: number
 }
 
 export const HomeProjectTasksDate = observer((props: Props) => {
+	const {deadline} = props
+
 	return (
 		<Container>
 			<Date>
-				{dateTsToString(props.project.deadline)}
+				{dateTsToString(deadline)}
 			</Date>
 			<Line/>
 		</Container>

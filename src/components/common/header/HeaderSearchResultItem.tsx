@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {backdropStore} from "../../../store/backdropStore";
 
 const Container = styled.button`
+	width: 100%;
     height: 50px;
     font-family: 'Montserrat';
     font-style: normal;
@@ -15,6 +16,11 @@ const Container = styled.button`
 	align-items: center;
 	padding: 0 26px;
 	cursor: pointer;
+	border-radius: 5px;
+	
+	&:hover {
+		background: #F1F1F1;
+	}
 `
 
 export const HeaderSearchResultItem = (props: {text: string; projectId?: number}) => {

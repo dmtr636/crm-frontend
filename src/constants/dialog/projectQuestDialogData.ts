@@ -39,6 +39,12 @@ export const createProjectQuestDialogData = (store: AppStore): IDialogData => {
 					tabStore: "projectTasksTabStore"
 				},
 				{
+					label: "Дедлайн сдачи",
+					name: "deadline",
+					required: true,
+					type: "date"
+				},
+				{
 					label: "Текст квеста",
 					name: "text",
 					required: true,

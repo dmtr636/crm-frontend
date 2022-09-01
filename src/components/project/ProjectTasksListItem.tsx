@@ -7,6 +7,7 @@ import {projectTasksTabs} from "../../constants/projectTasksTabs";
 import {createProjectTaskDialogData} from "../../constants/dialog/projectTaskDialogData";
 import {useStore} from "../../hooks/hooks";
 import {createProjectQuestDialogData} from "../../constants/dialog/projectQuestDialogData";
+import {dateTsToString} from "../../utils/utils";
 
 const Container = styled.div`
 	margin-bottom: 26px;
@@ -40,6 +41,13 @@ const Value = styled.div`
     line-height: 110%;
     letter-spacing: 0.03em;
     color: #1F232C;
+	min-width: 70px;
+`
+const TaskText = styled(Value)`
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	width: 210px;
 `
 const Button = styled.button<{src: string}>`
 	background: url(${props => props.src});
@@ -83,7 +91,7 @@ export const ProjectTasksListItem = observer((props: {task: ITask}) => {
 			 </Column>
 			 <Column>
 				 <Label>{"Текст"}</Label>
-				 <Value>{task.text}</Value>
+				 <TaskText>{task.text}</TaskText>
 			 </Column>
 			 <Column>
 				 <Label>{"Тип"}</Label>
@@ -92,6 +100,10 @@ export const ProjectTasksListItem = observer((props: {task: ITask}) => {
 			 <Column>
 				 <Label>{"Выполнена"}</Label>
 				 <Value>{task.completed ? "Да" : "Нет"}</Value>
+			 </Column>
+			 <Column>
+				 <Label>{"Дедлайн"}</Label>
+				 <Value>{dateTsToString(task.deadline, "number")}</Value>
 			 </Column>
 			 <Button src={editButton} onClick={handleEditClick} />
 		 </Container>

@@ -36,7 +36,7 @@ type Props = {
 }
 
 export const HomeProjectTasksCard = observer((props: Props) => {
-	const [tabStore, setTabStore] = useState<TabStore>()
+	const [tabStore] = useState(new TabStore(tabs))
 
 	const tasks = computed(() => {
 		switch (tabStore?.tab.id) {
@@ -46,17 +46,11 @@ export const HomeProjectTasksCard = observer((props: Props) => {
 		}
 	}).get()
 
-	useEffect(() => {
-		setTabStore(new TabStore(tabs))
-	}, [])
-
 	return (
 		<Card>
 			<HomeProjectTasksCardHeader project={props.project} />
 			<Content>
-				{tabStore &&
-                    <HomeProjectTasksCardSelect tabStore={tabStore} />
-				}
+				<HomeProjectTasksCardSelect tabStore={tabStore} />
 				<HomeProjectTasksCardTaskBoard tasks={tasks} />
 			</Content>
 		</Card>

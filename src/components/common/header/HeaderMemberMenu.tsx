@@ -1,8 +1,10 @@
 import {observer} from "mobx-react";
 import styled from "styled-components";
-import {useOuterClick, useStore} from "../../../hooks/hooks";
+import {useStore} from "../../../hooks/hooks";
 import {colors} from "../../../theme/colors";
 import {useNavigate} from "react-router-dom";
+import {dialogStore, DialogType} from "../../../store/dialogStore";
+import {createUploadPhotoDialogData} from "../../../constants/dialog/uploadPhotoDialogData";
 
 const Background = styled.div`
 	position: fixed;
@@ -19,8 +21,8 @@ const Container = styled.div`
 	right: 48px;
     background: #FFFFFF;
     border-radius: 0px 0px 5px 5px;
-	
-	padding: 0;
+	display: flex;
+	flex-direction: column;
 `
 const Item = styled.button`
     font-family: 'Raleway';
@@ -31,12 +33,14 @@ const Item = styled.button`
     letter-spacing: 0.03em;
     color: #1F232C;
 	padding: 17px 26px;
+	text-align: start;
 	
 	&:hover {
-		color: ${colors.dark.hover}
+		color: ${colors.dark.hover};
+		background: #F1F1F1;
 	}
 	&:active {
-		color: ${colors.dark.pressed}
+		color: ${colors.dark.pressed};
 	}
 `
 
@@ -46,13 +50,32 @@ export const HeaderMemberMenu = observer((props: {onClose: () => void}) => {
 	const navigate = useNavigate()
 
 	const handleLogout = () => {
+		onClose()
 		store.memberStore.logout()
 		navigate("/login", {replace: true})
+	}
+
+	const handleChangeAvatar = () => {
+		onClose()
+		if (store.memberStore.member?.avatar) {
+			dialogStore.openV2({
+				type: DialogType.edit,
+				data: createUploadPhotoDialogData(store)
+			})
+		} else {
+			dialogStore.openV2({
+				type: DialogType.add,
+				data: createUploadPhotoDialogData(store)
+			})
+		}
 	}
 
 	return (
 		<Background onClick={() => onClose()}>
 			<Container onClick={(event) => event.stopPropagation()}>
+				<Item onClick={handleChangeAvatar}>
+					Сменить аватар
+				</Item>
 				<Item onClick={handleLogout}>
 					Выйти
 				</Item>
