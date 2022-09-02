@@ -1,11 +1,11 @@
 import {observer} from "mobx-react";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import {darkColors, redColors} from "../../../theme/colors";
 import {ReactNode} from "react";
 
 type ButtonColor = "dark" | "red"
 
-const Container = styled.button<{color: ButtonColor}>`
+const Container = styled.button<{color: ButtonColor, disabled?: boolean}>`
 	height: 50px;
 	background: ${props => props.color === "dark" ? darkColors.default : redColors.default};
 	padding: 0 34px;
@@ -22,12 +22,14 @@ const Container = styled.button<{color: ButtonColor}>`
     color: #FFFFFF;
 	
 	&:hover {
-        background: ${props => props.color === "dark" ? darkColors.hover : redColors.hover};
+        background: ${props => props.color === "dark" && !props.disabled && darkColors.hover};
+        background: ${props => props.color === "red" && !props.disabled && redColors.hover};
 	}
 	
 	&:active {
-        background: ${props => props.color === "dark" ? darkColors.pressed : redColors.pressed};
-	}
+        background: ${props => props.color === "dark" && !props.disabled && darkColors.pressed};
+        background: ${props => props.color === "red" && !props.disabled && redColors.pressed};
+    }
 `
 
 type Props = {

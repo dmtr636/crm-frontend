@@ -43,12 +43,6 @@ const Value = styled.div`
     color: #1F232C;
 	min-width: 70px;
 `
-const TaskText = styled(Value)`
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	width: 210px;
-`
 const Button = styled.button<{src: string}>`
 	background: url(${props => props.src});
     width: 34px;
@@ -91,7 +85,7 @@ export const ProjectTasksListItem = observer((props: {task: ITask}) => {
 			 </Column>
 			 <Column>
 				 <Label>{"Текст"}</Label>
-				 <TaskText>{task.text}</TaskText>
+				 <Value>{task.text}</Value>
 			 </Column>
 			 <Column>
 				 <Label>{"Тип"}</Label>

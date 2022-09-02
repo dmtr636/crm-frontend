@@ -19,6 +19,7 @@ const Container = styled.div`
 const Link = styled.img<{ active?: boolean }>`
     opacity: ${props => props.active ? 1 : 0.5};
     cursor: pointer;
+	user-select: none;
 
     &:hover {
         opacity: ${props => !props.active && 0.7};

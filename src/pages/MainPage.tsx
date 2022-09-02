@@ -30,6 +30,7 @@ export const MainPage = observer(() => {
 		store.operationsObjectStore.fetchObjects()
 		store.accessObjectStore.fetchObjects()
 		store.memberObjectStore.fetchObjects()
+		store.notificationStore.fetchNotifications()
 	}, [])
 	
 	return (

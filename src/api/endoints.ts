@@ -13,3 +13,4 @@ export const PROJECT_ACCESSES_ENDPOINT = `${SERVER_HOST}/api/project-accesses`
 export const PROJECT_LINKS_ENDPOINT = `${SERVER_HOST}/api/project-links`
 export const PROJECT_MEMBERS_ENDPOINT = `${SERVER_HOST}/api/project-members`
 export const UPLOAD_AVATAR_ENDPOINT = `${SERVER_HOST}/api/upload-avatar`
+export const NOTIFICATIONS_ENDPOINT = `${SERVER_HOST}/api/notifications`

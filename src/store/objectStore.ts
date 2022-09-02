@@ -64,6 +64,7 @@ export class ObjectStore<ObjectType extends IObjectType> implements IObjectStore
 
 			if (this.endpoint === TASKS_ENDPOINT) {
 				this.appStore.taskStore.fetchGroupedTasks()
+				this.appStore.notificationStore.fetchNotifications()
 			}
 		})
 	}

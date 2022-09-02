@@ -17,6 +17,7 @@ const Background = styled.div`
 `
 const Container = styled.div`
 	position: absolute;
+	width: 208px;
 	top: 102px;
 	right: 48px;
     background: #FFFFFF;

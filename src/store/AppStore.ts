@@ -25,6 +25,7 @@ import {ProjectStore} from "./projectStore";
 import {ProjectTaskStore} from "./projectTaskStore";
 import {ProjectInfoDrawerStore} from "./projectInfoDrawerStore";
 import {ProjectAccessStore} from "./projectAccessStore";
+import {NotificationStore} from "./notificationStore";
 
 export class AppStore {
 	projectAccessObjectStore: ObjectStore<IProjectAccess>
@@ -43,6 +44,7 @@ export class AppStore {
 	projectStore: ProjectStore
 	projectTaskStore: ProjectTaskStore
 	projectAccessStore: ProjectAccessStore
+	notificationStore: NotificationStore
 
 	projectTabStore: TabStore
 
@@ -65,6 +67,7 @@ export class AppStore {
 		this.projectStore = new ProjectStore(this)
 		this.projectTaskStore = new ProjectTaskStore(this)
 		this.projectAccessStore = new ProjectAccessStore(this)
+		this.notificationStore = new NotificationStore(this)
 
 		this.projectTabStore = new TabStore(createProjectTabs(this))
 
