@@ -102,7 +102,7 @@ export const createProjectTabs = (store: AppStore): ITab[] => {
 					}
 				}
 			],
-			component: <ProjectLinks/>
+			component: <ProjectLinks showBorder/>
 		},
 		{
 			id: "team",

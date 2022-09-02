@@ -26,6 +26,8 @@ const Container = styled.div`
 `
 const Content = styled.div`
 	padding: 26px 48px;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
 `
 
 const getDialogContent = () => {
@@ -33,7 +35,6 @@ const getDialogContent = () => {
 		case DialogType.add:
 		case DialogType.edit:
 			return <FormDialog />
-
 		case DialogType.successAdd:
 		case DialogType.successEdit:
 		case DialogType.successDelete:
